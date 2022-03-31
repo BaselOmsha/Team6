@@ -36,7 +36,7 @@ public class Dao {
 		}
 	}
 
-	
+	//inserts new candidate into candidate table
 	public void addCandidate(String fname, String lname, String ssn, String party, String email, 
 			String uname, int age, String paswd, String salt) {
 		
@@ -81,6 +81,25 @@ public class Dao {
 		}
 		return false;
 		
+	}
+	
+	public int editCandidate(Candidate candidate) {
+		int count = 0;
+		String sql = "update gametable set breed = ?, weight = ? where id = ?";
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			
+			stmt.setString(1, game.getBreed());
+			stmt.setFloat(2, game.getWeight());
+			
+			stmt.setInt(3, game.getId());
+			
+			count = stmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
 	}
 
 	
