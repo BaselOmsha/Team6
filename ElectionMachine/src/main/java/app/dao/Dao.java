@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import app.model.Candidate;
+
 
 
 public class Dao {
@@ -83,16 +85,28 @@ public class Dao {
 		
 	}
 	
+	//edits candidate info
 	public int editCandidate(Candidate candidate) {
 		int count = 0;
-		String sql = "update gametable set breed = ?, weight = ? where id = ?";
+		String sql = "update candidate set fname = ?, set lname = ?, set ssn = ?, set party = ?, set email = ?, set uname = ?, set age = ?, set Why_running = ?, set What_things_Do_you_wnat_to_represent = ?, set profession = ?, set paswd = ?, set salt = ?,  where candidate_id = ?";
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			
-			stmt.setString(1, game.getBreed());
-			stmt.setFloat(2, game.getWeight());
+			stmt.setString(1, candidate.getFname());
+			stmt.setString(2, candidate.getLname());
+			stmt.setString(3, candidate.getSsn());
+			stmt.setString(4, candidate.getParty());
+			stmt.setString(5, candidate.getEmail());
+			stmt.setString(6, candidate.getUname());
+			stmt.setInt(7, candidate.getAge());
+			stmt.setString(8, candidate.getWhy_running());
+			stmt.setString(9, candidate.getWhat_things_Do_you_wnat_to_represent());
+			stmt.setString(10, candidate.getProfession());
+			stmt.setString(11, candidate.getPaswd());
+			stmt.setString(12, candidate.getSalt());
 			
-			stmt.setInt(3, game.getId());
+			
+			stmt.setInt(13, candidate.getCandidate_id());
 			
 			count = stmt.executeUpdate();
 		} catch (SQLException e) {
@@ -101,7 +115,40 @@ public class Dao {
 		}
 		return count;
 	}
-
+	
+	//shows info of each candidate
+	public Candidate showCandInfo(int candidate_id) {
+		Candidate result = null;
+		String sql = "select * from candidate where candidate_id = ?";
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+						
+			stmt.setInt(1, candidate_id);
+			
+			ResultSet resultset = stmt.executeQuery();
+			
+			if (resultset.next()) {
+				result = new Candidate();
+				result.setCandidate_id(resultset.getInt("candidate_id"));
+				result.setFname(resultset.getString("fname"));
+				result.setLname(resultset.getString("lname"));
+				result.setSsn(resultset.getString("ssn"));
+				result.setParty(resultset.getString("party"));
+				result.setEmail(resultset.getString("email"));
+				result.setUname(resultset.getString("uname"));
+				result.setAge(resultset.getInt("age"));
+				result.setWhy_running(resultset.getString("Why_running"));
+				result.setWhat_things_Do_you_wnat_to_represent(resultset.getString("What_things_Do_you_wnat_to_represent"));
+				result.setProfession(resultset.getString("profession"));
+				result.setPaswd(resultset.getString("paswd"));
+//				result.setSalt(resultset.getString("salt"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 	public String getUserSalt(String uname) {
 		String result = "";
