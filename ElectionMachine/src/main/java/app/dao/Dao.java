@@ -188,6 +188,44 @@ public class Dao {
 		}
 		return result;
 	}
+	//gets admin salt
+	public String getUserSalt1(String uname) {
+		String result = "";
+		String sql = "select salt from admin where uname=?";
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, uname);
+			ResultSet rs = stmt.executeQuery();
+			
+			if (rs.next()) {
+				result = rs.getString("salt");
+			}
+			
+		} catch (SQLException e ) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	//gets admin password
+	public String getUserpasswordHash1(String uname) {
+		String result = "";
+		String sql = "select paswd from admin where uname=?";
+		
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			
+			stmt.setString(1, uname);
+			ResultSet rs = stmt.executeQuery();
+			
+			if (rs.next()) {
+				result = rs.getString("paswd");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 	public int adminDeleteCand(Candidate cand) {
 		String sql = "delete from candidate where candidate_id=?";
