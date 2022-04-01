@@ -46,7 +46,7 @@ public class EditCand extends HttpServlet {
 			}
 		} else {
 			// Back to list
-			response.sendRedirect("/showdata");
+			response.sendRedirect("/showAll");
 			
 		}
 	
