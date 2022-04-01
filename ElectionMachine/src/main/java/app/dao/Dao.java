@@ -187,5 +187,34 @@ public class Dao {
 		}
 		return result;
 	}
+	
+	public ArrayList<cand> readAllCandidates() {
+        ArrayList<cand> list=new ArrayList<>();
+        Statement stmt=null;
+        int count=0;
+        try {
+            stmt = conn.createStatement();
+            ResultSet rs=stmt.executeQuery("select * from electionmachine");
+            while (rs.next()) {
+                cand game=new cand();
+                cand.setCandidate_id(Integer.parseInt(request.getParameter("candidate_id")));
+                cand.setFname(request.getParameter("fname"));
+                cand.setLname(request.getParameter("lname"));
+                cand.setSsn(request.getParameter("ssn"));
+                cand.setParty(request.getParameter("party"));
+                cand.setEmail(request.getParameter("email"));
+                cand.setUname(request.getParameter("uname"));
+                cand.setAge(Integer.parseInt(request.getParameter("age")));
+                cand.setWhy_running(request.getParameter("Why_running"));
+                cand.setWhat_things_Do_you_wnat_to_represent(request.getParameter("What_things_Do_you_wnat_to_represent"));
+                cand.setProfession(request.getParameter("profession"));
+                list.add(cand);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return list;
+    }
 
 }
