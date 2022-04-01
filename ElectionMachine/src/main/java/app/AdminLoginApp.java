@@ -40,9 +40,9 @@ public class AdminLoginApp extends HttpServlet {
 
 	        dao.close();
 	        if (SecurityUtils.isPasswordOk(hashpw, password, salt)) {
-	        	System.out.println("ok");
-//	        	response.sendRedirect("adminShowAllCand.jsp");
-//	        	RequestDispatcher rd=request.getRequestDispatcher("./jsp/adminShowAllCand.jsp");
+//	        	System.out.println("ok");
+	        	response.sendRedirect("adminShowAllCand.jsp");
+	        	RequestDispatcher rd=request.getRequestDispatcher("./jsp/adminShowAllCand.jsp");
 //		        rd.include(request,  response);
 	        } else {
 	        	response.sendRedirect("AdminLogIn.html");
