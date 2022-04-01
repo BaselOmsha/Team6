@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import app.Dao;
-import app.Candidate;
+import app.model.Candidate;
+import app.dao.Dao;
 
 @WebServlet(
 		name = "DeleteCand",

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import app.model.Candidate;
 import app.dao.Dao;
 import app.security.SecurityUtils;
 
@@ -24,7 +25,7 @@ public class AdminLoginApp extends HttpServlet {
 
 	    @Override
 	    public void doPost(HttpServletRequest request, HttpServletResponse response) 
-	            throws IOException {
+	            throws IOException, ServletException {
 	        response.setContentType("text/html");
 	        response.setCharacterEncoding("UTF-8");
 

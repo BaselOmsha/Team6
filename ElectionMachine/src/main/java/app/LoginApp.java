@@ -24,7 +24,7 @@ public class LoginApp extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) 
-            throws IOException {
+            throws IOException, ServletException {
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
 
