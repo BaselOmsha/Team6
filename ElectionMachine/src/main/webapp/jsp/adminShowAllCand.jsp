@@ -30,7 +30,7 @@
     <th>Profession</th>
     
 </tr>
-<c:forEach var="cand" items="${sessionScope.allCandidates }">
+<c:forEach var="candidate" items="${sessionScope.ReadAllCandidates }">
     <tr>
         <td>${candidate.candidate_id }</td>
         <td>${candidate.fname }</td>
@@ -40,14 +40,15 @@
         <td>${candidate.email }</td>
         <td>${candidate.uname }</td>
         <td>${candidate.age }</td>
-        <td>${candidate.Why_running }</td>
-        <td>${candidate.What_things_do_you_wnat_to_represent }</td>
-        <td>${candidate.profession }</td>
-        <td>${candidate.paswd }</td>
-        <td>
-            <a href="/EditCand?id=${candidate.candidate_id }">Edit</a>
+        <td>${candidate.why_running }</td>
+        <td>${candidate.what_things_do_you_want_to_represent }</td>
+		<td>${candidate.profession }</td>
+		<td>${candidate.paswd }</td>   
+		
+	 <td>
+            <a href="/EditCand?candidate_id=${candidate.candidate_id }">Edit</a>
             <a href="#"> - </a>
-            <a href="/adminDeleteForm?id=${candidate.candidate_id }">Delete</a>
+            <a href="/deleteCand?candidate_id=${candidate.candidate_id }">Delete</a>
         </td>
     </tr>
 </c:forEach>

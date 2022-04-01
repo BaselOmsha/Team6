@@ -89,7 +89,7 @@ public class Dao {
 	//edits candidate info
 	public int editCandidate(Candidate candidate) {
 		int count = 0;
-		String sql = "update candidate set fname = ?, set lname = ?, set ssn = ?, set party = ?, set email = ?, set uname = ?, set age = ?, set Why_running = ?, set What_things_Do_you_wnat_to_represent = ?, set profession = ?, set paswd = ?, set salt = ?,  where candidate_id = ?";
+		String sql = "update candidate set fname = ?, lname = ?, ssn = ?, party = ?, email = ?, uname = ?, age = ?, Why_running = ?, What_things_Do_you_wnat_to_represent = ?,  profession = ?,  paswd = ?  where candidate_id = ?";
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			
@@ -101,13 +101,13 @@ public class Dao {
 			stmt.setString(6, candidate.getUname());
 			stmt.setInt(7, candidate.getAge());
 			stmt.setString(8, candidate.getWhy_running());
-			stmt.setString(9, candidate.getWhat_things_Do_you_wnat_to_represent());
+			stmt.setString(9, candidate.getWhat_things_do_you_want_to_represent());
 			stmt.setString(10, candidate.getProfession());
 			stmt.setString(11, candidate.getPaswd());
-			stmt.setString(12, candidate.getSalt());
+			//stmt.setString(12, candidate.getSalt());
 			
 			
-			stmt.setInt(13, candidate.getCandidate_id());
+			stmt.setInt(12, candidate.getCandidate_id());
 			
 			count = stmt.executeUpdate();
 		} catch (SQLException e) {
@@ -139,7 +139,7 @@ public class Dao {
 				result.setUname(resultset.getString("uname"));
 				result.setAge(resultset.getInt("age"));
 				result.setWhy_running(resultset.getString("Why_running"));
-				result.setWhat_things_Do_you_wnat_to_represent(resultset.getString("What_things_Do_you_wnat_to_represent"));
+				result.setWhat_things_do_you_want_to_represent(resultset.getString("What_things_Do_you_wnat_to_represent"));
 				result.setProfession(resultset.getString("profession"));
 				result.setPaswd(resultset.getString("paswd"));
 //				result.setSalt(resultset.getString("salt"));
@@ -262,7 +262,7 @@ public class Dao {
                 cand.setUname(rs.getString("uname"));
                 cand.setAge(rs.getInt("age"));
                 cand.setWhy_running(rs.getString("Why_running"));
-                cand.setWhat_things_Do_you_wnat_to_represent(rs.getString("What_things_Do_you_wnat_to_represent"));
+                cand.setWhat_things_do_you_want_to_represent(rs.getString("What_things_Do_you_wnat_to_represent"));
                 cand.setProfession(rs.getString("profession"));
           
                 

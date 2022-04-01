@@ -85,8 +85,8 @@ public class AdminDeleteCand extends HttpServlet {
         cand.setEmail(request.getParameter("email"));
         cand.setUname(request.getParameter("uname"));
         cand.setAge(Integer.parseInt(request.getParameter("age")));
-        cand.setWhy_running(request.getParameter("Why_running"));
-        cand.setWhat_things_Do_you_wnat_to_represent(request.getParameter("What_things_Do_you_wnat_to_represent"));
+        cand.setWhy_running(request.getParameter("question1"));
+        cand.setWhat_things_do_you_want_to_represent(request.getParameter("question2"));
         cand.setProfession(request.getParameter("profession"));
         return cand;
 	}
