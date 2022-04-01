@@ -41,7 +41,7 @@ public class AdminDeleteCand extends HttpServlet {
 				
 				session.setAttribute("Candidate", cand);
 				
-				RequestDispatcher rd = request.getRequestDispatcher("jsp/Remove.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("jsp/adminDeleteForm.jsp");
 				rd.forward(request, response);
 				
 			} catch (Exception e) {

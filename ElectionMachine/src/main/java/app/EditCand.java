@@ -38,7 +38,7 @@ public class EditCand extends HttpServlet {
 				
 				session.setAttribute("candidate", cand);
 				
-				RequestDispatcher rd = request.getRequestDispatcher("jsp/editform.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("jsp/EditCand.jsp");
 				rd.forward(request, response);
 				
 			} catch (Exception e) {
@@ -68,7 +68,7 @@ public class EditCand extends HttpServlet {
 		// Back to list after actions
 		//RequestDispatcher rd = request.getRequestDispatcher("/showdata");
 		//rd.forward(request, response);
-		response.sendRedirect("/showdata");
+		response.sendRedirect("/showAll");
 	}
 	
 	private Candidate readCandidate(HttpServletRequest request) {

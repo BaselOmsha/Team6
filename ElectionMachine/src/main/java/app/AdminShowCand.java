@@ -32,7 +32,7 @@ public class AdminShowCand extends HttpServlet {
 
 	        session.setAttribute("ReadAllCandidates", cand);
 
-	        RequestDispatcher rd = request.getRequestDispatcher("jsp/adminShowAllcand.jsp");
+	        RequestDispatcher rd = request.getRequestDispatcher("jsp/adminShowAllCand.jsp");
 	        rd.forward(request, response);
 
 	    }
