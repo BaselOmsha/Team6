@@ -1,6 +1,7 @@
 package app.dao;
 
 import java.io.PrintWriter;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -188,15 +189,15 @@ public class Dao {
 		return result;
 	}
 	
-	public ArrayList<cand> readAllCandidates() {
-        ArrayList<cand> list=new ArrayList<>();
+	public ArrayList<Candidate> readAllCandidates() {
+        ArrayList<Candidate> list=new ArrayList<>();
         Statement stmt=null;
         int count=0;
         try {
             stmt = conn.createStatement();
             ResultSet rs=stmt.executeQuery("select * from electionmachine");
             while (rs.next()) {
-                cand game=new cand();
+                Candidate cand=new Candidate();
                 cand.setCandidate_id(Integer.parseInt(request.getParameter("candidate_id")));
                 cand.setFname(request.getParameter("fname"));
                 cand.setLname(request.getParameter("lname"));
