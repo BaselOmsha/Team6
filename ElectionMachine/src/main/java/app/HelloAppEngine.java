@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import app.security.SecurityUtils;
+
 @WebServlet(
     name = "HelloAppEngine",
     urlPatterns = {"/hello"}
@@ -21,6 +23,12 @@ public class HelloAppEngine extends HttpServlet {
     response.setCharacterEncoding("UTF-8");
 
     response.getWriter().print("Hello App Engine!\r\n");
+    
+    
+    String salt = SecurityUtils.getSalt();
+    String paswd = SecurityUtils.getPasswordHashed("Admin123", salt);
+    System.out.println(salt);
+    System.out.println(paswd);
 
   }
 }
