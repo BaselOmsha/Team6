@@ -250,20 +250,33 @@ public class Dao {
         int count=0;
         try {
             stmt = conn.createStatement();
-            ResultSet rs=stmt.executeQuery("select * from electionmachine");
+            ResultSet rs=stmt.executeQuery("select * from candidate");
             while (rs.next()) {
                 Candidate cand=new Candidate();
-                cand.setCandidate_id(Integer.parseInt(request.getParameter("candidate_id")));
-                cand.setFname(request.getParameter("fname"));
-                cand.setLname(request.getParameter("lname"));
-                cand.setSsn(request.getParameter("ssn"));
-                cand.setParty(request.getParameter("party"));
-                cand.setEmail(request.getParameter("email"));
-                cand.setUname(request.getParameter("uname"));
-                cand.setAge(Integer.parseInt(request.getParameter("age")));
-                cand.setWhy_running(request.getParameter("Why_running"));
-                cand.setWhat_things_Do_you_wnat_to_represent(request.getParameter("What_things_Do_you_wnat_to_represent"));
-                cand.setProfession(request.getParameter("profession"));
+                cand.setCandidate_id(rs.getInt("candidate_id"));
+                cand.setFname(rs.getString("fname"));
+                cand.setLname(rs.getString("lname"));
+                cand.setSsn(rs.getString("ssn"));
+                cand.setParty(rs.getString("party"));
+                cand.setEmail(rs.getString("email"));
+                cand.setUname(rs.getString("uname"));
+                cand.setAge(rs.getInt("age"));
+                cand.setWhy_running(rs.getString("Why_running"));
+                cand.setWhat_things_Do_you_wnat_to_represent(rs.getString("What_things_Do_you_wnat_to_represent"));
+                cand.setProfession(rs.getString("profession"));
+          
+                
+//                cand.setCandidate_id(Integer.parseInt(request.getParameter("candidate_id")));
+//                cand.setFname(request.getParameter("fname"));
+//                cand.setLname(request.getParameter("lname"));
+//                cand.setSsn(request.getParameter("ssn"));
+//                cand.setParty(request.getParameter("party"));
+//                cand.setEmail(request.getParameter("email"));
+//                cand.setUname(request.getParameter("uname"));
+//                cand.setAge(Integer.parseInt(request.getParameter("age")));
+//                cand.setWhy_running(request.getParameter("Why_running"));
+//                cand.setWhat_things_Do_you_wnat_to_represent(request.getParameter("What_things_Do_you_wnat_to_represent"));
+//                cand.setProfession(request.getParameter("profession"));
                 list.add(cand);
             }
         } catch (SQLException e) {
