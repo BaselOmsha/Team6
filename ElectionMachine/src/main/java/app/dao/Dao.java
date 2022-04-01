@@ -189,6 +189,23 @@ public class Dao {
 		return result;
 	}
 	
+	public int adminDeleteCand(Candidate cand) {
+		String sql = "delete from candidate where id=?";
+		int count=0;
+		try {
+			PreparedStatement stmt=conn.prepareStatement(sql);
+			
+			stmt.setInt(1, cand.getCandidate_id());
+			//pstmt.executeUpdate();
+			
+			count = stmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
 	public ArrayList<Candidate> readAllCandidates() {
         ArrayList<Candidate> list=new ArrayList<>();
         Statement stmt=null;
