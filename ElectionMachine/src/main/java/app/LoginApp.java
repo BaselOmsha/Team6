@@ -39,11 +39,11 @@ public class LoginApp extends HttpServlet {
 
         dao.close();
         if (SecurityUtils.isPasswordOk(hashpw, password, salt)) {
-//        	response.sendRedirect("adminShowAllCand.jsp");
-        	RequestDispatcher rd=request.getRequestDispatcher("./jsp/adminShowAllCand.jsp");
-	        rd.include(request,  response);
+        	response.sendRedirect("/EditCand");
+//        	RequestDispatcher rd=request.getRequestDispatcher("./jsp/adminShowAllCand.jsp");
+//	        rd.include(request,  response);
         } else {
-        	response.sendRedirect("AdminLogIn.html");
+        	response.sendRedirect("CandLogIn.html");
         }
     }
 
