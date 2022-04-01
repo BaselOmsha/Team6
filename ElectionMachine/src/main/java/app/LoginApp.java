@@ -3,6 +3,7 @@ package app;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,7 +39,9 @@ public class LoginApp extends HttpServlet {
 
         dao.close();
         if (SecurityUtils.isPasswordOk(hashpw, password, salt)) {
-        	response.sendRedirect("adminShowAllCand.jsp");
+//        	response.sendRedirect("adminShowAllCand.jsp");
+        	RequestDispatcher rd=request.getRequestDispatcher("./jsp/adminShowAllCand.jsp");
+	        rd.include(request,  response);
         } else {
         	response.sendRedirect("AdminLogIn.html");
         }
