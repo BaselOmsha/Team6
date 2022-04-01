@@ -45,9 +45,9 @@
         <td>${candidate.profession }</td>
         <td>${candidate.paswd }</td>
         <td>
-            <a href="/editgame?id=${game.id }">Edit</a>
+            <a href="/EditCand?id=${candidate.candidate_id }">Edit</a>
             <a href="#"> - </a>
-            <a href="/removegame?id=${game.id }">Delete</a>
+            <a href="/adminDeleteForm?id=${candidate.candidate_id }">Delete</a>
         </td>
     </tr>
 </c:forEach>
