@@ -34,8 +34,8 @@ public class AdminLoginApp extends HttpServlet {
 	        String password = request.getParameter("paswd");
 
 	        //Read reference values from DB
-	        String salt = dao.getUserSalt(uname);
-	        String hashpw = dao.getUserpasswordHash(uname);
+	        String salt = dao.getUserSalt1(uname);
+	        String hashpw = dao.getUserpasswordHash1(uname);
 
 	        dao.close();
 	        if (SecurityUtils.isPasswordOk(hashpw, password, salt)) {
@@ -48,3 +48,5 @@ public class AdminLoginApp extends HttpServlet {
 	    }
 
 	}
+
+
