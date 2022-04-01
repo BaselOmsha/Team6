@@ -190,7 +190,7 @@ public class Dao {
 	}
 	
 	public int adminDeleteCand(Candidate cand) {
-		String sql = "delete from candidate where id=?";
+		String sql = "delete from candidate where candidate_id=?";
 		int count=0;
 		try {
 			PreparedStatement stmt=conn.prepareStatement(sql);
