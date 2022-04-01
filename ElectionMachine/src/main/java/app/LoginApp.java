@@ -38,9 +38,9 @@ public class LoginApp extends HttpServlet {
 
         dao.close();
         if (SecurityUtils.isPasswordOk(hashpw, password, salt)) {
-            response.getWriter().println("Login success");
+        	response.sendRedirect("adminShowAllCand.jsp");
         } else {
-            response.getWriter().println("Login failed");
+        	response.sendRedirect("AdminLogIn.html");
         }
     }
 
