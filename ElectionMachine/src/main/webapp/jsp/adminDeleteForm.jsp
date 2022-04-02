@@ -123,10 +123,15 @@ if(uname == null) response.sendRedirect("/AdminLogIn.html");
         Why are you running in the election?:<input type='text' name='question1' value='${sessionScope.candidate.why_running }'><br>
         What problems do you want to debate?:<input type='text' name='question2' value='${sessionScope.candidate.what_things_do_you_want_to_represent }'><br>
         Profession:<input type='text' name='profession' value='${sessionScope.candidate.profession }'><br>
-        Password:<input type='text' name='paswd' value='${sessionScope.candidate.paswd }'><br>
-		<input type='submit' name='ok' value='Delete'><br>
-		<a href="/EditCand?candidate_id=${candidate.candidate_id }">Go back</a><br>
-		<a href="/showAll">Cancel</a><br>
+<%--         Password:<input type='text' name='paswd' value='${sessionScope.candidate.paswd }'><br><br> --%>
+<br><br>
+		<input style='font-size: 20px; border-radius: 25px; background-color: #ff7a18; width: 100px' type='submit' name='ok' value='Delete'>
+			<input
+			style='font-size: 20px; border-radius: 25px; background-color: #ff7a18; width: 100px'
+			type='button' name='cancel' value='Cancel'
+			onclick='window.history.back()'><br> 
+		
+	
 	</form>
 </div>
 <div class="stripe"></div>

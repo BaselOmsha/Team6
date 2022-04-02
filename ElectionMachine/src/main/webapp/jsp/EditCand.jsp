@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="app.model.Candidate" %> 
+	pageEncoding="ISO-8859-1"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="app.model.Candidate"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <meta charset="UTF-8">
@@ -47,25 +47,53 @@ a:hover {
 a:active {
 	color: blue;
 }
+
 .box {
-    background-color: #ffffffea;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    width: auto;
-    height: auto;
-    position: relative;
-    flex-direction: raw;
-    display: flex;
-    flex-wrap: wrap; 
-    justify-content: center; 
-    align-items: center;
-    overflow: hidden;
-    
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-		
+	background-color: #ffffffea;
+	width: auto;
+	height: auto;
+	position: relative;
+	flex-direction: column;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	overflow: scroll;
 }
+
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: auto;
+	flex-direction: column;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+
+td, th {
+	border: 1px solid;
+	text-align: left;
+	padding: 8px;
+	color: #000000;
+	background-color: #eeeeef;
+	border: none;
+	font-size: 20px;
+}
+
+tr:nth-child(even) {
+	background-color: rgb(0, 0, 255);
+}
+
+#button1 , #button2 {
+display:inline-block;
+/* additional code */
+}
+
 </style>
 
 </head>
@@ -76,29 +104,34 @@ a:active {
 			<nav class="navbar navbar-expand-lg navbar-light">
 				<div class="container-fluid">
 					<a class="navbar-brand" href="index.html"
-						style="color: #0000ff; font-family: 'Dosis', sans-serif; font-size: 35px;"><b Style="color: #0693e3;">Election</b> <b Style="color: rgb(207, 46, 46);">Machine</b> <b>2022</b></a>
+						style="color: #0000ff; font-family: 'Dosis', sans-serif; font-size: 35px;"><b
+						Style="color: #0693e3;">Election</b> <b
+						Style="color: rgb(207, 46, 46);">Machine</b> <b>2022</b></a>
 					<div id="navbarNav">
 						<ul class="navbar-nav">
-						<!-- 	<li class="nav-item"><a class="nav-link active"
+							<!-- 	<li class="nav-item"><a class="nav-link active"
 								aria-current="page" href="votRegForm.html" style=" font-size: 20px"><b>Voter Registration</b></a></li>
 							<li class="nav-item"><a class="nav-link active" href="./staticRegForm/candRegForm.html" style=" font-size: 20px"><b>Candidate Registration</b></a>
 							</li> -->
-							<li class="nav-item"><a class="nav-link active" href="#" style=" font-size: 20px"><b><%
-//get the cockies
-Cookie[] cookies = request.getCookies();
-String uname = null;
-if(cookies !=null){
-	for (int i = 0; i < cookies.length; i++) {
-		
-	if(cookies[i].getName().equals("Welcome")) uname = cookies[i].getValue();
-	out.println("Welcome " + uname);
-}
-}
-if(uname == null) response.sendRedirect("/AdminLogIn.html");
-%></b></a>
-							</li>
-							<li class="nav-item"><a class="nav-link active" href="/adminlogout" style=" font-size: 20px"><b>Log out</b></a>
-							</li>
+							<li class="nav-item"><a class="nav-link active" href="#"
+								style="font-size: 20px"><b> <%
+ //get the cockies
+ Cookie[] cookies = request.getCookies();
+ String uname = null;
+ if (cookies != null) {
+ 	for (int i = 0; i < cookies.length; i++) {
+
+ 		if (cookies[i].getName().equals("Welcome"))
+ 	uname = cookies[i].getValue();
+ 		out.println("Welcome " + uname);
+ 	}
+ }
+ if (uname == null)
+ 	response.sendRedirect("/AdminLogIn.html");
+ %>
+								</b></a></li>
+							<li class="nav-item"><a class="nav-link active"
+								href="/adminlogout" style="font-size: 20px"><b>Log out</b></a></li>
 						</ul>
 					</div>
 				</div>
@@ -108,39 +141,173 @@ if(uname == null) response.sendRedirect("/AdminLogIn.html");
 		</header>
 		<main>
 
-<div class="box">
-	<form action='./EditCand' method='post'>
-		id: <input type='text' name='candidate_id' value='${sessionScope.candidate.candidate_id }'readonly><br>
-		FirstName: <input type='text' name='fname' value='${sessionScope.candidate.fname }'><br>
-		LasttName: <input type='text' name='lname' value='${sessionScope.candidate.lname }'><br>	
-		Ssn:<input type='text' name='ssn' value='${sessionScope.candidate.ssn }'><br>
-		Party:<input type='text' name='party' value='${sessionScope.candidate.party }'><br>	
-		Email:<input type='text' name='email' value='${sessionScope.candidate.email }'><br>	
-		Username:<input type='text' name='uname' value='${sessionScope.candidate.uname }'><br>
-		Age:<input type='number' name='age' value='${sessionScope.candidate.age }'><br>
-		Why are you running in the election?:<input type='text' name='question1' value='${sessionScope.candidate.why_running }'><br>
-		What problems do you want to debate?:<input type='text' name='question2' value='${sessionScope.candidate.what_things_do_you_want_to_represent }'><br>
-		Profession:<input type='text' name='profession' value='${sessionScope.candidate.profession }'><br>
-		Password:<input type='text' name='paswd' value='${sessionScope.candidate.paswd }'><br>
-				
-		<input type='submit' name='ok' value='Edit'><br>
-		<a href="/deleteCand?candidate_id=${candidate.candidate_id }">Delete</a><br>
-		<a href="/showAll">Cancel</a><br>
-	</form>
-</div>
-<div class="stripe"></div>
-		<footer>
-			<div class="container">
-				<div class="py-3 my-4">
-					<ul class="nav justify-content-center border-bottom pb-3 mb-3">
-						<li class="nav-item"><a class="nav-link px-2 text-muted">Facebook</a></li>
-						<li class="nav-item"><a class="nav-link px-2 text-muted">Instagram</a></li>
-						<li class="nav-item"><a class="nav-link px-2 text-muted">LinkedIn</a></li>
-						<li class="nav-item"><a class="nav-link px-2 text-muted">Discord</a></li>
-					</ul>
-					<p class="text-center text-muted">&copy; 2022 HAMK, Team2</p>
-				</div>
+			<div class="box">
+			<br><br>
+			<h1>Candidate Edit Form</h1><br>
+				<form action='./EditCand' method='post'>
+					<table>
+						<tr>
+							<td>ID</td>
+							<td><input type='text' name='candidate_id'
+								value='${sessionScope.candidate.candidate_id }' readonly><br></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>First name</td>
+							<td><input type='text' name='fname'
+								value='${sessionScope.candidate.fname }'></td>
+							<br>
+						</tr>
+						<tr>
+							<td></td>
+							<td><br></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></input></td>
+							<br>
+						</tr>
+						<tr>
+							<td>Last name</td>
+							<td><input type='text' name='lname'
+								value='${sessionScope.candidate.lname }'><br></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>Social security number</td>
+							<td><input type='text' name='ssn'
+								value='${sessionScope.candidate.ssn }'></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><br></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></input></td>
+							<br>
+						</tr>
+						<tr>
+							<td>Party</td>
+							<td><input type='text' name='party'
+								value='${sessionScope.candidate.party }'><br></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>Email:</td>
+							<td><input type='text' name='email'
+								value='${sessionScope.candidate.email }'></input></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><br></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<br>
+						</tr>
+						<tr>
+							<td>Username</td>
+							<td><input type='text' name='uname'
+								value='${sessionScope.candidate.uname }'><br></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>Age</td>
+							<td><input type='number' name='age'
+								value='${sessionScope.candidate.age }'></td>
+							</td>
+						</tr>
+						<td>
+						<td><br></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<br>
+						</tr>
+						<tr>
+							<td>Why are you running?</td>
+							<td><input type='text' name='question1'
+								value='${sessionScope.candidate.why_running }'><br></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>What things do you want to represent?</td>
+							<td><input type='text' name='question2'
+								value='${sessionScope.candidate.what_things_do_you_want_to_represent }'></td>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><br></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<br>
+						</tr>
+						<tr>
+							<td>Profession</td>
+							<td><input type='text' name='profession'
+								value='${sessionScope.candidate.profession }'><br></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+					<%-- 		<td>Password</td>
+							<td><input type='text' name='paswd'
+								value='${sessionScope.candidate.paswd }'></td>
+							</td>
+						</tr> --%>
+					</table>
+					<br> <br> <input type='submit' name='ok' value='Update' style="margin-left: 45%; font-size: 30px;"  id="button1" >
+					<input style="margin-left: 45%; font-size: 30px;" type='reset' name='reset' value='Reset' id="button2"><br>
+					<a style="margin-left: 45%; font-size: 30px" href="/deleteCand?candidate_id=${candidate.candidate_id }">Delete</a><br>
+					<a style="margin-left: 45%; font-size: 30px" href="/showAll">Cancel</a><br>
+				</form>
+
 			</div>
-		</footer>		
+			<div class="stripe"></div>
+			<footer>
+				<div class="container">
+					<div class="py-3 my-4">
+						<ul class="nav justify-content-center border-bottom pb-3 mb-3">
+							<li class="nav-item"><a class="nav-link px-2 text-muted">Facebook</a></li>
+							<li class="nav-item"><a class="nav-link px-2 text-muted">Instagram</a></li>
+							<li class="nav-item"><a class="nav-link px-2 text-muted">LinkedIn</a></li>
+							<li class="nav-item"><a class="nav-link px-2 text-muted">Discord</a></li>
+						</ul>
+						<p class="text-center text-muted">&copy; 2022 HAMK, Team2</p>
+					</div>
+				</div>
+			</footer>
 </body>
 </html>

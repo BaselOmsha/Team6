@@ -141,7 +141,7 @@ if(uname == null) response.sendRedirect("/AdminLogIn.html");
         <td>${candidate.why_running }</td>
         <td>${candidate.what_things_do_you_want_to_represent }</td>
 		<td>${candidate.profession }</td>
-		<td>${candidate.paswd }</td>   
+		
 		
 	 <td>
             <a href="/EditCand?candidate_id=${candidate.candidate_id }">Edit</a>
