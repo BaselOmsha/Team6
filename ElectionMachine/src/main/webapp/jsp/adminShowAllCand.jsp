@@ -145,8 +145,8 @@ if(uname == null) response.sendRedirect("/AdminLogIn.html");
 		
 	 <td>
             <a href="/EditCand?candidate_id=${candidate.candidate_id }">Edit</a>
-            <a href="#"> - </a>
-            <a href="/deleteCand?candidate_id=${candidate.candidate_id }">Delete</a>
+           
+            
         </td>
     </tr>
 </c:forEach>

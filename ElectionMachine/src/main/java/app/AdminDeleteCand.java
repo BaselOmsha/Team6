@@ -34,10 +34,10 @@ public class AdminDeleteCand extends HttpServlet {
 		
 		if ( idValue != null ) {
 			try {
-				int id = Integer.parseInt(idValue);
+				int candidate_id = Integer.parseInt(idValue);
 				
 				Dao dao = new Dao();
-				Candidate cand = dao.showCandInfo(id);
+				Candidate cand = dao.showCandInfo(candidate_id);
 				
 				session.setAttribute("Candidate", cand);
 				
@@ -88,6 +88,7 @@ public class AdminDeleteCand extends HttpServlet {
         cand.setWhy_running(request.getParameter("question1"));
         cand.setWhat_things_do_you_want_to_represent(request.getParameter("question2"));
         cand.setProfession(request.getParameter("profession"));
+        cand.setPaswd(request.getParameter("paswd"));
         return cand;
 	}
 }

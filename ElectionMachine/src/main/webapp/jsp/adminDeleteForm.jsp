@@ -109,7 +109,7 @@ if(uname == null) response.sendRedirect("/AdminLogIn.html");
 		</header>
 		<main>
 
-<div class="box">></div>
+<div class="box">
 
 	<form action='./deleteCand' method='post'>
 		id: <input type='text' name='candidate_id' value='${sessionScope.candidate.candidate_id }'readonly><br>
@@ -124,7 +124,9 @@ if(uname == null) response.sendRedirect("/AdminLogIn.html");
         What problems do you want to debate?:<input type='text' name='question2' value='${sessionScope.candidate.what_things_do_you_want_to_represent }'><br>
         Profession:<input type='text' name='profession' value='${sessionScope.candidate.profession }'><br>
         Password:<input type='text' name='paswd' value='${sessionScope.candidate.paswd }'><br>
-		<input type='submit' name='ok' value='Delete'>
+		<input type='submit' name='ok' value='Delete'><br>
+		<a href="/EditCand?candidate_id=${candidate.candidate_id }">Go back</a><br>
+		<a href="/showAll">Cancel</a><br>
 	</form>
 </div>
 <div class="stripe"></div>

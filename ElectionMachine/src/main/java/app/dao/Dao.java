@@ -264,6 +264,7 @@ public class Dao {
                 cand.setWhy_running(rs.getString("Why_running"));
                 cand.setWhat_things_do_you_want_to_represent(rs.getString("What_things_Do_you_wnat_to_represent"));
                 cand.setProfession(rs.getString("profession"));
+//                cand.setPaswd(rs.getString("paswd"));
           
                 
 //                cand.setCandidate_id(Integer.parseInt(request.getParameter("candidate_id")));

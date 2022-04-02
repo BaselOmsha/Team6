@@ -108,7 +108,7 @@ if(uname == null) response.sendRedirect("/AdminLogIn.html");
 		</header>
 		<main>
 
-<div class="box">></div>
+<div class="box">
 	<form action='./EditCand' method='post'>
 		id: <input type='text' name='candidate_id' value='${sessionScope.candidate.candidate_id }'readonly><br>
 		FirstName: <input type='text' name='fname' value='${sessionScope.candidate.fname }'><br>
@@ -123,7 +123,9 @@ if(uname == null) response.sendRedirect("/AdminLogIn.html");
 		Profession:<input type='text' name='profession' value='${sessionScope.candidate.profession }'><br>
 		Password:<input type='text' name='paswd' value='${sessionScope.candidate.paswd }'><br>
 				
-		<input type='submit' name='ok' value='Edit'>
+		<input type='submit' name='ok' value='Edit'><br>
+		<a href="/deleteCand?candidate_id=${candidate.candidate_id }">Delete</a><br>
+		<a href="/showAll">Cancel</a><br>
 	</form>
 </div>
 <div class="stripe"></div>
