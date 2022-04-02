@@ -1,10 +1,12 @@
 package app;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,11 +43,20 @@ public class AdminLoginApp extends HttpServlet {
 	        dao.close();
 	        if (SecurityUtils.isPasswordOk(hashpw, password, salt)) {
 //	        	System.out.println("ok");
+	        	String data = uname;
+	    		Cookie cookie = new Cookie("Welcome", data);
+	    		//setting cookie to expiry in 30 mins
+				cookie.setMaxAge(30*60);
+				response.addCookie(cookie);
 	        	response.sendRedirect("/showAll");
 	//        	RequestDispatcher rd=request.getRequestDispatcher("./jsp/adminShowAllCand.jsp");
 //		        rd.include(request,  response);
 	        } else {
-	        	response.sendRedirect("AdminLogIn.html");
+	        	RequestDispatcher rd = getServletContext().getRequestDispatcher("/AdminLogIn.html");
+				PrintWriter out= response.getWriter();
+				out.println("<font color=red>Either user name or password is wrong.</font>");
+				rd.include(request, response);
+	        	
 	        }
 	    }
 
