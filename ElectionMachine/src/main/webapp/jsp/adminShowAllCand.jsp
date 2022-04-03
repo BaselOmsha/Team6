@@ -69,6 +69,27 @@ a:active {
 	background-size: cover;
 	background-attachment: fixed;
 }
+
+table {
+  	font-family: arial, sans-serif;
+  	border-collapse: collapse;
+  	width: auto;
+  	
+}
+
+td, th {
+  border: 1px solid;
+  text-align: left;
+  padding: 8px;
+  color:#000000;
+  background-color:#69839647;
+}
+
+tr:nth-child(even) {
+  background-color: #019274;
+   
+}
+
 </style>
 
 </head>

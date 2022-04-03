@@ -51,20 +51,48 @@ a:active {
 
 .box {
 	background-color: #ffffffea;
-	padding-top: 40px;
-	padding-bottom: 40px;
 	width: auto;
 	height: auto;
 	position: relative;
-	flex-direction: raw;
+	flex-direction: column;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
-	overflow: hidden;
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-attachment: fixed;
+	overflow: scroll;
+}
+
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: auto;
+	flex-direction: column;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+
+td, th {
+	border: 1px solid;
+	text-align: left;
+	padding: 8px;
+	color: #000000;
+	background-color: #eeeeef;
+	border: none;
+	font-size: 20px;
+}
+
+tr:nth-child(even) {
+	background-color: rgb(0, 0, 255);
+}
+
+#button1 , #button2 {
+display:inline-block;
+/* additional code */
 }
 </style>
 
@@ -115,41 +143,160 @@ a:active {
 		<main>
 
 			<div class="box">
-
+			<br><br>
+				<h1>Candidate delete Form</h1><br>
+				<h5 style="color:red">Are you sure you want to delete this candidate? Action cannot be undone!</h5><br>
 				<form action='./deleteCand' method='post'>
-					id: <input type='text' name='candidate_id'
-						value='${sessionScope.candidate.candidate_id }' readonly><br>
-					FirstName: <input type='text' name='firstname'
-						value='${sessionScope.candidate.fname }' readonly><br>
-					LasttName: <input type='text' name='lastname'
-						value='${sessionScope.candidate.lname }' readonly><br>
-					Ssn:<input type='text' name='ssn'
-						value='${sessionScope.candidate.ssn }' readonly><br>
-					Party:<input type='text' name='party'
-						value='${sessionScope.candidate.party }' readonly><br>
-					Email:<input type='text' name='email'
-						value='${sessionScope.candidate.email }' readonly><br>
-					Username:<input type='text' name='uname'
-						value='${sessionScope.candidate.uname }' readonly><br>
-					Age:<input type='number' name='age'
-						value='${sessionScope.candidate.age }' readonly><br>
-					Why are you running in the election?:<input type='text'
-						name='question1' value='${sessionScope.candidate.why_running }'
-						readonly><br> What problems do you want to debate?:<input
-						type='text' name='question2'
-						value='${sessionScope.candidate.what_things_do_you_want_to_represent }'
-						readonly><br> Profession:<input type='text'
-						name='profession' value='${sessionScope.candidate.profession }'
-						readonly><br>
+					<table>
+						<tr>
+							<td>ID</td>
+							<td><input type='text' name='candidate_id'
+								value='${sessionScope.candidate.candidate_id }' readonly><br></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>First name</td>
+							<td><input type='text' name='fname'
+								value='${sessionScope.candidate.fname }'></td>
+							<br>
+						</tr>
+						<tr>
+							<td></td>
+							<td><br></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></input></td>
+							<br>
+						</tr>
+						<tr>
+							<td>Last name</td>
+							<td><input type='text' name='lname'
+								value='${sessionScope.candidate.lname }'><br></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>Social security number</td>
+							<td><input type='text' name='ssn'
+								value='${sessionScope.candidate.ssn }'></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><br></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></input></td>
+							<br>
+						</tr>
+						<tr>
+							<td>Party</td>
+							<td><input type='text' name='party'
+								value='${sessionScope.candidate.party }'><br></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>Email:</td>
+							<td><input type='text' name='email'
+								value='${sessionScope.candidate.email }'></input></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><br></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<br>
+						</tr>
+						<tr>
+							<td>Username</td>
+							<td><input type='text' name='uname'
+								value='${sessionScope.candidate.uname }'><br></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>Age</td>
+							<td><input type='number' name='age'
+								value='${sessionScope.candidate.age }'></td>
+							</td>
+						</tr>
+						<td>
+						<td><br></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<br>
+						</tr>
+						<tr>
+							<td>Why are you running?</td>
+							<td><input type='text' name='question1'
+								value='${sessionScope.candidate.why_running }'><br></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>What things do you want to represent?</td>
+							<td><input type='text' name='question2'
+								value='${sessionScope.candidate.what_things_do_you_want_to_represent }'></td>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><br></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<br>
+						</tr>
+						<tr>
+							<td>Profession</td>
+							<td><input type='text' name='profession'
+								value='${sessionScope.candidate.profession }'><br></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td><input type='text' name='paswd'
+								value='${sessionScope.candidate.paswd }' hidden></td>
+							</td>
+						</tr>
+					</table>
 					<%--         Password:<input type='text' name='paswd' value='${sessionScope.candidate.paswd }'readonly><br><br> --%>
 					<br>
-					<br> <input
-						style='font-size: 20px; border-radius: 25px; background-color: #ff7a18; width: 100px'
-						type='submit' name='ok' value='Delete'> <input
-						style='font-size: 20px; border-radius: 25px; background-color: #ff7a18; width: 100px'
-						type='button' name='cancel' value='Cancel'
-						onclick='window.history.back()'><br>
-
+					<table>
+					<td> <input type='submit' name='ok' value='Delete' style=' font-size: 30px' > </td>
+					<td> <input style='font-size: 30px' type='button' name='cancel' value='Cancel' onclick='window.history.back()'></td>
+					</tr>
+					</table>
 
 				</form>
 			</div>

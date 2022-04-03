@@ -38,9 +38,14 @@
 	color: #ffe02f;
 }
 
+a {
+color:red;
+
+}
 /* mouse over link */
 a:hover {
 	color: #000000;
+	
 }
 
 /* selected link */
@@ -288,10 +293,15 @@ display:inline-block;
 							</td>
 						</tr>
 					</table>
-					<br> <br> <input type='submit' name='ok' value='Update' style="margin-left: 45%; font-size: 30px;"  id="button1" >
-					<input style="margin-left: 45%; font-size: 30px;" type='reset' name='reset' value='Reset' id="button2"><br>
-					<a style="margin-left: 45%; font-size: 30px" href="/deleteCand?candidate_id=${candidate.candidate_id }">Delete</a><br>
-					<a style="margin-left: 45%; font-size: 30px" href="/showAll">Cancel</a><br>
+					<br>
+					<table>
+					<tr>
+					<td> <input type='submit' name='ok' value='Update' style=" font-size: 30px;"  id="button1" ></td>
+					<td><input style=" font-size: 30px;" type='reset' name='reset' value='Reset' id="button2"></td>
+					<td><input style=' font-size: 30px' type='button' name='cancel' value='Cancel' onclick='window.history.back()'></td>
+					<td><a style=" font-size: 30px; border: solid black;" href="/deleteCand?candidate_id=${candidate.candidate_id }">Delete</a></td>
+					</tr>
+					</table>
 				</form>
 
 			</div>
