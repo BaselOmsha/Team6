@@ -24,7 +24,7 @@ public class RegisterCandidateApp extends HttpServlet {
 		response.setContentType("text/html");
 		response.setCharacterEncoding("UTF-8");
 		
-		response.sendRedirect("login.html");
+		response.sendRedirect("AdminLogIn.html");
 		
 	}
 	@Override
@@ -53,11 +53,11 @@ public class RegisterCandidateApp extends HttpServlet {
 				paswd == null || paswd.isEmpty() 
 				) {
 				
-			RequestDispatcher rd=request.getRequestDispatcher("./staticRegForm/candFillUp.html");
+			RequestDispatcher rd=request.getRequestDispatcher("./jsp/candFillUp.jsp");
 	        rd.include(request,  response);
 	       
 		 } else if (dao.checkCandUname(uname)){  //if user name is in use reload the form
-			 RequestDispatcher rd=request.getRequestDispatcher("./staticRegForm/unameTakenCan.html");
+			 RequestDispatcher rd=request.getRequestDispatcher("./jsp/unameTakenCan.jsp");
 		        rd.include(request,  response); 
 	    } else{
 	    int age = Integer.parseInt(request.getParameter("age"));
@@ -68,7 +68,7 @@ public class RegisterCandidateApp extends HttpServlet {
 		dao.addCandidate(fname, lname, ssn, party, email, uname, age, hashpw, salt);
 		
 		dao.close();
-		response.sendRedirect("./staticRegForm/candFilled.html");
+		response.sendRedirect("./jsp/candFilled.jsp");
 		
 	}
 		}catch (Exception e) {

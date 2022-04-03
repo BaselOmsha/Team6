@@ -113,7 +113,7 @@ display:inline-block;
 								aria-current="page" href="votRegForm.html" style=" font-size: 20px"><b>Voter Registration</b></a></li>
 							<li class="nav-item"><a class="nav-link active" href="./staticRegForm/candRegForm.html" style=" font-size: 20px"><b>Candidate Registration</b></a>
 							</li> -->
-							<li class="nav-item"><a class="nav-link active" href="#"
+							<li class="nav-item"><a class="nav-link active" 
 								style="font-size: 20px"><b> <%
  //get the cockies
  Cookie[] cookies = request.getCookies();
@@ -282,11 +282,11 @@ display:inline-block;
 							<td></td>
 							<td></td>
 							<td></td>
-					<%-- 		<td>Password</td>
+							<td></td>
 							<td><input type='text' name='paswd'
-								value='${sessionScope.candidate.paswd }'></td>
+								value='${sessionScope.candidate.paswd }' hidden></td>
 							</td>
-						</tr> --%>
+						</tr>
 					</table>
 					<br> <br> <input type='submit' name='ok' value='Update' style="margin-left: 45%; font-size: 30px;"  id="button1" >
 					<input style="margin-left: 45%; font-size: 30px;" type='reset' name='reset' value='Reset' id="button2"><br>

@@ -1,3 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="app.model.Candidate" %> 
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <meta charset="UTF-8">
@@ -88,30 +94,51 @@ tr:nth-child(even) {
 </head>
 <body>
 		<header>
-						<!--navigation bar starts here.-->
-			<nav class="navbar navbar-expand-lg navbar-light">
-				<div class="container-fluid">
-					<a class="navbar-brand" href="index.html"
-						style="color: #0000ff; font-family: 'Dosis', sans-serif; font-size: 35px;"><b Style="color: #0693e3;">Election</b> <b Style="color: rgb(207, 46, 46);">Machine</b> <b>2022</b></a>
-					<div id="navbarNav">
-						<ul class="navbar-nav">
-<!-- 							<li class="nav-item"><a class="nav-link active" -->
-<!-- 								aria-current="page" href="votRegForm.html" style=" font-size: 20px"><b>Voter Registration</b></a></li> -->
-							<li class="nav-item"><a class="nav-link active" href="./staticRegForm/candRegForm.html" style=" font-size: 20px"><b>Candidate Registration</b></a>
-							</li>
-							<li class="nav-item"><a class="nav-link active" style=" font-size: 20px"><b></b></a>
-							</li>
-							<li class="nav-item"><a class="nav-link active" href="/adminlogout" style=" font-size: 20px"><b>Log out</b></a>
-							</li>
-						</ul>
-					</div>
+		<!--navigation bar starts here.-->
+		<nav class="navbar navbar-expand-lg navbar-light">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="index.html"
+					style="color: #0000ff; font-family: 'Dosis', sans-serif; font-size: 35px;"><b
+					Style="color: #0693e3;">Election</b> <b
+					Style="color: rgb(207, 46, 46);">Machine</b> <b>2022</b></a>
+				<div id="navbarNav">
+					<ul class="navbar-nav">
+						<!-- 							<li class="nav-item"><a class="nav-link active" -->
+						<!-- 								aria-current="page" href="votRegForm.html" style=" font-size: 20px"><b>Voter Registration</b></a></li> -->
+						<li class="nav-item"><a class="nav-link active"
+							href="./staticRegForm/candRegForm.html" style="font-size: 20px"><b>Candidate
+									Registration</b></a></li>
+						<li class="nav-item"><a class="nav-link active"
+							style="font-size: 20px"><b>
+									<%
+									//get the cockies
+									Cookie[] cookies = request.getCookies();
+									String uname = null;
+									if (cookies != null) {
+										for (int i = 0; i < cookies.length; i++) {
+
+											if (cookies[i].getName().equals("Welcome"))
+										uname = cookies[i].getValue();
+											out.println("Welcome " + uname);
+										}
+									}
+									if (uname == null)
+										response.sendRedirect("/AdminLogIn.html");
+									%>
+							</b></a></li>
+						<li class="nav-item"><a class="nav-link active"
+							href="/adminlogout" style="font-size: 20px"><b>Log out</b></a></li>
+					</ul>
 				</div>
-			</nav>
-		</header>
+			</div>
+		</nav>
+	</header>
 		<main>
 		<div class="box">
 		<br><br>
 			<h1>Candidate Registration Form</h1><br>
+				<h5 style="color:red">Username is taken. Choose a different one!</h5><br>
+			
 			<form method='post' action='/candidate'>
 				<table>
 					<tr>
@@ -207,7 +234,11 @@ tr:nth-child(even) {
 				<br> <input type='submit' name='ok' value='Register'
 					style="margin-left: 45%; font-size: 30px"
 					onclick='sendInfo(this.form);'>
+					<br> <input type='button' name='ok' value='Cancel'
+					style="margin-left: 46%; font-size: 30px"
+					onclick='window.history.back()'>
 			</form>
+			<br>
 			<br> Items with an asterisk (*) are mandatory <br><br>
 		</div>	
 		</main>

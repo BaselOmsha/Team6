@@ -11,7 +11,7 @@ public class Candidate implements Serializable{
 	private String email;
 	private String uname;
 	private  int age;
-	private String why_running;
+	private String Why_running;
 	private String what_things_do_you_want_to_represent;
 	private String profession;
 	private String paswd;
@@ -65,10 +65,10 @@ public class Candidate implements Serializable{
 		this.age = age;
 	}
 	public String getWhy_running() {
-		return why_running;
+		return Why_running;
 	}
-	public void setWhy_running(String why_running) {
-		why_running = why_running;
+	public void setWhy_running(String Why_running) {
+		this.Why_running = Why_running;
 	}
 	public String getWhat_things_do_you_want_to_represent() {
 		return what_things_do_you_want_to_represent;
@@ -96,7 +96,7 @@ public class Candidate implements Serializable{
 	}
 	
 	public String toString() {
-		return candidate_id+" "+fname+" "+lname+" "+ssn+" "+party+" "+email+" "+uname+" "+age+" "+why_running+" "+what_things_do_you_want_to_represent+" "+profession+" "+paswd+" "+salt;
+		return candidate_id+" "+fname+" "+lname+" "+ssn+" "+party+" "+email+" "+uname+" "+age+" "+Why_running+" "+what_things_do_you_want_to_represent+" "+profession+" "+paswd+" "+salt;
 	}
 
 }

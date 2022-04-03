@@ -52,9 +52,9 @@ public class AdminLoginApp extends HttpServlet {
 	//        	RequestDispatcher rd=request.getRequestDispatcher("./jsp/adminShowAllCand.jsp");
 //		        rd.include(request,  response);
 	        } else {
-	        	RequestDispatcher rd = getServletContext().getRequestDispatcher("/AdminLogIn.html");
+	        	RequestDispatcher rd = getServletContext().getRequestDispatcher("/AdminLogInWUP.html");
 				PrintWriter out= response.getWriter();
-				out.println("<font color=red>Either user name or password is wrong.</font>");
+//				out.println("<font color=red>Either user name or password is wrong.</font>");
 				rd.include(request, response);
 	        	
 	        }
