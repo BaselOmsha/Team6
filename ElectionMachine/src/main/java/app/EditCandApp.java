@@ -46,7 +46,7 @@ public class EditCandApp extends HttpServlet {
 			}
 		} else {
 			// Back to list
-			response.sendRedirect("/index.html");
+			response.sendRedirect("/EditCandApp");
 			
 		}
 	
