@@ -47,7 +47,7 @@ public class LoginApp extends HttpServlet {
           //setting cookie to expiry in 30 mins
           cookie.setMaxAge(30*60);
           response.addCookie(cookie);
-          response.sendRedirect("/EditCand");
+          response.sendRedirect("/EditCand1");
 //            RequestDispatcher rd=request.getRequestDispatcher("./jsp/adminShowAllCand.jsp");
 //          rd.include(request,  response);
       } else {
