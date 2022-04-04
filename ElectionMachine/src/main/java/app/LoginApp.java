@@ -49,9 +49,9 @@ public class LoginApp extends HttpServlet {
           cookie.setMaxAge(30*60);
           response.addCookie(cookie);
           
-          HttpSession session = request.getSession();
-          
-          session.setAttribute("LoggedUser", "2");
+//          HttpSession session = request.getSession();
+//          
+//          session.setAttribute("LoggedUser", "2");
           response.sendRedirect("/showInfo");
 
 //            RequestDispatcher rd=request.getRequestDispatcher("./jsp/adminShowAllCand.jsp");

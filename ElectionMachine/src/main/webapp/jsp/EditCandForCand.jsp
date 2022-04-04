@@ -12,7 +12,7 @@
 <meta name="author" content="">
 <meta name="description"
 	content="Team 14 project work. The website contains basic web development guides utilizing HTML5, CSS, JavaScript and Bootstrap">
-<title>Admin Page</title>
+<title>Candidate Page</title>
 <!--Link to bootstrap.-->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -132,11 +132,11 @@ display:inline-block;
  	}
  }
  if (uname == null)
- 	response.sendRedirect("/AdminLogIn.html");
+ 	response.sendRedirect("/CandLogIn.html");
  %>
 								</b></a></li>
 							<li class="nav-item"><a class="nav-link active"
-								href="/adminlogout" style="font-size: 20px"><b>Log out</b></a></li>
+								href="/candlogout" style="font-size: 20px"><b>Log out</b></a></li>
 						</ul>
 					</div>
 				</div>

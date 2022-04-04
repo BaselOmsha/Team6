@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.ArrayList"%>
 <%@ page import="app.model.Candidate"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
@@ -136,7 +137,7 @@ display:inline-block;
  %>
 								</b></a></li>
 							<li class="nav-item"><a class="nav-link active"
-								href="/adminlogout" style="font-size: 20px"><b>Log out</b></a></li>
+								href="/candlogout" style="font-size: 20px"><b>Log out</b></a></li>
 						</ul>
 					</div>
 				</div>
@@ -149,20 +150,19 @@ display:inline-block;
 			<div class="box">
 			<br><br>
 			<h1>Candidate Edit Form</h1><br>
-				<form>
+				
 					<table>
+						
 						<tr>
 							<td>ID</td>
-							<td><input type='text' name='candidate_id'
-								value='${sessionScope.candidate.candidate_id }' readonly><br></td>
+							<td>${sessionScope.candidate.candidate_id }<br></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td>First name</td>
-							<td><input type='text' name='fname'
-								value='${sessionScope.candidate.fname }'></td>
+							<td>${sessionScope.candidate.fname }</td>
 							<br>
 						</tr>
 						<tr>
@@ -179,16 +179,14 @@ display:inline-block;
 						</tr>
 						<tr>
 							<td>Last name</td>
-							<td><input type='text' name='lname'
-								value='${sessionScope.candidate.lname }'><br></td>
+							<td>${sessionScope.candidate.lname }<br></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td>Social security number</td>
-							<td><input type='text' name='ssn'
-								value='${sessionScope.candidate.ssn }'></td>
+							<td>${sessionScope.candidate.ssn }</td>
 						</tr>
 						<tr>
 							<td></td>
@@ -204,16 +202,14 @@ display:inline-block;
 						</tr>
 						<tr>
 							<td>Party</td>
-							<td><input type='text' name='party'
-								value='${sessionScope.candidate.party }'><br></td>
+							<td>${sessionScope.candidate.party }<br></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td>Email:</td>
-							<td><input type='text' name='email'
-								value='${sessionScope.candidate.email }'></input></td>
+							<td>${sessionScope.candidate.email }</td>
 						</tr>
 						<tr>
 							<td></td>
@@ -229,16 +225,14 @@ display:inline-block;
 						</tr>
 						<tr>
 							<td>Username</td>
-							<td><input type='text' name='uname'
-								value='${sessionScope.candidate.uname }'><br></td>
+							<td>${sessionScope.candidate.uname }<br></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td>Age</td>
-							<td><input type='number' name='age'
-								value='${sessionScope.candidate.age }'></td>
+							<td>${sessionScope.candidate.age }</td>
 							</td>
 						</tr>
 						<td>
@@ -254,16 +248,14 @@ display:inline-block;
 						</tr>
 						<tr>
 							<td>Why are you running?</td>
-							<td><input type='text' name='question1'
-								value='${sessionScope.candidate.why_running }'><br></td>
+							<td>${sessionScope.candidate.why_running }<br></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td>What things do you want to represent?</td>
-							<td><input type='text' name='question2'
-								value='${sessionScope.candidate.what_things_do_you_want_to_represent }'></td>
+							<td>${sessionScope.candidate.what_things_do_you_want_to_represent }</td>
 							</td>
 						</tr>
 						<tr>
@@ -280,16 +272,14 @@ display:inline-block;
 						</tr>
 						<tr>
 							<td>Profession</td>
-							<td><input type='text' name='profession'
-								value='${sessionScope.candidate.profession }'><br></td>
+							<td>${sessionScope.candidate.profession }<br></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
-							<td><input type='text' name='paswd'
-								value='${sessionScope.candidate.paswd }' hidden></td>
+							<td></td>
 							</td>
 						</tr>
 					</table>
@@ -298,8 +288,9 @@ display:inline-block;
 					<tr>
 					<td><a style=" font-size: 30px; border: solid black;" href="/EditCandApp?candidate_id=${candidate.candidate_id }">Edit</a></td>
 					</tr>
+					
 					</table>
-				</form>
+				
 
 			</div>
 			<div class="stripe"></div>
