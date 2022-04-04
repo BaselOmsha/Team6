@@ -32,7 +32,7 @@ public class ShowCand extends HttpServlet {
 	        Dao dao = new Dao();
 	        Candidate cand = dao.showCandInfo(candidate_id);
 
-	        session.setAttribute("showCandInfo", cand);
+	        session.setAttribute("candidate", cand);
 
 	        RequestDispatcher rd = request.getRequestDispatcher("jsp/showCand.jsp");
 	        rd.forward(request, response);

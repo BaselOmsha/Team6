@@ -149,7 +149,7 @@ display:inline-block;
 			<div class="box">
 			<br><br>
 			<h1>Candidate Edit Form</h1><br>
-				<form action='./EditCandApp' method='post'>
+				<form>
 					<table>
 						<tr>
 							<td>ID</td>
@@ -296,10 +296,7 @@ display:inline-block;
 					<br>
 					<table>
 					<tr>
-					<td> <input type='submit' name='ok' value='Update' style=" font-size: 30px;"  id="button1" ></td>
-					<td><input style=" font-size: 30px;" type='reset' name='reset' value='Reset' id="button2"></td>
-					<td><input style=' font-size: 30px' type='button' name='cancel' value='Cancel' onclick='window.history.back()'></td>
-					<td><a style=" font-size: 30px; border: solid black;" href="/deleteCand?candidate_id=${candidate.candidate_id }">Delete</a></td>
+					<td><a style=" font-size: 30px; border: solid black;" href="/EditCandApp?candidate_id=${candidate.candidate_id }">Edit</a></td>
 					</tr>
 					</table>
 				</form>

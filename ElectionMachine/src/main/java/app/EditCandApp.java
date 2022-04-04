@@ -38,7 +38,7 @@ public class EditCandApp extends HttpServlet {
 				
 				session.setAttribute("candidate", cand);
 				
-				RequestDispatcher rd = request.getRequestDispatcher("jsp/EditCand1.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("jsp/EditCandForCand.jsp");
 				rd.forward(request, response);
 				
 			} catch (Exception e) {
@@ -46,7 +46,7 @@ public class EditCandApp extends HttpServlet {
 			}
 		} else {
 			// Back to list
-			response.sendRedirect("/EditCandApp");
+			response.sendRedirect("/showInfo");
 			
 		}
 	
@@ -68,7 +68,7 @@ public class EditCandApp extends HttpServlet {
 		// Back to list after actions
 		//RequestDispatcher rd = request.getRequestDispatcher("/showdata");
 		//rd.forward(request, response);
-		response.sendRedirect("/EditCandApp");
+		response.sendRedirect("/showInfo");
 	}
 	
 	private Candidate readCandidate(HttpServletRequest request) {
