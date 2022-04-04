@@ -98,7 +98,7 @@ tr:nth-child(even) {
 		<!--navigation bar starts here.-->
 		<nav class="navbar navbar-expand-lg navbar-light">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="index.html"
+				<a class="navbar-brand" href="../index.html"
 					style="color: #0000ff; font-family: 'Dosis', sans-serif; font-size: 35px;"><b
 					Style="color: #0693e3;">Election</b> <b
 					Style="color: rgb(207, 46, 46);">Machine</b> <b>2022</b></a>
@@ -107,7 +107,7 @@ tr:nth-child(even) {
 						<!-- 							<li class="nav-item"><a class="nav-link active" -->
 						<!-- 								aria-current="page" href="votRegForm.html" style=" font-size: 20px"><b>Voter Registration</b></a></li> -->
 						<li class="nav-item"><a class="nav-link active"
-							href="./staticRegForm/candRegForm.html" style="font-size: 20px"><b>Candidate
+							href="candregForm.jsp" style="font-size: 20px"><b>Candidate
 									Registration</b></a></li>
 						<li class="nav-item"><a class="nav-link active"
 							style="font-size: 20px"><b>
