@@ -287,41 +287,31 @@ public class Dao {
         return list;
     }
 	
-	public ArrayList<Candidate> readCandidatesInfo() {
+	public ArrayList<Candidate> readCandidatesInfo(int candidate_id) {
         ArrayList<Candidate> list=new ArrayList<>();
-        Statement stmt=null;
-        int count=0;
+        Candidate result = null;
+        String sql = "select * from candidate where candidate_id = ?";
         try {
-            stmt = conn.createStatement();
-            ResultSet rs=stmt.executeQuery("select * from candidate where candidate_id=?");
-            while (rs.next()) {
-                Candidate cand=new Candidate();
-                cand.setCandidate_id(rs.getInt("candidate_id"));
-                cand.setFname(rs.getString("fname"));
-                cand.setLname(rs.getString("lname"));
-                cand.setSsn(rs.getString("ssn"));
-                cand.setParty(rs.getString("party"));
-                cand.setEmail(rs.getString("email"));
-                cand.setUname(rs.getString("uname"));
-                cand.setAge(rs.getInt("age"));
-                cand.setWhy_running(rs.getString("Why_running"));
-                cand.setWhat_things_do_you_want_to_represent(rs.getString("What_things_Do_you_wnat_to_represent"));
-                cand.setProfession(rs.getString("profession"));
-//                cand.setPaswd(rs.getString("paswd"));
-          
-                
-//                cand.setCandidate_id(Integer.parseInt(request.getParameter("candidate_id")));
-//                cand.setFname(request.getParameter("fname"));
-//                cand.setLname(request.getParameter("lname"));
-//                cand.setSsn(request.getParameter("ssn"));
-//                cand.setParty(request.getParameter("party"));
-//                cand.setEmail(request.getParameter("email"));
-//                cand.setUname(request.getParameter("uname"));
-//                cand.setAge(Integer.parseInt(request.getParameter("age")));
-//                cand.setWhy_running(request.getParameter("Why_running"));
-//                cand.setWhat_things_Do_you_wnat_to_represent(request.getParameter("What_things_Do_you_wnat_to_represent"));
-//                cand.setProfession(request.getParameter("profession"));
-                list.add(cand);
+        	PreparedStatement stmt = conn.prepareStatement(sql);
+        	stmt.setInt(1, candidate_id);
+        	ResultSet resultset = stmt.executeQuery();
+        	if (resultset.next()) {
+				result = new Candidate();
+				result.setCandidate_id(resultset.getInt("candidate_id"));
+				result.setFname(resultset.getString("fname"));
+				result.setLname(resultset.getString("lname"));
+				result.setSsn(resultset.getString("ssn"));
+				result.setParty(resultset.getString("party"));
+				result.setEmail(resultset.getString("email"));
+				result.setUname(resultset.getString("uname"));
+				result.setAge(resultset.getInt("age"));
+				result.setWhy_running(resultset.getString("Why_running"));
+				result.setWhat_things_do_you_want_to_represent(resultset.getString("What_things_Do_you_wnat_to_represent"));
+				result.setProfession(resultset.getString("profession"));
+				result.setPaswd(resultset.getString("paswd"));
+//				result.setSalt(resultset.getString("salt"));
+			
+                list.add(result);
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -329,5 +319,5 @@ public class Dao {
         }
         return list;
     }
-
+	
 }

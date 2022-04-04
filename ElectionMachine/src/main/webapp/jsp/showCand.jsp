@@ -120,21 +120,22 @@ display:inline-block;
 							<li class="nav-item"><a class="nav-link active" href="./staticRegForm/candRegForm.html" style=" font-size: 20px"><b>Candidate Registration</b></a>
 							</li> -->
 							<li class="nav-item"><a class="nav-link active" 
-								style="font-size: 20px"><b> <%
- //get the cockies
- Cookie[] cookies = request.getCookies();
- String uname = null;
- if (cookies != null) {
- 	for (int i = 0; i < cookies.length; i++) {
-
- 		if (cookies[i].getName().equals("Welcome"))
- 	uname = cookies[i].getValue();
- 		out.println("Welcome " + uname);
- 	}
- }
- if (uname == null)
- 	response.sendRedirect("/CandLogIn.html");
- %>
+								style="font-size: 20px"><b> 
+								<%
+								 //get the cockies
+								 Cookie[] cookies = request.getCookies();
+								 String uname = null;
+								 if (cookies != null) {
+								 	for (int i = 0; i < cookies.length; i++) {
+								
+								 		if (cookies[i].getName().equals("Welcome"))
+								 	uname = cookies[i].getValue();
+								 		out.println("Welcome " + uname);
+								 	}
+								 }
+								 if (uname == null)
+								 	response.sendRedirect("/CandLogIn.html");
+								 %>
 								</b></a></li>
 							<li class="nav-item"><a class="nav-link active"
 								href="/candlogout" style="font-size: 20px"><b>Log out</b></a></li>

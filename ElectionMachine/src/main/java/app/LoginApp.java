@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import app.dao.Dao;
+import app.model.Candidate;
 import app.security.SecurityUtils;
 
 @WebServlet(name = "LoginApp", urlPatterns = { "/login" })
@@ -44,14 +45,13 @@ public class LoginApp extends HttpServlet {
         if (SecurityUtils.isPasswordOk(hashpw, password, salt)) {
 //          System.out.println("ok");
           String data = uname;
+          HttpSession session = request.getSession();
+          Candidate cand=new Candidate();
+          session.setAttribute("LoggedUser", "2");
+          session.setMaxInactiveInterval(30*60);
           Cookie cookie = new Cookie("Welcome", data);
-          //setting cookie to expiry in 30 mins
           cookie.setMaxAge(30*60);
           response.addCookie(cookie);
-          
-//          HttpSession session = request.getSession();
-//          
-//          session.setAttribute("LoggedUser", "2");
           response.sendRedirect("/showInfo");
 
 //            RequestDispatcher rd=request.getRequestDispatcher("./jsp/adminShowAllCand.jsp");
@@ -65,3 +65,4 @@ public class LoginApp extends HttpServlet {
       }
   }
 }
+

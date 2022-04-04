@@ -149,7 +149,7 @@ display:inline-block;
 			<div class="box">
 			<br><br>
 			<h1>Candidate Edit Form</h1><br>
-				<form action='./EditCand' method='post'>
+				<form action='./EditCandApp' method='post'>
 					<table>
 						<tr>
 							<td>ID</td>
