@@ -11,6 +11,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import app.dao.Dao;
 import app.security.SecurityUtils;
@@ -47,8 +48,11 @@ public class LoginApp extends HttpServlet {
           //setting cookie to expiry in 30 mins
           cookie.setMaxAge(30*60);
           response.addCookie(cookie);
-
-          response.sendRedirect("/EditCandApp");
+          
+          HttpSession session = request.getSession();
+          
+          session.setAttribute("LoggedUser", "2");
+          response.sendRedirect("/showInfo");
 
 //            RequestDispatcher rd=request.getRequestDispatcher("./jsp/adminShowAllCand.jsp");
 //          rd.include(request,  response);
