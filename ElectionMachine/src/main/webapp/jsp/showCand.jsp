@@ -150,7 +150,7 @@ display:inline-block;
 
 			<div class="box">
 			<br><br>
-			<h1>Candidate Edit Form</h1><br>
+			<h1>Candidate info</h1><br>
 				
 					<table>
 						
