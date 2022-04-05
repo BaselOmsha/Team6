@@ -287,13 +287,13 @@ public class Dao {
         return list;
     }
 	
-	public ArrayList<Candidate> readCandidatesInfo(int candidate_id) {
-        ArrayList<Candidate> list=new ArrayList<>();
+	public Candidate readCandidatesInfo(String uname) {
+      //  ArrayList<Candidate> list=new ArrayList<>();
         Candidate result = null;
-        String sql = "select * from candidate where candidate_id = ?";
+        String sql = "select * from candidate where uname = ?";
         try {
         	PreparedStatement stmt = conn.prepareStatement(sql);
-        	stmt.setInt(1, candidate_id);
+        	stmt.setString(1, uname);
         	ResultSet resultset = stmt.executeQuery();
         	if (resultset.next()) {
 				result = new Candidate();
@@ -311,13 +311,13 @@ public class Dao {
 				result.setPaswd(resultset.getString("paswd"));
 //				result.setSalt(resultset.getString("salt"));
 			
-                list.add(result);
+        //        list.add(result);
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return list;
+        return result;
     }
 	
 }

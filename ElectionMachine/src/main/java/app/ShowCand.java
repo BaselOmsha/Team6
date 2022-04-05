@@ -26,11 +26,12 @@ public class ShowCand extends HttpServlet {
 
         // if sessions does not exist, create new one
         HttpSession session = request.getSession();
-        String value = request.getParameter("candidate_id");
-        value = (String) session.getAttribute("LoggedUser");
-        int candidate_id = Integer.parseInt(value);
-        Dao dao = new Dao();
-        ArrayList<Candidate> cand = dao.readCandidatesInfo(candidate_id);
+       // String value = request.getParameter("candidate_id");
+        Candidate cand = (Candidate) session.getAttribute("LoggedUser");
+       // value = (String) session.getAttribute("LoggedUser");
+        int candidate_id = cand.getCandidate_id();
+     //   Dao dao = new Dao();
+       //Candidate cand = dao.readCandidatesInfo(candidate_id);
 
         session.setAttribute("readCandidatesInfo", cand);
 

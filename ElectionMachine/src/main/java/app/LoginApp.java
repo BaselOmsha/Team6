@@ -41,13 +41,14 @@ public class LoginApp extends HttpServlet {
         String salt = dao.getUserSalt(uname);
         String hashpw = dao.getUserpasswordHash(uname);
 
-        dao.close();
+        
         if (SecurityUtils.isPasswordOk(hashpw, password, salt)) {
 //          System.out.println("ok");
           String data = uname;
           HttpSession session = request.getSession();
-          Candidate cand=new Candidate();
-          session.setAttribute("LoggedUser", "2");
+          Candidate cand=dao.readCandidatesInfo(data);
+          dao.close();
+          session.setAttribute("LoggedUser", cand);
           session.setMaxInactiveInterval(30*60);
           Cookie cookie = new Cookie("Welcome", data);
           cookie.setMaxAge(30*60);
@@ -57,6 +58,7 @@ public class LoginApp extends HttpServlet {
 //            RequestDispatcher rd=request.getRequestDispatcher("./jsp/adminShowAllCand.jsp");
 //          rd.include(request,  response);
       } else {
+    	  dao.close();
           RequestDispatcher rd = getServletContext().getRequestDispatcher("/LogInWUP.html");
           PrintWriter out= response.getWriter();
 //          out.println("<font color=red>Either user name or password is wrong.</font>");

@@ -156,14 +156,14 @@ display:inline-block;
 						
 						<tr>
 							<td>ID</td>
-							<td>${sessionScope.candidate.candidate_id }<br></td>
+							<td>${sessionScope.readCandidatesInfo.candidate_id }<br></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td>First name</td>
-							<td>${sessionScope.candidate.fname }</td>
+							<td>${sessionScope.readCandidatesInfo.fname }</td>
 							<br>
 						</tr>
 						<tr>
@@ -180,14 +180,14 @@ display:inline-block;
 						</tr>
 						<tr>
 							<td>Last name</td>
-							<td>${sessionScope.candidate.lname }<br></td>
+							<td>${sessionScope.readCandidatesInfo.lname }<br></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td>Social security number</td>
-							<td>${sessionScope.candidate.ssn }</td>
+							<td>${sessionScope.readCandidatesInfo.ssn }</td>
 						</tr>
 						<tr>
 							<td></td>
@@ -203,14 +203,14 @@ display:inline-block;
 						</tr>
 						<tr>
 							<td>Party</td>
-							<td>${sessionScope.candidate.party }<br></td>
+							<td>${sessionScope.readCandidatesInfo.party }<br></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td>Email:</td>
-							<td>${sessionScope.candidate.email }</td>
+							<td>${sessionScope.readCandidatesInfo.email }</td>
 						</tr>
 						<tr>
 							<td></td>
@@ -226,14 +226,14 @@ display:inline-block;
 						</tr>
 						<tr>
 							<td>Username</td>
-							<td>${sessionScope.candidate.uname }<br></td>
+							<td>${sessionScope.readCandidatesInfo.uname }<br></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td>Age</td>
-							<td>${sessionScope.candidate.age }</td>
+							<td>${sessionScope.readCandidatesInfo.age }</td>
 							</td>
 						</tr>
 						<td>
@@ -249,14 +249,14 @@ display:inline-block;
 						</tr>
 						<tr>
 							<td>Why are you running?</td>
-							<td>${sessionScope.candidate.why_running }<br></td>
+							<td>${sessionScope.readCandidatesInfo.why_running }<br></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td>What things do you want to represent?</td>
-							<td>${sessionScope.candidate.what_things_do_you_want_to_represent }</td>
+							<td>${sessionScope.readCandidatesInfo.what_things_do_you_want_to_represent }</td>
 							</td>
 						</tr>
 						<tr>
@@ -273,7 +273,7 @@ display:inline-block;
 						</tr>
 						<tr>
 							<td>Profession</td>
-							<td>${sessionScope.candidate.profession }<br></td>
+							<td>${sessionScope.readCandidatesInfo.profession }<br></td>
 							<td></td>
 							<td></td>
 							<td></td>
@@ -287,7 +287,7 @@ display:inline-block;
 					<br>
 					<table>
 					<tr>
-					<td><a style=" font-size: 30px; border: solid black;" href="/EditCandApp?candidate_id=${candidate.candidate_id }">Edit</a></td>
+					<td><a style=" font-size: 30px; border: solid black;" href="/EditCandApp?candidate_id=${sessionScope.readCandidatesInfo.candidate_id }">Edit</a></td>
 					</tr>
 					
 					</table>
