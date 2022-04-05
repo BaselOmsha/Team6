@@ -26,7 +26,7 @@ public class EditCandApp extends HttpServlet {
 		
 		// if sessions does not exist, create new one
 		HttpSession session = request.getSession();
-		
+		// returns the value of request parameter as a sString
 		String idValue = request.getParameter("candidate_id");
 		
 		if ( idValue != null ) {
@@ -35,9 +35,9 @@ public class EditCandApp extends HttpServlet {
 				
 				Dao dao = new Dao();
 				Candidate cand = dao.showCandInfo(candidate_id);
-				
+				// saving cand object in session using the unique string candidate
 				session.setAttribute("candidate", cand);
-				
+				//dispatch request to EditCandForCand.jsp 
 				RequestDispatcher rd = request.getRequestDispatcher("jsp/EditCandForCand.jsp");
 				rd.forward(request, response);
 				
