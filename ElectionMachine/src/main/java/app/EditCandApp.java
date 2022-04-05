@@ -68,6 +68,8 @@ public class EditCandApp extends HttpServlet {
 		// Back to list after actions
 		//RequestDispatcher rd = request.getRequestDispatcher("/showdata");
 		//rd.forward(request, response);
+		HttpSession session = request.getSession();
+        session.setAttribute("LoggedUser", cand);
 		response.sendRedirect("/showInfo");
 	}
 	
