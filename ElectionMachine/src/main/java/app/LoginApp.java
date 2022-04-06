@@ -33,7 +33,7 @@ public class LoginApp extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         Dao dao = new Dao();
-        //return values as string
+        //return values as string.
         String uname = request.getParameter("uname");
         String password = request.getParameter("paswd");
 
