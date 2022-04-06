@@ -29,7 +29,7 @@ public class AdminDeleteCand extends HttpServlet {
 		
 		// if sessions does not exist, create new one
 		HttpSession session = request.getSession();
-		
+		// returns the value of request parameter as a sString
 		String idValue = request.getParameter("candidate_id");
 		
 		if ( idValue != null ) {
