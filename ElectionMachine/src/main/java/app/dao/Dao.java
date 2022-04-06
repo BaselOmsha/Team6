@@ -21,6 +21,7 @@ public class Dao {
 	// When new instance is created, also DB-connection is created
 	public Dao() {
 		try {
+			// get the connection to db form the Connections class
 			conn=Connections.getConnection();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
