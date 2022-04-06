@@ -23,12 +23,17 @@ public class ShowCand extends HttpServlet {
 	@Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws IOException, ServletException {
-
+		
+			
+		
         // if sessions does not exist, create new one
         HttpSession session = request.getSession();
        // String value = request.getParameter("candidate_id");
         Candidate cand = (Candidate) session.getAttribute("LoggedUser");
        // value = (String) session.getAttribute("LoggedUser");
+        if ( cand != null ) {
+        try {
+    
         int candidate_id = cand.getCandidate_id();
      //   Dao dao = new Dao();
        //Candidate cand = dao.readCandidatesInfo(candidate_id);
@@ -37,6 +42,15 @@ public class ShowCand extends HttpServlet {
 
         RequestDispatcher rd = request.getRequestDispatcher("jsp/showCand.jsp");
         rd.forward(request, response);
+        
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        }else {
+			// Back to list
+			response.sendRedirect("/CandLogIn.html");
+			
+		}
 
     }
 

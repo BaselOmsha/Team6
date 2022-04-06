@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import app.model.Candidate;
+import app.conn.Connections;
 
 
 
@@ -20,10 +21,8 @@ public class Dao {
 	// When new instance is created, also DB-connection is created
 	public Dao() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			conn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/electionmachine", "team6",
-					"kukkuu");
-		} catch (SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+			conn=Connections.getConnection();
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
