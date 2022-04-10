@@ -6,10 +6,18 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="app.model.Candidate"%>
 
-
+<%
+//requires revalidation after logging out
+response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+response.setHeader("Expires", "0"); // Proxies
+%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <meta http-equiv="content-type"
 	content="application/xhtml+xml; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -113,19 +121,28 @@ tr:nth-child(even) {
 							<li class="nav-item"><a class="nav-link active"
 								style="font-size: 20px"><b>
 										<%
-										//get the cockies
-										Cookie[] cookies = request.getCookies();
+										//allow access only if session exists
 										String uname = null;
-										if (cookies != null) {
-											for (int i = 0; i < cookies.length; i++) {
-
-												if (cookies[i].getName().equals("Welcome"))
-											uname = cookies[i].getValue();
-												out.println("Welcome " + uname);
+										uname =(String) session.getAttribute("uname");
+										if (uname!=null){
+											String data = null;
+											String sessionID = null;
+											Cookie[] cookies = request.getCookies();
+											if(cookies !=null){
+												for (int i = 0; i < cookies.length; i++) {
+												if(cookies[i].getName().equals("uname")) data = cookies[i].getValue();
+												
+												if(cookies[i].getName().equals("JSESSIONID")) sessionID = cookies[i].getValue();
 											}
-										}
-										if (uname == null)
+											out.println("Welcome, " + data);
+											}else{
+												sessionID = session.getId();
+											}
+											
+										}else if(session.getAttribute("uname") == null){
 											response.sendRedirect("/AdminLogIn.html");
+										}
+
 										%>
 								</b></a></li>
 							<li class="nav-item"><a class="nav-link active"

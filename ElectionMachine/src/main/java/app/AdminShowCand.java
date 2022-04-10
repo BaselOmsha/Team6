@@ -26,14 +26,26 @@ public class AdminShowCand extends HttpServlet {
 
 	        // if sessions does not exist, create new one
 	        HttpSession session = request.getSession();
-
+//	        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+//	        response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+//	        response.setHeader("Expires", "0"); // Proxies
+//	        String uname = request.getParameter("uname");
+//	        try {
 	        Dao dao = new Dao();
 	        ArrayList<Candidate> cand = dao.readAllCandidates();
-
-	        session.setAttribute("ReadAllCandidates", cand);
-
-	        RequestDispatcher rd = request.getRequestDispatcher("jsp/adminShowAllCand.jsp");
-	        rd.forward(request, response);
+	        
+//		        if(session == null || uname == null ){
+//		        	 response.sendRedirect("/AdminLogIn.html");
+//		        } else  if (session != null) { 
+		        	session.setAttribute("ReadAllCandidates", cand);
+		        
+		        RequestDispatcher rd = request.getRequestDispatcher("jsp/adminShowAllCand.jsp");
+		        rd.forward(request, response);
+//		        }
+//	        }catch (Exception e) {
+//				e.printStackTrace();
+//				 
+//	        }
 
 	    }
 

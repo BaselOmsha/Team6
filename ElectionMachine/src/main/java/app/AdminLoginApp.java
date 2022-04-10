@@ -10,6 +10,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import app.model.Candidate;
 import app.dao.Dao;
@@ -30,7 +31,7 @@ public class AdminLoginApp extends HttpServlet {
 	            throws IOException, ServletException {
 	        response.setContentType("text/html");
 	        response.setCharacterEncoding("UTF-8");
-
+	       
 	        Dao dao = new Dao();
 
 	        String uname = request.getParameter("uname");
@@ -42,16 +43,17 @@ public class AdminLoginApp extends HttpServlet {
 
 	        
 	        if (SecurityUtils.isPasswordOk(hashpw, password, salt)) {
-//	        	System.out.println("ok");
-	        	String data = uname;
-	        	dao.close();
-	    		Cookie cookie = new Cookie("Welcome", data);
-	    		//setting cookie to expiry in 30 mins
-				cookie.setMaxAge(30*60);
-				response.addCookie(cookie);
-	        	response.sendRedirect("/showAll");
-	//        	RequestDispatcher rd=request.getRequestDispatcher("./jsp/adminShowAllCand.jsp");
-//		        rd.include(request,  response);
+	        	 HttpSession session=request.getSession();
+	        	 
+	        	 session.setAttribute("uname", "Admin");
+	        	 System.out.println("Session: "+ request.getSession(false));
+//	        	 session  expires in 30 mins
+	        	 session.setMaxInactiveInterval(30*60);
+	        	 Cookie cookie = new Cookie("uname", uname);
+	        	 response.addCookie(cookie);
+	        	 String encodedURL = response.encodeRedirectURL("/showAll?uname="+ uname);
+	 			 response.sendRedirect(encodedURL);
+
 	        } else {
 	        	dao.close();
 	        	RequestDispatcher rd = getServletContext().getRequestDispatcher("/AdminLogInWUP.html");
