@@ -10,6 +10,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "CandLogoutApp", urlPatterns = { "/candlogout" })
 public class CandLogoutApp extends HttpServlet {
@@ -17,20 +18,23 @@ public class CandLogoutApp extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
     	response.setContentType("text/html");
-    	Cookie cookie = null;
     	Cookie[] cookies = request.getCookies();
     	if(cookies != null){
-    	for(Cookie cookie1 : cookies){
-    		if(cookie1.getName().equals("Welcome")){
-    			cookie = cookie1;
-    			break;
+    	for(Cookie cookie : cookies){
+    		if(cookie.getName().equals("JSESSIONID")){
+    			System.out.println("JSESSIONID="+cookie.getValue());
     		}
-    	}
-    	}
-    	if(cookie != null){
     		cookie.setMaxAge(0);
-        	response.addCookie(cookie);
+    		response.addCookie(cookie);
     	}
+    	}
+    	//invalidate the session if exists
+    	HttpSession session = request.getSession(false);
+    	System.out.println("User="+session.getAttribute("LoggedUser"));
+    	if(session != null){
+    		session.invalidate();
+    	}
+    	//no encoding because we have invalidated the session
     	response.sendRedirect("/CandLogIn.html");
     }
 

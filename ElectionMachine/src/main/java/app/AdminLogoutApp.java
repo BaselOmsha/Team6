@@ -35,29 +35,7 @@ public class AdminLogoutApp extends HttpServlet {
     	}
     	//no encoding because we have invalidated the session
     	response.sendRedirect("/AdminLogIn.html");
-//    	System.out.println("Session before incalidate: "+ request.getSession(false));
-//    	
-//    	 HttpSession session=request.getSession(false);  
-//    	 response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
-//    	 response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-//    	 response.setHeader("Expires", "0"); // Proxies
-//    	 String uname = request.getParameter("uname");
-//    	 if(session != null){
-//    		 session.getMaxInactiveInterval();
-//    		 session.removeAttribute("uname");
-//    		 request.getSession(false).invalidate();  
-//             response.sendRedirect("/AdminLogIn.html");
-//             System.out.println("Session after invalidate: "+ request.getSession(false));
-//    	 } 
-//    	 
-//    	 if(uname != null){
-//    		 session.getMaxInactiveInterval();
-//    		 session.removeAttribute("uname");
-//    		 request.getSession(false).invalidate();    
-//             response.sendRedirect("/AdminLogIn.html");
-//             System.out.println("Session after invalidate: "+ request.getSession(false));
-//    	 } 
-//         response.sendRedirect("/AdminLogIn.html");
+
     }
 
 

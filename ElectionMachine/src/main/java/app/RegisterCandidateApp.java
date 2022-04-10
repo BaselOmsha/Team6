@@ -68,8 +68,8 @@ public class RegisterCandidateApp extends HttpServlet {
 		dao.addCandidate(fname, lname, ssn, party, email, uname, age, hashpw, salt);
 		
 		dao.close();
-		response.sendRedirect("./jsp/candFilled.jsp");
-		
+		RequestDispatcher rd=request.getRequestDispatcher("./jsp/candFilled.jsp");
+        rd.include(request,  response);		
 	}
 		}catch (Exception e) {
 			e.printStackTrace();

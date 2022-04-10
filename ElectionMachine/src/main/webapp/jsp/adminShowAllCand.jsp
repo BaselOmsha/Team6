@@ -139,7 +139,7 @@ tr:nth-child(even) {
 												sessionID = session.getId();
 											}
 											
-										}else if(session.getAttribute("uname") == null){
+										}else if(uname == null){
 											response.sendRedirect("/AdminLogIn.html");
 										}
 

@@ -5,7 +5,12 @@
 
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="app.model.Candidate"%>
-
+<%
+//requires revalidation after logging out
+response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+response.setHeader("Expires", "0"); // Proxies
+%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <meta charset="UTF-8">
@@ -130,7 +135,7 @@ tr:nth-child(even) {
 											sessionID = session.getId();
 										}
 										
-									}else if(session.getAttribute("uname") == null){
+									}else if(uname == null){
 										response.sendRedirect("/AdminLogIn.html");
 									}
 									%>

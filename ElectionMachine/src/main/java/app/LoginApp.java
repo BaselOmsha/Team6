@@ -43,17 +43,31 @@ public class LoginApp extends HttpServlet {
 
         
         if (SecurityUtils.isPasswordOk(hashpw, password, salt)) {
-//          System.out.println("ok");
+//         HttpSession session=request.getSession();
+//         Candidate cand=dao.readCandidatesInfo(uname);
+//         dao.close();
+//       	 session.setAttribute("LoggedUser", cand);
+//       	 System.out.println("Session: "+ request.getSession(false));
+////       	 session  expires in 30 mins
+//       	 session.setMaxInactiveInterval(30*60);
+//       	 Cookie cookie = new Cookie("uname", uname);
+//       	 response.addCookie(cookie);
+//       	 String encodedURL = response.encodeRedirectURL("/showInfo?uname="+ uname);
+//			 response.sendRedirect(encodedURL);
+////          System.out.println("ok");
           String data = uname;
           HttpSession session = request.getSession();
           Candidate cand=dao.readCandidatesInfo(data);
           dao.close();
           session.setAttribute("LoggedUser", cand);
+          System.out.println("Session: "+ request.getSession(false));
           session.setMaxInactiveInterval(30*60);
-          Cookie cookie = new Cookie("Welcome", data);
+          Cookie cookie = new Cookie("LoggedUser", data);
           cookie.setMaxAge(30*60);
           response.addCookie(cookie);
-          response.sendRedirect("/showInfo");
+          String encodedURL = response.encodeRedirectURL("/showInfo?uname="+ data);
+			response.sendRedirect(encodedURL);
+//          response.sendRedirect("/showInfo?uname"+data);
 
 //            RequestDispatcher rd=request.getRequestDispatcher("./jsp/adminShowAllCand.jsp");
 //          rd.include(request,  response);
