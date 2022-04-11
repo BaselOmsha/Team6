@@ -300,7 +300,7 @@ display:inline-block;
 							<td></td>
 							<td></td>
 							<td>Password</td>
-							<td><input type='text' name='paswd'
+							<td><input type='password' name='paswd'
 								value='${sessionScope.candidate.paswd }' ></td>
 							</td>
 						</tr>
