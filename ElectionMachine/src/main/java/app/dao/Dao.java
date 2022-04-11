@@ -1,3 +1,4 @@
+
 package app.dao;
 
 import java.io.PrintWriter;
@@ -13,9 +14,15 @@ import app.model.Candidate;
 import app.conn.Connections;
 
 
-
+/**
+ * This is dao class
+ * @author team6 (Nori, Jesse, Basil)
+ * version 0.3
+ */
 public class Dao {
-
+	/**
+	 *Function to connect to database 
+	 */
 	private Connection conn;
 
 	// When new instance is created, also DB-connection is created
@@ -39,7 +46,18 @@ public class Dao {
 		}
 	}
 
-	//inserts new candidate into candidate table
+	/**
+	 * Inserts new candidate into candidate tableFunction to connect to database
+	 * @param fname
+	 * @param lname
+	 * @param ssn
+	 * @param party
+	 * @param email
+	 * @param uname
+	 * @param age
+	 * @param paswd
+	 * @param salt
+	 */
 	public void addCandidate(String fname, String lname, String ssn, String party, String email, 
 			String uname, int age, String paswd, String salt) {
 		
@@ -63,7 +81,12 @@ public class Dao {
 			e.printStackTrace();
 		}
 	}
-	//Checks for duplicate candidates' username
+
+	/**
+	 * Checks for duplicate candidates' username
+	 * @param uname
+	 * @return
+	 */
 	public boolean checkCandUname (String uname) {
 		boolean count = true;
 		String sql = "select uname from candidate where uname=?";
@@ -85,8 +108,12 @@ public class Dao {
 		return false;
 		
 	}
-	
-	//edits candidate info
+
+	/**
+	 *  updates candidates' info in the db
+	 * @param candidate
+	 * @return
+	 */
 	public int editCandidate(Candidate candidate) {
 		int count = 0;
 		String sql = "update candidate set fname = ?, lname = ?, ssn = ?, party = ?, email = ?, uname = ?, age = ?, Why_running = ?, What_things_Do_you_wnat_to_represent = ?,  profession = ?,  paswd = ?  where candidate_id = ?";
@@ -117,7 +144,12 @@ public class Dao {
 		return count;
 	}
 	
-	//shows info of each candidate
+	//
+	/**
+	 * shows info of each candidate
+	 * @param candidate_id
+	 * @return
+	 */
 	public Candidate showCandInfo(int candidate_id) {
 		Candidate result = null;
 		String sql = "select * from candidate where candidate_id = ?";
@@ -151,6 +183,11 @@ public class Dao {
 		return result;
 	}
 	
+	/**
+	 * checks candidate salt
+	 * @param uname
+	 * @return
+	 */
 	public String getUserSalt(String uname) {
 		String result = "";
 		String sql = "select salt from candidate where uname=?";
@@ -169,6 +206,11 @@ public class Dao {
 		return result;
 	}
 	
+	/**
+	 * check candidates' hashed pw
+	 * @param uname
+	 * @return
+	 */
 	public String getUserpasswordHash(String uname) {
 		String result = "";
 		String sql = "select paswd from candidate where uname=?";
@@ -188,7 +230,12 @@ public class Dao {
 		}
 		return result;
 	}
-	//gets admin salt
+	
+	/**
+	 * gets admin salt
+	 * @param uname
+	 * @return
+	 */
 	public String getUserSalt1(String uname) {
 		String result = "";
 		String sql = "select salt from admin where uname=?";
@@ -206,7 +253,12 @@ public class Dao {
 		}
 		return result;
 	}
-	//gets admin password
+	
+	/**
+	 * gets admin password
+	 * @param uname gets the pw based on user's uername
+	 * @return
+	 */
 	public String getUserpasswordHash1(String uname) {
 		String result = "";
 		String sql = "select paswd from admin where uname=?";
@@ -227,6 +279,11 @@ public class Dao {
 		return result;
 	}
 	
+	/**
+	 * delete rows from candidate's table
+	 * @param cand
+	 * @return
+	 */
 	public int adminDeleteCand(Candidate cand) {
 		String sql = "delete from candidate where candidate_id=?";
 		int count=0;
@@ -244,6 +301,10 @@ public class Dao {
 		return count;
 	}
 	
+	/**
+	 * prints candidates
+	 * @return returns a list of candidates 
+	 */
 	public ArrayList<Candidate> readAllCandidates() {
         ArrayList<Candidate> list=new ArrayList<>();
         Statement stmt=null;
@@ -287,6 +348,11 @@ public class Dao {
         return list;
     }
 	
+	/**
+	 * Shows candidates's info
+	 * @param uname show candidate's info based on their username when logged in
+	 * @return
+	 */
 	public Candidate readCandidatesInfo(String uname) {
       //  ArrayList<Candidate> list=new ArrayList<>();
         Candidate result = null;
