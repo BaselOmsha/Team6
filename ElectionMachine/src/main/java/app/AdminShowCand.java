@@ -13,6 +13,12 @@ import javax.servlet.http.HttpSession;
 import app.model.Candidate;
 import app.dao.Dao;
 
+/**
+ * This controller handels the request to show all candidates 
+ * in the Admin's main page. 
+ * @author team6 (Nori, Jesse, Basil) 
+ * version 0.3
+ */
 @WebServlet(
         name = "ShowAll",
         urlPatterns = {"/showAll"}
@@ -20,6 +26,9 @@ import app.dao.Dao;
 
 public class AdminShowCand extends HttpServlet {
 	
+	/**
+	 *Creates new candidate object that utilises readAllCandidates(); dao finction
+	 */
 	@Override
 	    public void doGet(HttpServletRequest request, HttpServletResponse response) 
 	            throws IOException, ServletException {

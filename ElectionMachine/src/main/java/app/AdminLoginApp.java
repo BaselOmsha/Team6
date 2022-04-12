@@ -19,7 +19,8 @@ import app.security.SecurityUtils;
 /**
  * This Controller handles the admin login
  * 
- * @author team6 (Nori, Jesse, Basil) version 0.3
+ * @author team6 (Nori, Jesse, Basil) 
+ * version 0.3
  *
  */
 @WebServlet(name = "AdminLoginApp", urlPatterns = { "/adminlogin" })
