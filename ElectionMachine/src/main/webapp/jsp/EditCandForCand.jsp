@@ -299,7 +299,7 @@ display:inline-block;
 							<td></td>
 							<td></td>
 							<td></td>
-							<td>Password</td>
+							<td>Password (type old PW to save settings)<br>Type new PW to change existing one</td>
 							<td><input type='password' name='paswd'
 								value='${sessionScope.candidate.paswd }' ></td>
 							</td>

@@ -67,7 +67,7 @@ public class EditCand extends HttpServlet {
 		Dao dao=new Dao();
 		Candidate cand = readCandidate(request);
 		
-		dao.editCandidate(cand);
+		dao.editCandidateAdmin(cand);
 		
 		dao.close();
 		

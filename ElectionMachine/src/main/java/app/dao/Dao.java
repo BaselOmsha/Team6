@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import app.model.Candidate;
+import app.security.SecurityUtils;
 import app.conn.Connections;
 
 
@@ -116,7 +117,7 @@ public class Dao {
 	 */
 	public int editCandidate(Candidate candidate) {
 		int count = 0;
-		String sql = "update candidate set fname = ?, lname = ?, ssn = ?, party = ?, email = ?, uname = ?, age = ?, Why_running = ?, What_things_Do_you_wnat_to_represent = ?,  profession = ?,  paswd = ?  where candidate_id = ?";
+		String sql = "update candidate set fname = ?, lname = ?, ssn = ?, party = ?, email = ?, uname = ?, age = ?, Why_running = ?, What_things_Do_you_wnat_to_represent = ?,  profession = ?,  paswd = ?, salt = ?  where candidate_id = ?";
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			
@@ -130,8 +131,45 @@ public class Dao {
 			stmt.setString(8, candidate.getWhy_running());
 			stmt.setString(9, candidate.getWhat_things_do_you_want_to_represent());
 			stmt.setString(10, candidate.getProfession());
+			
+			// Create salt and hashed pw
+			String salt = SecurityUtils.getSalt();
+			String hashpw = SecurityUtils.getPasswordHashed(candidate.getPaswd(), salt);
+			stmt.setString(11, hashpw);
+			stmt.setString(12, salt);
+			
+			
+			stmt.setInt(13, candidate.getCandidate_id());
+			
+			count = stmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	public int editCandidateAdmin(Candidate candidate) {
+		int count = 0;
+		String sql = "update candidate set fname = ?, lname = ?, ssn = ?, party = ?, email = ?, uname = ?, age = ?, Why_running = ?, What_things_Do_you_wnat_to_represent = ?,  profession = ?,  paswd = ? where candidate_id = ?";
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			
+			stmt.setString(1, candidate.getFname());
+			stmt.setString(2, candidate.getLname());
+			stmt.setString(3, candidate.getSsn());
+			stmt.setString(4, candidate.getParty());
+			stmt.setString(5, candidate.getEmail());
+			stmt.setString(6, candidate.getUname());
+			stmt.setInt(7, candidate.getAge());
+			stmt.setString(8, candidate.getWhy_running());
+			stmt.setString(9, candidate.getWhat_things_do_you_want_to_represent());
+			stmt.setString(10, candidate.getProfession());
+			
+			
+			
 			stmt.setString(11, candidate.getPaswd());
-			//stmt.setString(12, candidate.getSalt());
+			//stmt.setString(12, salt);
 			
 			
 			stmt.setInt(12, candidate.getCandidate_id());
