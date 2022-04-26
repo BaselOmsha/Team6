@@ -1,64 +1,61 @@
 package services;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-/*
- * URI to this service's Root Resource class is /laptopservice
- * The whole URL is http://some.server.someplace/rest/laptopservice
- * where some.server.someplace is the address to the server's web server (e.g. localhost:8080)
- * rest comes from the project web.xml file (element url-pattern)
- * laptopservice is the value of @Path below
- */
+import app.model.Candidate;
+import app.model.Kysymykset;
+
+
 @Path("/service")
 public class service {
 	
-	/*
-	 * This method can be reached with a GET (annotation @GET) type request to the URL
-	 * http://some.server.someplace/rest/laptopservice/servicename
-	 * ...just adding value of the @Path to the previously mentioned address
-	 * Method can return plain text (@Produces...) 
-	 */
-	@GET
-	@Path("/servicename")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String serviceName() {
-		return "This is a Laptop service";
-	}
 	
-	/*
-	 * This method can be reached with a GET (annotation @GET) type request to the URL
-	 * http://some.server.someplace/rest/laptopservice/getonelaptop/someid
-	 * where someid must be an integer.
-	 * The method receives the path parameter by {laptopid} and is cast
-	 * to int in method's actual parameter list @PathParam("laptopid") int id.
-	 * 
-	 * The implementation of this method is just to get one string from the method getLaptop,
-	 * which cannot be reached directly by http URL.
-	 */
-	@GET
-	@Path("/getonelaptop/{laptopid}")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String getOneLaptop(@PathParam("laptopid") int id) {
-		String s=getLaptop(id);
-		return s;
-	}
 	
-	/*
-	 * Just a method for testing purposes
-	 */
-	public String getLaptop(int id) {
-		ArrayList list=new ArrayList<>();
-		list.add("Honeywell");
-		list.add("Acer Trix");
-		list.add("IBM some model");
-		list.add("Asus Barracuda");
-		list.add("Commodore 64");
+	@GET
+	@Path("/readAllQuestions")
+	public void readAllQuestions(
+			@Context HttpServletRequest request,
+			@Context HttpServletResponse response) throws IOException {
 		
-		return (String) list.get(id);
+		
+	    
+		
+		EntityManagerFactory emf=Persistence.createEntityManagerFactory("Emachine");
+		EntityManager em=emf.createEntityManager();
+		
+		
+	
+	    //When using default (RESOURCE-LOCAL) transaction type
+	    //Every transaction must begin and end.
+	    em.getTransaction().begin();
+	    List<Kysymykset> list=em.createQuery("select k from Kysymykset k").getResultList();
+	    em.getTransaction().commit();
+	    
+	    RequestDispatcher rd = request.getRequestDispatcher("/jsp/candQues.jsp");
+	    request.setAttribute("Kysymyslista", list);
+	    try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+	
 }
