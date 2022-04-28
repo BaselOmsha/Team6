@@ -2,13 +2,21 @@ package app.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * This is the model layer that contain the necessary data of candidate to be
  * fetched to the user by the controller layer(Servelt)
  * @author team6 (Nori, Jesse, Basil) 
  * version 0.3
  */
+@Entity
 public class Candidate implements Serializable {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int candidate_id;
 	private String fname;
 	private String lname;
