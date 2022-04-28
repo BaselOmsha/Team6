@@ -26,7 +26,7 @@ response.setHeader("Expires", "0"); // Proxies
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="./css/style.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css">
 <!--Link to local css file.-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -115,7 +115,7 @@ display:inline-block;
 			<!--navigation bar starts here.-->
 			<nav class="navbar navbar-expand-lg navbar-light">
 				<div class="container-fluid">
-					<a class="navbar-brand" href="index.html"
+					<a class="navbar-brand" href="/index.html"
 						style="color: #0000ff; font-family: 'Dosis', sans-serif; font-size: 35px;"><b
 						Style="color: #0693e3;">Election</b> <b
 						Style="color: rgb(207, 46, 46);">Machine</b> <b>2022</b></a>
@@ -156,7 +156,6 @@ display:inline-block;
 						</ul>
 					</div>
 				</div>
-			</nav>
 			</nav>
 			<!-- /#header -->
 		</header>
@@ -557,7 +556,7 @@ display:inline-block;
 					</tr>
 					</table>
 				</form>
-
+			</main>
 			</div>
 			<div class="stripe"></div>
 			<footer>
