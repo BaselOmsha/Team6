@@ -19,7 +19,7 @@ import app.model.*;
 
 
 @Path("/service")
-public class service {
+public class Service {
 
 	@GET
 	@Path("/readAllQuestions")
