@@ -125,32 +125,30 @@ display:inline-block;
 								aria-current="page" href="votRegForm.html" style=" font-size: 20px"><b>Voter Registration</b></a></li>
 							<li class="nav-item"><a class="nav-link active" href="./staticRegForm/candRegForm.html" style=" font-size: 20px"><b>Candidate Registration</b></a>
 							</li> -->
-							<%-- <li class="nav-item"><a class="nav-link active" 
-								style="font-size: 20px"><b> 										<%
-										//allow access only if session exists
-											//allow access only if session exists
-										String uname = null;
-										uname =(String) session.getAttribute("uname");
-										if (uname!=null){
-											String data = null;
-											String sessionID = null;
-											Cookie[] cookies = request.getCookies();
-											if(cookies !=null){
-												for (int i = 0; i < cookies.length; i++) {
-												if(cookies[i].getName().equals("uname")) data = cookies[i].getValue();
-												
-												if(cookies[i].getName().equals("JSESSIONID")) sessionID = cookies[i].getValue();
-											}
-											out.println("Welcome, " + data);
-											}else{
-												sessionID = session.getId();
-											}
-											
-										}else if(session.getAttribute("uname") == null){
-											response.sendRedirect("/AdminLogIn.html");
-										}
+							<li class="nav-item"><a class="nav-link active" 
+								style="font-size: 20px"><b> 										
+								<%
+								
+								 session.getAttribute("LoggedUser");
+								if(session.getAttribute("LoggedUser") != null){
+								String uname = null;
+								String sessionID = null;
+								 Cookie[] cookies = request.getCookies();
+								 if (cookies != null) {
+								 	for (int i = 0; i < cookies.length; i++) {
+								
+								 		if (cookies[i].getName().equals("LoggedUser")) uname = cookies[i].getValue();
+								 		if(cookies[i].getName().equals("JSESSIONID")) sessionID = cookies[i].getValue();
+								 	}
+								 	out.println("Welcome, " + uname);
+								 }else{
+										sessionID = session.getId();
+									}
+								} else if (session.getAttribute("LoggedUser") == null){
+								 	response.sendRedirect("/CandLogIn.html");
+								}
 										%>
-								</b></a></li> --%>
+								</b></a></li>
 							<li class="nav-item"><a class="nav-link active"
 								href="/adminlogout" style="font-size: 20px"><b>Log out</b></a></li>
 						</ul>
@@ -162,6 +160,34 @@ display:inline-block;
 		<main>
 
 			<div class="box">
+						<h1>Candidate Questions Form</h1><br>
+			<form action='./EditCand' method='post'>
+			<table>
+					<c:forEach var="Kysymyslista"
+						items="${requestScope.Kysymyslista}">
+						<tr>
+						<td>${Kysymyslista.kysymys_id}</td>
+						<td>${Kysymyslista.kysymys}</td>
+						<td><input type="radio" id="q1" name="kysymys1" value="1">
+  							<label for="question1">1</label><br></td>
+  							<td><input type="radio" id="q2" name="kysymys1" value="2">
+  							<label for="question2">2</label><br></td>
+  							<td><input type="radio" id="q3" name="kysymys1" value="3">
+  							<label for="question3">3</label><br></td>
+  							<td><input type="radio" id="q4" name="kysymys1" value="4">
+  							<label for="question4">4</label><br></td>
+  							<td><input type="radio" id="q5" name="kysymys1" value="5">
+  							<label for="question5">5</label><br></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</c:forEach>
+			</table>
+			</form>		
+					<br><br>
 			<br><br>
 			<h1>Candidate Edit Form</h1><br>
 				<form action='./EditCand' method='post'>
