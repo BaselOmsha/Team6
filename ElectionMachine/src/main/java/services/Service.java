@@ -1,6 +1,7 @@
 package services;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -47,33 +48,48 @@ public class Service {
 			e.printStackTrace();
 		}
 	}
+	
 	@PUT
 	@Path("/update")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void updateAllAnswers(@Context HttpServletRequest request, @Context HttpServletResponse response) {
+	public List<Vastaukset> updateAnswers(Vastaukset Vastaukset) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
 		EntityManager em=emf.createEntityManager();
 		em.getTransaction().begin();
-		Fish f=em.find(Fish.class, fish.getId());
-		if (f!=null) {
-			em.merge(fish);//The actual update line
+		Vastaukset V=em.find(Vastaukset.class, Vastaukset.getEhdokas_id());
+		if (V!=null) {
+			em.merge(Vastaukset);//The actual update line
 		}
 		em.getTransaction().commit();
 		//Calling the method readFish() of this service
-		//List<Fish> list=readFish();		
-		//return list;
+		List<Vastaukset> list=readAllAnswers();		
+		return list;
+	}
+	private List<Vastaukset> readAllAnswers() {
+		// TODO Auto-generated method stub
+		return null;
 	}	
+
+	@GET
+	@Path("/testi")
+	public void Test(PrintWriter out, int vastaus) {
+		out.println("<h3> Vastaus "+vastaus+"</h3>");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
+		EntityManager em = emf.createEntityManager();
+
+		// When using default (RESOURCE-LOCAL) transaction type
+		// Every transaction must begin and end.
+		em.getTransaction().begin();
+		List<Kysymykset> list = em.createQuery("select k from Kysymykset k").setParameter(1, vastaus).getResultList();
+		em.getTransaction().commit();
+		em.close();
+		printKysymykset(out, list);
+
+	}
+
+	private void printKysymykset(PrintWriter out, List<Kysymykset> list) {
+		out.println("Vastaus");
+		
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
