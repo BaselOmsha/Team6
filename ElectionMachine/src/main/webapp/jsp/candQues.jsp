@@ -151,7 +151,7 @@ display:inline-block;
 										%>
 								</b></a></li>
 							<li class="nav-item"><a class="nav-link active"
-								href="/adminlogout" style="font-size: 20px"><b>Log out</b></a></li>
+								href="/candlogout" style="font-size: 20px"><b>Log out</b></a></li>
 						</ul>
 					</div>
 				</div>
