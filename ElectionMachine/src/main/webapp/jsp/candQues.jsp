@@ -2,8 +2,6 @@
 	pageEncoding="ISO-8859-1"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.ArrayList"%>
-<%@ page import="app.model.Kysymykset"%>
 <%@ page import="app.model.Candidate"%>
 
 <%
@@ -123,33 +121,36 @@ display:inline-block;
 						Style="color: rgb(207, 46, 46);">Machine</b> <b>2022</b></a>
 					<div id="navbarNav">
 						<ul class="navbar-nav">
-<!-- 								<li class="nav-item"><a class="nav-link active" -->
-<!-- 								aria-current="page" href="votRegForm.html" style=" font-size: 20px"><b>Voter Registration</b></a></li> -->
-<!-- 							<li class="nav-item"><a class="nav-link active" href="./staticRegForm/candRegForm.html" style=" font-size: 20px"><b>Candidate Registration</b></a> -->
-<!-- 							</li> -->
-							<li class="nav-item"><a class="nav-link active" 
-								style="font-size: 20px"><b> 										
-										<%
-										 session.getAttribute("LoggedUser");
-										if(session.getAttribute("LoggedUser") != null){
+							<!-- 	<li class="nav-item"><a class="nav-link active"
+								aria-current="page" href="votRegForm.html" style=" font-size: 20px"><b>Voter Registration</b></a></li>
+							<li class="nav-item"><a class="nav-link active" href="./staticRegForm/candRegForm.html" style=" font-size: 20px"><b>Candidate Registration</b></a>
+							</li> -->
+							<%-- <li class="nav-item"><a class="nav-link active" 
+								style="font-size: 20px"><b> 										<%
+										//allow access only if session exists
+											//allow access only if session exists
 										String uname = null;
-										String sessionID = null;
-										 Cookie[] cookies = request.getCookies();
-										 if (cookies != null) {
-										 	for (int i = 0; i < cookies.length; i++) {
-										
-										 		if (cookies[i].getName().equals("LoggedUser")) uname = cookies[i].getValue();
-										 		if(cookies[i].getName().equals("JSESSIONID")) sessionID = cookies[i].getValue();
-										 	}
-										 	out.println("Welcome, " + uname);
-										 }else{
+										uname =(String) session.getAttribute("uname");
+										if (uname!=null){
+											String data = null;
+											String sessionID = null;
+											Cookie[] cookies = request.getCookies();
+											if(cookies !=null){
+												for (int i = 0; i < cookies.length; i++) {
+												if(cookies[i].getName().equals("uname")) data = cookies[i].getValue();
+												
+												if(cookies[i].getName().equals("JSESSIONID")) sessionID = cookies[i].getValue();
+											}
+											out.println("Welcome, " + data);
+											}else{
 												sessionID = session.getId();
 											}
-										} else if (session.getAttribute("LoggedUser") == null){
-										 	response.sendRedirect("/CandLogIn.html");
+											
+										}else if(session.getAttribute("uname") == null){
+											response.sendRedirect("/AdminLogIn.html");
 										}
-										 %>
-								</b></a></li>
+										%>
+								</b></a></li> --%>
 							<li class="nav-item"><a class="nav-link active"
 								href="/adminlogout" style="font-size: 20px"><b>Log out</b></a></li>
 						</ul>
@@ -159,37 +160,10 @@ display:inline-block;
 			<!-- /#header -->
 		</header>
 		<main>
+
 			<div class="box">
 			<br><br>
-			<h1>Candidate Questions Form</h1><br>
-			<form action='./EditCand' method='post'>
-			<table>
-					<c:forEach var="Kysymyslista"
-						items="${requestScope.Kysymyslista}">
-						<tr>
-						<td>${Kysymyslista.kysymys_id}</td>
-						<td>${Kysymyslista.kysymys}</td>
-						<td><input type="radio" id="q1" name="kysymys1" value="1">
-  							<label for="question1">1</label><br></td>
-  							<td><input type="radio" id="q2" name="kysymys1" value="2">
-  							<label for="question2">2</label><br></td>
-  							<td><input type="radio" id="q3" name="kysymys1" value="3">
-  							<label for="question3">3</label><br></td>
-  							<td><input type="radio" id="q4" name="kysymys1" value="4">
-  							<label for="question4">4</label><br></td>
-  							<td><input type="radio" id="q5" name="kysymys1" value="5">
-  							<label for="question5">5</label><br></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-					</c:forEach>
-			</table>
-			</form>		
-					<br><br>
-			<h1>Candidate Questions Form</h1><br>
+			<h1>Candidate Edit Form</h1><br>
 				<form action='./EditCand' method='post'>
 					<table>
 						<tr>
@@ -585,7 +559,7 @@ display:inline-block;
 					<td> <input type='submit' name='ok' value='Update' style=" font-size: 30px;"  id="button1" ></td>
 					<td><input style=" font-size: 30px;" type='reset' name='reset' value='Reset' id="button2"></td>
 					<td><input style=' font-size: 30px' type='button' name='cancel' value='Cancel' onclick='window.history.back()'></td>
-<%-- 					<td><a style=" font-size: 30px; border: solid black;" href="/deleteCand?candidate_id=${candidate.candidate_id }">Delete</a></td> --%>
+					<td><a style=" font-size: 30px; border: solid black;" href="/deleteCand?candidate_id=${candidate.candidate_id }">Delete</a></td>
 					</tr>
 					</table>
 				</form>
