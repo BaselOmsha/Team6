@@ -20,7 +20,7 @@ import app.model.*;
 
 @Path("/service")
 public class Service {
-
+	//comment
 	@GET
 	@Path("/readAllQuestions")
 	public void readAllQuestions(@Context HttpServletRequest request, @Context HttpServletResponse response)
