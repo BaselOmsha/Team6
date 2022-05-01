@@ -5,6 +5,7 @@
 <%@ page import="app.model.Candidate"%>
 <%@ page import="app.model.Kysymykset"%>
 
+
 <%
 //requires revalidation after logging out
 response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
@@ -47,13 +48,11 @@ response.setHeader("Expires", "0"); // Proxies
 }
 
 a {
-color:red;
-
+	color: red;
 }
 /* mouse over link */
 a:hover {
 	color: #000000;
-	
 }
 
 /* selected link */
@@ -102,11 +101,10 @@ tr:nth-child(even) {
 	background-color: rgb(0, 0, 255);
 }
 
-#button1 , #button2 {
-display:inline-block;
-/* additional code */
+#button1, #button2 {
+	display: inline-block;
+	/* additional code */
 }
-
 </style>
 
 </head>
@@ -126,29 +124,29 @@ display:inline-block;
 								aria-current="page" href="votRegForm.html" style=" font-size: 20px"><b>Voter Registration</b></a></li>
 							<li class="nav-item"><a class="nav-link active" href="./staticRegForm/candRegForm.html" style=" font-size: 20px"><b>Candidate Registration</b></a>
 							</li> -->
-							<li class="nav-item"><a class="nav-link active" 
-								style="font-size: 20px"><b> 										
-								<%
-								
-								 session.getAttribute("LoggedUser");
-								if(session.getAttribute("LoggedUser") != null){
-								String uname = null;
-								String sessionID = null;
-								 Cookie[] cookies = request.getCookies();
-								 if (cookies != null) {
-								 	for (int i = 0; i < cookies.length; i++) {
-								
-								 		if (cookies[i].getName().equals("LoggedUser")) uname = cookies[i].getValue();
-								 		if(cookies[i].getName().equals("JSESSIONID")) sessionID = cookies[i].getValue();
-								 	}
-								 	out.println("Welcome, " + uname);
-								 }else{
-										sessionID = session.getId();
-									}
-								} else if (session.getAttribute("LoggedUser") == null){
-								 	response.sendRedirect("/CandLogIn.html");
-								}
-										%>
+							<li class="nav-item"><a class="nav-link active"
+								style="font-size: 20px"><b> <%
+ session.getAttribute("LoggedUser");
+ if (session.getAttribute("LoggedUser") != null) {
+ 	String uname = null;
+ 	String sessionID = null;
+ 	Cookie[] cookies = request.getCookies();
+ 	if (cookies != null) {
+ 		for (int i = 0; i < cookies.length; i++) {
+
+ 	if (cookies[i].getName().equals("LoggedUser"))
+ 		uname = cookies[i].getValue();
+ 	if (cookies[i].getName().equals("JSESSIONID"))
+ 		sessionID = cookies[i].getValue();
+ 		}
+ 		out.println("Welcome, " + uname);
+ 	} else {
+ 		sessionID = session.getId();
+ 	}
+ } else if (session.getAttribute("LoggedUser") == null) {
+ 	response.sendRedirect("/CandLogIn.html");
+ }
+ %>
 								</b></a></li>
 							<li class="nav-item"><a class="nav-link active"
 								href="/candlogout" style="font-size: 20px"><b>Log out</b></a></li>
@@ -160,62 +158,82 @@ display:inline-block;
 		</header>
 		<main>
 
- 			<div class="box"> 
-						<h1>Candidate Questions Form</h1><br> 
- 			<form action='#' method='post'>
- 			<input type="text" name="candidate_id" value="${sessionScope.LoggedUser.candidate_id}">
- 			<table> 
- 			
-					<c:forEach var="Kysymyslista"
-						items="${requestScope.Kysymyslista}">
- 						<tr> 
-						<td>${Kysymyslista.kysymys_id}</td>
-						<td>${Kysymyslista.kysymys}</td>
- 						<td><input type="radio" id="q1${Kysymyslista.kysymys_id}" name="kysymys${Kysymyslista.kysymys_id}" value="1"> 
-  							<label for="q1${Kysymyslista.kysymys_id}">1</label><br></td> 
-   							<td><input type="radio" id="q2${Kysymyslista.kysymys_id}" name="kysymys${Kysymyslista.kysymys_id}" value="2"> 
-  							<label for="q2${Kysymyslista.kysymys_id}">2</label><br></td>
-   							<td><input type="radio" id="q3${Kysymyslista.kysymys_id}" name="kysymys${Kysymyslista.kysymys_id}" value="3"> 
-   							<label for="q3${Kysymyslista.kysymys_id}">3</label><br></td> 
-  							<td><input type="radio" id="q4${Kysymyslista.kysymys_id}" name="kysymys${Kysymyslista.kysymys_id}" value="4"> 
-   							<label for="q4${Kysymyslista.kysymys_id}">4</label><br></td> 
-   							<td><input type="radio" id="q5${Kysymyslista.kysymys_id}" name="kysymys${Kysymyslista.kysymys_id}" value="5"> 
-   							<label for="q5${Kysymyslista.kysymys_id}">5</label><br></td> 
- 							<td></td> 
- 							<td></td> 
- 							<td></td> 
-							<td></td> 
- 							<td></td> 
-						</tr> 
-					</c:forEach>
- 			</table> 
- 			</form>		
-					<br><br>
- 					<table> 
- 					<tr> 
- 					<td> <input type='submit' name='ok' value='Update' style=" font-size: 30px;"  id="button1" ></td> 
-					<td><input style=" font-size: 30px;" type='reset' name='reset' value='Reset' id="button2"></td>
- 					<td><input style=' font-size: 30px' type='button' name='cancel' value='Cancel' onclick='window.history.back()'></td> 
-					<td><a style=" font-size: 30px; border: solid black;" href="/deleteCand?candidate_id=${candidate.candidate_id }">Delete</a></td>
- 					</tr> 
-					</table> 
-	
-				</div>
-			</main>
+			<div class="box">
+				<h1>Candidate Questions Form</h1>
+				<br>
+				<form action='/rest/service/addAnswer' method='post'>
+					<input type="text" name="candidate_id"
+						value="${sessionScope.LoggedUser.candidate_id}">
+					<table>
+						<tr>
+							<td>CandidateID</td>
+							<td>QuestionsID</td>
+							<td>Questions</td>
+							
+						</tr>
+						<c:forEach var="Kysymyslista" items="${requestScope.Kysymyslista}">
+							<tr>
+								<td>${sessionScope.LoggedUser.candidate_id}</td>
+								<td>${Kysymyslista.kysymys_id}</td>
+								<td>${Kysymyslista.kysymys}</td>
+								<td><input type="radio" id="q1${Kysymyslista.kysymys_id}"
+									name="kysymys${Kysymyslista.kysymys_id}" value="1"> <label
+									for="q1${Kysymyslista.kysymys_id}">1</label><br></td>
+								<td><input type="radio" id="q2${Kysymyslista.kysymys_id}"
+									name="kysymys${Kysymyslista.kysymys_id}" value="2"> <label
+									for="q2${Kysymyslista.kysymys_id}">2</label><br></td>
+								<td><input type="radio" id="q3${Kysymyslista.kysymys_id}"
+									name="kysymys${Kysymyslista.kysymys_id}" value="3"> <label
+									for="q3${Kysymyslista.kysymys_id}">3</label><br></td>
+								<td><input type="radio" id="q4${Kysymyslista.kysymys_id}"
+									name="kysymys${Kysymyslista.kysymys_id}" value="4"> <label
+									for="q4${Kysymyslista.kysymys_id}">4</label><br></td>
+								<td><input type="radio" id="q5${Kysymyslista.kysymys_id}"
+									name="kysymys${Kysymyslista.kysymys_id}" value="5"> <label
+									for="q5${Kysymyslista.kysymys_id}">5</label><br></td>
+								<td><input type="text" 
+									name="kommentti${Vastaukset.kommentti}"
+									value="Add an Explanation">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</c:forEach>
+					</table>
+
+					<br>
+					<br>
+					<table>
+						<tr>
+							<td><input type='submit' name='ok' value='Answer'
+								style="font-size: 30px"></td>
+							<td><input style="font-size: 30px;" type='reset'
+								name='reset' value='Reset' id="button2"></td>
+							<td><input style='font-size: 30px' type='button'
+								name='cancel' value='Cancel' onclick='window.history.back()'></td>
+							<td><a style="font-size: 30px; border: solid black;"
+								href="/deleteCand?candidate_id=${candidate.candidate_id }">Edit</a></td>
+						</tr>
+					</table>
+				</form>
 			</div>
-			<div class="stripe"></div>
-			<footer>
-				<div class="container">
-					<div class="py-3 my-4">
-						<ul class="nav justify-content-center border-bottom pb-3 mb-3">
-							<li class="nav-item"><a class="nav-link px-2 text-muted">Facebook</a></li>
-							<li class="nav-item"><a class="nav-link px-2 text-muted">Instagram</a></li>
-							<li class="nav-item"><a class="nav-link px-2 text-muted">LinkedIn</a></li>
-							<li class="nav-item"><a class="nav-link px-2 text-muted">Discord</a></li>
-						</ul>
-						<p class="text-center text-muted">&copy; 2022 HAMK, Team2</p>
-					</div>
-				</div>
-			</footer>
+		</main>
+	</div>
+	<div class="stripe"></div>
+	<footer>
+		<div class="container">
+			<div class="py-3 my-4">
+				<ul class="nav justify-content-center border-bottom pb-3 mb-3">
+					<li class="nav-item"><a class="nav-link px-2 text-muted">Facebook</a></li>
+					<li class="nav-item"><a class="nav-link px-2 text-muted">Instagram</a></li>
+					<li class="nav-item"><a class="nav-link px-2 text-muted">LinkedIn</a></li>
+					<li class="nav-item"><a class="nav-link px-2 text-muted">Discord</a></li>
+				</ul>
+				<p class="text-center text-muted">&copy; 2022 HAMK, Team2</p>
+			</div>
+		</div>
+	</footer>
 </body>
 </html>
