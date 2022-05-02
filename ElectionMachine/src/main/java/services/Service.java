@@ -136,8 +136,8 @@ public class Service {
 	@Path("/addAnswer")
 //	@Produces(MediaType.TEXT_HTML)
 	@Consumes("application/x-www-form-urlencoded")
-	public void addAnswer(MultivaluedMap <String, String> formparams, @Context HttpServletRequest request, @Context HttpServletResponse response)
-			throws IOException, ServletException {
+	public void addAnswer(MultivaluedMap<String, String> fp, @Context HttpServletRequest request,
+			@Context HttpServletResponse response) throws IOException, ServletException {
 //		for(String s:formparams.keySet()) {
 //			System.out.println(s);
 //			String v = formparams.getFirst("kysymys "+i);
@@ -150,7 +150,7 @@ public class Service {
 //		}
 //		System.out.println("Cand id="+formparams.getFirst("candidate_id"));
 //		System.out.println(request.getParameter("kysymys1"));
-		
+
 //		  private static EntityManagerFactory emf;
 //		    private static EntityManager getEntityManager() {
 //		        if (emf==null) {
@@ -158,32 +158,45 @@ public class Service {
 //		        }
 //		        return emf.createEntityManager();
 //		    }
-		
+
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
 		EntityManager em = emf.createEntityManager();
 //		int kysymykset = Integer.parseInt(request.getParameter("kysymykset_id"));
-		
-	
-		int candidate_id = Integer.parseInt(formparams.getFirst("candidate_id"));
-		int vastaus = Integer.parseInt(formparams.getFirst("kysymys1"));
-		String kommentti = formparams.getFirst("kommentti1");
-//		System.out.println("     "+kommentti+"    "+vastaus+"   "+candidate_id+"    ");
 
-		
-		Vastaukset vas = new Vastaukset();
-		
-//		int kysymys_ID = Integer.parseInt(formparams.getFirst("kysymys_ID"));
-	
-		vas = new Vastaukset(candidate_id, vastaus, kommentti);
-		
-//		Kysymykset k = new Kysymykset();
-//		k.setKysymys_ID(kysymys_ID);
-//		vas.setKysymykset(k);
-		em.getTransaction().begin();
-		em.persist(vas);
-		em.getTransaction().commit();
-		em.close();
-		//		response.setContentType("text/html");
+		try {
+
+			int vastaus = Integer.parseInt(fp.getFirst("vastaus1"));
+			String kommentti = fp.getFirst("kommentti1");
+			Vastaukset vas = new Vastaukset(kommentti, vastaus);
+			
+			
+			int candidate_id = Integer.parseInt(fp.getFirst("candidate_id"));
+			int kysymys_ID = Integer.parseInt(fp.getFirst("kysymys_ID"));
+//			 int kysymykset = Integer.parseInt(request.getParameter("kysymykset_id"));
+
+			System.out.println("     " + kommentti + "    " + vastaus + "   " + candidate_id + "    " + kysymys_ID);
+
+			Candidate ca = new Candidate();
+			ca.setCandidate_id(candidate_id);
+			vas.setCandidate(ca);
+
+			Kysymykset k = new Kysymykset();
+			k.setKysymys_ID(kysymys_ID);
+			vas.setKysymykset(k);
+
+			if (vas.isOk()) {
+				em.getTransaction().begin();
+				em.persist(vas);
+
+				em.getTransaction().commit();
+			}
+			em.close();
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// response.setContentType("text/html");
 //		response.setCharacterEncoding("UTF-8");
 //		HttpSession session = request.getSession();
 //		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");

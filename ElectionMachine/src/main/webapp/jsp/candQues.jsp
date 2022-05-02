@@ -162,38 +162,45 @@ tr:nth-child(even) {
 				<h1>Candidate Questions Form</h1>
 				<br>
 				<form action='/rest/service/addAnswer' method='post'>
-					<input type="text" name="candidate_id"
-						value="${sessionScope.LoggedUser.candidate_id}">
+					<%-- <input type="text" name="candidate_id"
+						value="${sessionScope.LoggedUser.candidate_id}"> --%>
 					<table>
 						<tr>
 							<td>CandidateID</td>
 							<td>QuestionsID</td>
 							<td>Questions</td>
-							
+
 						</tr>
 						<c:forEach var="Kysymys" items="${requestScope.Kysymyslista}">
 							<tr>
-								<td>${sessionScope.LoggedUser.candidate_id}</td>
-								<td>${Kysymys.kysymys_ID}</td>
+								<td><input type="text" name="candidate_id"
+									value="${sessionScope.LoggedUser.candidate_id}" hidden>${sessionScope.LoggedUser.candidate_id}</td>
+								<td><input type="text" name="kysymys_ID"
+									value="${Kysymys.kysymys_ID}" hidden>${Kysymys.kysymys_ID}</td>
 								<td>${Kysymys.kysymys}</td>
 								<td><input type="radio" id="q1${Kysymys.kysymys_ID}"
-									name="kysymys${Kysymys.kysymys_ID}" value="1"> <label
+									name="vastaus${Kysymys.kysymys_ID}" value="1"> <label
 									for="q1${Kysymys.kysymys_ID}">1</label><br></td>
+									
 								<td><input type="radio" id="q2${Kysymys.kysymys_ID}"
-									name="kysymys${Kysymys.kysymys_ID}" value="2"> <label
+									name="vastaus${Kysymys.kysymys_ID}" value="2"> <label
 									for="q2${Kysymys.kysymys_ID}">2</label><br></td>
+									
 								<td><input type="radio" id="q3${Kysymys.kysymys_ID}"
-									name="kysymys${Kysymys.kysymys_ID}" value="3"> <label
+									name="vastaus${Kysymys.kysymys_ID}" value="3"> <label
 									for="q3${Kysymys.kysymys_ID}">3</label><br></td>
+									
 								<td><input type="radio" id="q4${Kysymys.kysymys_ID}"
-									name="kysymys${Kysymys.kysymys_ID}" value="4"> <label
+									name="vastaus${Kysymys.kysymys_ID}" value="4"> <label
 									for="q4${Kysymys.kysymys_ID}">4</label><br></td>
+									
 								<td><input type="radio" id="q5${Kysymys.kysymys_ID}"
-									name="kysymys${Kysymys.kysymys_ID}" value="5"> <label
+									name="vastaus${Kysymys.kysymys_ID}" value="5"> <label
 									for="q5${Kysymys.kysymys_ID}">5</label><br></td>
-								<td><input type="text" 
+									
+								<td><input type="text" id="kommentti${Kysymys.kysymys_ID}"
 									name="kommentti${Kysymys.kysymys_ID}"
-									value="Add an Explanation">
+									placeholder="Add an Explanation">
 								<td></td>
 								<td></td>
 								<td></td>
@@ -203,8 +210,7 @@ tr:nth-child(even) {
 						</c:forEach>
 					</table>
 
-					<br>
-					<br>
+					<br> <br>
 					<table>
 						<tr>
 							<td><input type='submit' name='ok' value='Answer'
