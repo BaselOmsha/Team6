@@ -17,7 +17,7 @@ public class Candidate implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="candidate_id")
-	private int candidateId;
+	private int candidate_id;
 
 	private int age;
 
@@ -50,12 +50,12 @@ public class Candidate implements Serializable {
 	public Candidate() {
 	}
 
-	public int getCandidateId() {
-		return this.candidateId;
+	public int getCandidate_id() {
+		return this.candidate_id;
 	}
 
-	public void setCandidateId(int candidateId) {
-		this.candidateId = candidateId;
+	public void setCandidate_id(int candidate_id) {
+		this.candidate_id = candidate_id;
 	}
 
 	public int getAge() {

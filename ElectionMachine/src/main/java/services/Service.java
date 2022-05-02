@@ -151,16 +151,34 @@ public class Service {
 //		System.out.println("Cand id="+formparams.getFirst("candidate_id"));
 //		System.out.println(request.getParameter("kysymys1"));
 		
+//		  private static EntityManagerFactory emf;
+//		    private static EntityManager getEntityManager() {
+//		        if (emf==null) {
+//		            emf=Persistence.createEntityManagerFactory("rest-t8-bookservice-jpa");
+//		        }
+//		        return emf.createEntityManager();
+//		    }
+		
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
 		EntityManager em = emf.createEntityManager();
+//		int kysymykset = Integer.parseInt(request.getParameter("kysymykset_id"));
 		
-//		String kysymys_id = formparams.getFirst("kysymys_id");
-		String vastaus = formparams.getFirst("kysymys");
-		String kommentti = formparams.getFirst("kommentti");
-		String candidate_id = formparams.getFirst("candidate_id");
+	
+		int candidate_id = Integer.parseInt(formparams.getFirst("candidate_id"));
+		int vastaus = Integer.parseInt(formparams.getFirst("kysymys1"));
+		String kommentti = formparams.getFirst("kommentti1");
+//		System.out.println("     "+kommentti+"    "+vastaus+"   "+candidate_id+"    ");
+
 		
-		Vastaukset vas = new Vastaukset(vastaus, kommentti, candidate_id);
+		Vastaukset vas = new Vastaukset();
 		
+//		int kysymys_ID = Integer.parseInt(formparams.getFirst("kysymys_ID"));
+	
+		vas = new Vastaukset(candidate_id, vastaus, kommentti);
+		
+//		Kysymykset k = new Kysymykset();
+//		k.setKysymys_ID(kysymys_ID);
+//		vas.setKysymykset(k);
 		em.getTransaction().begin();
 		em.persist(vas);
 		em.getTransaction().commit();

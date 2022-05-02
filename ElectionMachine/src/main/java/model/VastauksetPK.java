@@ -13,18 +13,18 @@ public class VastauksetPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name="candidate_id", insertable=false, updatable=false)
-	private int candidateId;
+	private int candidate_id;
 
 	@Column(insertable=false, updatable=false)
 	private int kysymys_ID;
 
 	public VastauksetPK() {
 	}
-	public int getCandidateId() {
-		return this.candidateId;
+	public int getCandidate_id() {
+		return this.candidate_id;
 	}
-	public void setCandidateId(int candidateId) {
-		this.candidateId = candidateId;
+	public void setCandidate_id(int candidateId) {
+		this.candidate_id = candidateId;
 	}
 	public int getKysymys_ID() {
 		return this.kysymys_ID;
@@ -42,14 +42,14 @@ public class VastauksetPK implements Serializable {
 		}
 		VastauksetPK castOther = (VastauksetPK)other;
 		return 
-			(this.candidateId == castOther.candidateId)
+			(this.candidate_id == castOther.candidate_id)
 			&& (this.kysymys_ID == castOther.kysymys_ID);
 	}
 
 	public int hashCode() {
 		final int prime = 31;
 		int hash = 17;
-		hash = hash * prime + this.candidateId;
+		hash = hash * prime + this.candidate_id;
 		hash = hash * prime + this.kysymys_ID;
 		
 		return hash;
