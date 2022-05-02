@@ -11,8 +11,8 @@ import app.model.*;
  * 
  * @author team6 (Nori, Jesse, Basil) version 0.3
  */
-@Entity
-@NamedQuery(name = "Candidate.findAll", query = "SELECT c FROM Candidate c")
+//@Entity
+//@NamedQuery(name = "Candidate.findAll", query = "SELECT c FROM Candidate c")
 public class Candidate implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id

@@ -4,8 +4,8 @@ import java.io.Serializable;
 import javax.persistence.*;
 import app.model.*;
 
-@Entity
-@NamedQuery(name = "Vastaukset.findAll", query = "SELECT v FROM Vastaukset v")
+//@Entity
+//@NamedQuery(name = "Vastaukset.findAll", query = "SELECT v FROM Vastaukset v")
 public class Vastaukset implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -76,6 +76,25 @@ public class Vastaukset implements Serializable {
 		
 		this.kommentti = kommentti;
 	}
+	
+	public Vastaukset(String vastaus, String kommentti, String candidate_id) {
+		super();
+		try {
+			this.candidate_id=Integer.parseInt(candidate_id);
+		}
+		catch(NumberFormatException | NullPointerException e) {
+			
+		}
+
+		try {
+			this.vastaus=Integer.parseInt(vastaus);
+		}
+		catch(NumberFormatException | NullPointerException e) {
+	
+		}
+		
+		this.kommentti = kommentti;
+	}
 
 	public Vastaukset(Candidate candidate, Kysymykset kysymykset, int vastaus) {
 		super();
@@ -113,6 +132,15 @@ public class Vastaukset implements Serializable {
 		this.vastaus = vastaus2;
 		this.kommentti = kommentti2;
 	}
+
+	public Vastaukset(int candidate_id, int vastaus, String kommentti) {
+		// TODO Auto-generated constructor stub
+		this.candidate_id = candidate_id;
+		this.vastaus = vastaus;
+		this.kommentti = kommentti;
+
+	}
+
 
 	public int getCandidate_id() {
 		return candidate_id;

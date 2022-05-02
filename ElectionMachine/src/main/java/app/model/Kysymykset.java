@@ -5,8 +5,8 @@ import java.util.*;
 import javax.persistence.*;
 import app.model.*;
 
-@Entity
-@NamedQuery(name = "Kysymykset.findAll", query = "SELECT k FROM Kysymykset k")
+//@Entity
+//@NamedQuery(name = "Kysymykset.findAll", query = "SELECT k FROM Kysymykset k")
 public class Kysymykset implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id

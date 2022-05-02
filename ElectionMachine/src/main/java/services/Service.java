@@ -1,6 +1,7 @@
 package services;
 
 import java.io.*;
+
 import java.util.*;
 
 import javax.persistence.*;
@@ -10,7 +11,7 @@ import javax.servlet.http.Cookie;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 
-import app.model.*;
+import model.*;
 
 @Path("/service")
 public class Service {
@@ -142,13 +143,28 @@ public class Service {
 //			String v = formparams.getFirst("kysymys "+i);
 //			
 //		}
-		for(int i=1; i < formparams.keySet().size(); i++) {
-			String a = formparams.getFirst("kysymys"+i);
-			String c = formparams.getFirst("kommentti"+i);
-			System.out.println(a+"     "+c);
-		}
-		System.out.println("Cand id="+formparams.getFirst("candidate_id"));
-		System.out.println(request.getParameter("kysymys1"));
+//		for(int i=1; i < formparams.keySet().size(); i++) {
+//			String a = formparams.getFirst("kysymys"+i);
+//			String c = formparams.getFirst("kommentti"+i);
+//			System.out.println(a+"     "+c);
+//		}
+//		System.out.println("Cand id="+formparams.getFirst("candidate_id"));
+//		System.out.println(request.getParameter("kysymys1"));
+		
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
+		EntityManager em = emf.createEntityManager();
+		
+//		String kysymys_id = formparams.getFirst("kysymys_id");
+		String vastaus = formparams.getFirst("kysymys");
+		String kommentti = formparams.getFirst("kommentti");
+		String candidate_id = formparams.getFirst("candidate_id");
+		
+		Vastaukset vas = new Vastaukset(vastaus, kommentti, candidate_id);
+		
+		em.getTransaction().begin();
+		em.persist(vas);
+		em.getTransaction().commit();
+		em.close();
 		//		response.setContentType("text/html");
 //		response.setCharacterEncoding("UTF-8");
 //		HttpSession session = request.getSession();

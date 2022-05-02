@@ -2,8 +2,8 @@
 	pageEncoding="ISO-8859-1"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="app.model.Candidate"%>
-<%@ page import="app.model.Kysymykset"%>
+<%@ page import="model.Candidate"%>
+<%@ page import="model.Kysymykset"%>
 
 
 <%
@@ -171,28 +171,28 @@ tr:nth-child(even) {
 							<td>Questions</td>
 							
 						</tr>
-						<c:forEach var="Kysymyslista" items="${requestScope.Kysymyslista}">
+						<c:forEach var="Kysymys" items="${requestScope.Kysymyslista}">
 							<tr>
 								<td>${sessionScope.LoggedUser.candidate_id}</td>
-								<td>${Kysymyslista.kysymys_id}</td>
-								<td>${Kysymyslista.kysymys}</td>
-								<td><input type="radio" id="q1${Kysymyslista.kysymys_id}"
-									name="kysymys${Kysymyslista.kysymys_id}" value="1"> <label
-									for="q1${Kysymyslista.kysymys_id}">1</label><br></td>
-								<td><input type="radio" id="q2${Kysymyslista.kysymys_id}"
-									name="kysymys${Kysymyslista.kysymys_id}" value="2"> <label
-									for="q2${Kysymyslista.kysymys_id}">2</label><br></td>
-								<td><input type="radio" id="q3${Kysymyslista.kysymys_id}"
-									name="kysymys${Kysymyslista.kysymys_id}" value="3"> <label
-									for="q3${Kysymyslista.kysymys_id}">3</label><br></td>
-								<td><input type="radio" id="q4${Kysymyslista.kysymys_id}"
-									name="kysymys${Kysymyslista.kysymys_id}" value="4"> <label
-									for="q4${Kysymyslista.kysymys_id}">4</label><br></td>
-								<td><input type="radio" id="q5${Kysymyslista.kysymys_id}"
-									name="kysymys${Kysymyslista.kysymys_id}" value="5"> <label
-									for="q5${Kysymyslista.kysymys_id}">5</label><br></td>
+								<td>${Kysymys.kysymys_ID}</td>
+								<td>${Kysymys.kysymys}</td>
+								<td><input type="radio" id="q1${Kysymys.kysymys_ID}"
+									name="kysymys${Kysymys.kysymys_ID}" value="1"> <label
+									for="q1${Kysymys.kysymys_ID}">1</label><br></td>
+								<td><input type="radio" id="q2${Kysymys.kysymys_ID}"
+									name="kysymys${Kysymys.kysymys_ID}" value="2"> <label
+									for="q2${Kysymys.kysymys_ID}">2</label><br></td>
+								<td><input type="radio" id="q3${Kysymys.kysymys_ID}"
+									name="kysymys${Kysymys.kysymys_ID}" value="3"> <label
+									for="q3${Kysymys.kysymys_ID}">3</label><br></td>
+								<td><input type="radio" id="q4${Kysymys.kysymys_ID}"
+									name="kysymys${Kysymys.kysymys_ID}" value="4"> <label
+									for="q4${Kysymys.kysymys_ID}">4</label><br></td>
+								<td><input type="radio" id="q5${Kysymys.kysymys_ID}"
+									name="kysymys${Kysymys.kysymys_ID}" value="5"> <label
+									for="q5${Kysymys.kysymys_ID}">5</label><br></td>
 								<td><input type="text" 
-									name="kommentti${Kysymyslista.kysymys_id}"
+									name="kommentti${Kysymys.kysymys_ID}"
 									value="Add an Explanation">
 								<td></td>
 								<td></td>
