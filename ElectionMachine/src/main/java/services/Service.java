@@ -134,48 +134,60 @@ public class Service {
 	@POST
 	@Path("/addAnswer")
 //	@Produces(MediaType.TEXT_HTML)
-//	@Consumes(MediaType.TEXT_HTML)
-	public void addAnswer(@Context HttpServletRequest request, @Context HttpServletResponse response)
+	@Consumes("application/x-www-form-urlencoded")
+	public void addAnswer(MultivaluedMap <String, String> formparams, @Context HttpServletRequest request, @Context HttpServletResponse response)
 			throws IOException, ServletException {
-		response.setContentType("text/html");
-		response.setCharacterEncoding("UTF-8");
-		HttpSession session = request.getSession();
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
-		EntityManager em = emf.createEntityManager();
-
-		try {
-//			int candidate_id = Integer.parseInt(request.getParameter("candidate_id"));
+//		for(String s:formparams.keySet()) {
+//			System.out.println(s);
+//			String v = formparams.getFirst("kysymys "+i);
+//			
+//		}
+		for(int i=1; i < formparams.keySet().size(); i++) {
+			String a = formparams.getFirst("kysymys"+i);
+			String c = formparams.getFirst("kommentti"+i);
+			System.out.println(a+"     "+c);
+		}
+		System.out.println("Cand id="+formparams.getFirst("candidate_id"));
+		System.out.println(request.getParameter("kysymys1"));
+		//		response.setContentType("text/html");
+//		response.setCharacterEncoding("UTF-8");
+//		HttpSession session = request.getSession();
+//		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
+//		EntityManager em = emf.createEntityManager();
 //
-//			int kysymys_id = Integer.parseInt(request.getParameter("kysymys_id"));
-
-			int vastaus = Integer.parseInt(request.getParameter("vastaus"));
-			
-			String kommentti = request.getParameter("kommentti");
-
-			Vastaukset v = new Vastaukset(vastaus, kommentti);
-
-			em.getTransaction().begin();
-			em.persist(v);
-			em.getTransaction().commit();
-			em.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
-		List<Kysymykset> list1 = em.createQuery("select k from Kysymykset k").getResultList();
-		em.getTransaction().commit();
-
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/candQuesAn.jsp");
-		request.setAttribute("Kysymyslista", list1);
-		try {
-			rd.forward(request, response);
-		} catch (ServletException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		em.close();
+//		try {
+////			int candidate_id = Integer.parseInt(request.getParameter("candidate_id"));
+////
+////			int kysymys_id = Integer.parseInt(request.getParameter("kysymys_id"));
+//
+//			int vastaus = Integer.parseInt(request.getParameter("vastaus"));
+//			
+//			String kommentti = request.getParameter("kommentti");
+//
+//			Vastaukset v = new Vastaukset(vastaus, kommentti);
+//
+//			em.getTransaction().begin();
+//			em.persist(v);
+//			em.getTransaction().commit();
+//			em.close();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		em = emf.createEntityManager();
+//		em.getTransaction().begin();
+//		List<Kysymykset> list1 = em.createQuery("select k from Kysymykset k").getResultList();
+//		em.getTransaction().commit();
+//
+//		RequestDispatcher rd = request.getRequestDispatcher("/jsp/candQuesAn.jsp");
+//		request.setAttribute("Kysymyslista", list1);
+//		try {
+//			rd.forward(request, response);
+//		} catch (ServletException | IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//		em.close();
 
 	}
 

@@ -192,7 +192,7 @@ tr:nth-child(even) {
 									name="kysymys${Kysymyslista.kysymys_id}" value="5"> <label
 									for="q5${Kysymyslista.kysymys_id}">5</label><br></td>
 								<td><input type="text" 
-									name="kommentti${Vastaukset.kommentti}"
+									name="kommentti${Kysymyslista.kysymys_id}"
 									value="Add an Explanation">
 								<td></td>
 								<td></td>
