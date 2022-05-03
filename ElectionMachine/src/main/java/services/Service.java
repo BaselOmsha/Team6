@@ -164,40 +164,43 @@ public class Service {
 //		int kysymykset = Integer.parseInt(request.getParameter("kysymykset_id"));
 
 		try {
-
-			int vastaus = Integer.parseInt(fp.getFirst("vastaus1"));
-			String kommentti = fp.getFirst("kommentti1");
 			
-			
-			int candidate_id = Integer.parseInt(fp.getFirst("candidate_id"));
-			int kysymys_ID = Integer.parseInt(fp.getFirst("kysymys_ID"));
-//			 int kysymykset = Integer.parseInt(request.getParameter("kysymykset_id"));
-
-			System.out.println("     " + kommentti + "    " + vastaus + "   " + candidate_id + "    " + kysymys_ID);
-			
-			Vastaukset vas = new Vastaukset(kommentti, vastaus, candidate_id, kysymys_ID);
-
-			Candidate ca = new Candidate();
-			ca.setCandidate_id(candidate_id);
-			vas.setCandidate(ca);
-
-			Kysymykset k = new Kysymykset();
-			k.setKysymys_ID(kysymys_ID);
-			vas.setKysymykset(k);
-			
-			ca=em.find(Candidate.class, candidate_id);
-			k=em.find(Kysymykset.class, kysymys_ID);
-			
-			System.out.println("check 1");
-			if (vas.isOk()) {
-				em.getTransaction().begin();
-				em.persist(vas);
-				System.out.println("check 2");
-				em.getTransaction().commit();
-				System.out.println("check final");
+			for(int i=1; i < fp.keySet().size(); i++) {
+				
+				
+				int vastaus = Integer.parseInt(fp.getFirst("vastaus"+i));
+				String kommentti = fp.getFirst("kommentti"+i);
+				
+				int candidate_id = Integer.parseInt(fp.getFirst("candidate_id"));
+				int kysymys_ID = Integer.parseInt(fp.getFirst("kysymys_ID"+i));
+	//			 int kysymykset = Integer.parseInt(request.getParameter("kysymykset_id"));
+	
+				System.out.println("     " + kommentti + "    " + vastaus + "   " + candidate_id + "    " + kysymys_ID);
+				
+				Vastaukset vas = new Vastaukset(kommentti, vastaus, candidate_id, kysymys_ID);
+	
+				Candidate ca = new Candidate();
+				ca.setCandidate_id(candidate_id);
+				vas.setCandidate(ca);
+	
+				Kysymykset k = new Kysymykset();
+				k.setKysymys_ID(kysymys_ID);
+				vas.setKysymykset(k);
+				
+				ca=em.find(Candidate.class, candidate_id);
+				k=em.find(Kysymykset.class, kysymys_ID);
+				
+				System.out.println("check 1");
+				if (vas.isOk()) {
+					em.getTransaction().begin();
+					em.persist(vas);
+					System.out.println("check 2");
+					em.getTransaction().commit();
+					System.out.println("check final");
+				}
+				
 			}
 			em.close();
-			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

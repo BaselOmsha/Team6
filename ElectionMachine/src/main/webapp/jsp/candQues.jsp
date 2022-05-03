@@ -175,7 +175,7 @@ tr:nth-child(even) {
 							<tr>
 								<td><input type="text" name="candidate_id"
 									value="${sessionScope.LoggedUser.candidate_id}" hidden>${sessionScope.LoggedUser.candidate_id}</td>
-								<td><input type="text" name="kysymys_ID"
+								<td><input type="text" name="kysymys_ID${Kysymys.kysymys_ID}"
 									value="${Kysymys.kysymys_ID}" hidden>${Kysymys.kysymys_ID}</td>
 								<td>${Kysymys.kysymys}</td>
 								<td><input type="radio" id="q1${Kysymys.kysymys_ID}"
