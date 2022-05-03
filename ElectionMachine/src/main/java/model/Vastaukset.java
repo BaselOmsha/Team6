@@ -3,13 +3,12 @@ package model;
 import java.io.Serializable;
 import javax.persistence.*;
 
-
 /**
  * The persistent class for the vastaukset database table.
  * 
  */
 @Entity
-@NamedQuery(name="Vastaukset.findAll", query="SELECT v FROM Vastaukset v")
+@NamedQuery(name = "Vastaukset.findAll", query = "SELECT v FROM Vastaukset v")
 public class Vastaukset implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -20,14 +19,14 @@ public class Vastaukset implements Serializable {
 
 	private int vastaus;
 
-	//bi-directional many-to-one association to Candidate
+	// bi-directional many-to-one association to Candidate
 	@ManyToOne
-	@JoinColumn(name="candidate_id")
+	@JoinColumn(name = "candidate_id")
 	private Candidate candidate;
 
-	//bi-directional many-to-one association to Kysymykset
+	// bi-directional many-to-one association to Kysymykset
 	@ManyToOne
-	@JoinColumn(name="kysymys_ID")
+	@JoinColumn(name = "kysymys_ID")
 	private Kysymykset kysymykset;
 
 	public Vastaukset() {
@@ -81,23 +80,23 @@ public class Vastaukset implements Serializable {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
+		}
 		try {
 			this.kysymykset.setKysymys_ID(kysymys_ID);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.vastaus=vastaus;
-		this.kommentti=kommentti;
+		this.vastaus = vastaus;
+		this.kommentti = kommentti;
 	}
 
 	public Vastaukset(int candidate_id, int vastaus, String kommentti) {
 		// TODO Auto-generated constructor stub
 		this.candidate.setCandidate_id(candidate_id);
-		this.vastaus=vastaus;
-		this.kommentti=kommentti;
-		
+		this.vastaus = vastaus;
+		this.kommentti = kommentti;
+
 	}
 
 //	public Vastaukset(int candidate_id, int vastaus, String kommentti, int kysymykset) {
@@ -110,41 +109,39 @@ public class Vastaukset implements Serializable {
 
 	public Vastaukset(int vastaus, String kommentti) {
 		// TODO Auto-generated constructor stub
-		this.vastaus=vastaus;
-		this.kommentti=kommentti;
+		this.vastaus = vastaus;
+		this.kommentti = kommentti;
 	}
 
 	public Vastaukset(int vastaus, String kommentti, Candidate ca, Kysymykset k) {
 		// TODO Auto-generated constructor stub
-		this.vastaus=vastaus;
-		this.kommentti=kommentti;
-		this.candidate=ca;
-		this.kysymykset=k;
+		this.vastaus = vastaus;
+		this.kommentti = kommentti;
+		this.candidate = ca;
+		this.kysymykset = k;
 	}
 
-	public Vastaukset(int vastaus, String kommentti, int candidate_id, int kysymys_ID) {
+	public Vastaukset(String kommentti, int vastaus, int candidate_id, int kysymys_ID) {
 		// TODO Auto-generated constructor stub
-		try {
-			this.candidate.setCandidate_id(candidate_id);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
-		try {
-			this.kysymykset.setKysymys_ID(kysymys_ID);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		this.vastaus=vastaus;
-		this.kommentti=kommentti;
+		this.kommentti = kommentti;
+		this.vastaus = vastaus;
 		
+		this.id= new VastauksetPK();
+		id.setCandidate_id(candidate_id);
+		id.setKysymys_ID(kysymys_ID);
+		
+		this.candidate = new Candidate();
+		this.candidate.setCandidate_id(candidate_id);
+		
+		this.kysymykset = new Kysymykset();
+		this.kysymykset.setKysymys_ID(kysymys_ID);
+
 	}
 
 	public Vastaukset(String kommentti, int vastaus) {
 		// TODO Auto-generated constructor stub
-		this.kommentti=kommentti;
-		this.vastaus=vastaus;
+		this.kommentti = kommentti;
+		this.vastaus = vastaus;
 	}
 
 	public VastauksetPK getId() {
@@ -189,7 +186,7 @@ public class Vastaukset implements Serializable {
 
 	public boolean isOk() {
 		// TODO Auto-generated method stub
-		return this.vastaus>0  && this.kommentti!=null;
+		return this.vastaus > 0 && this.kommentti != null;
 	}
 
 }

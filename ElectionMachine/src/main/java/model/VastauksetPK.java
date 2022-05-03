@@ -15,7 +15,7 @@ public class VastauksetPK implements Serializable {
 	@Column(name="candidate_id", insertable=false, updatable=false)
 	private int candidate_id;
 
-	@Column(insertable=false, updatable=false)
+	@Column(name="kysymys_ID", insertable=false, updatable=false)
 	private int kysymys_ID;
 
 	public VastauksetPK() {
