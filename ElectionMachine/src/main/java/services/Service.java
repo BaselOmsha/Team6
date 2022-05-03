@@ -193,12 +193,12 @@ public class Service {
 				vas.setKysymykset(k);
 
 				em.getTransaction().begin();
-				ca = em.find(Candidate.class, candidate_id);
-				k = em.find(Kysymykset.class, kysymys_ID);
-				vas = em.find(Vastaukset.class, kommentti);
-				vas = em.find(Vastaukset.class, vastaus);
-				vas = em.find(Vastaukset.class, candidate_id);
-				vas = em.find(Vastaukset.class, kysymys_ID);
+				ca = em.find(Candidate.class, ca.getCandidate_id());
+				k = em.find(Kysymykset.class, k.getKysymys_ID());
+				vas = em.find(Vastaukset.class, vas.getKommentti());
+				vas = em.find(Vastaukset.class, vas.getVastaus());
+				vas = em.find(Vastaukset.class, vas.getId().getCandidate_id());
+				vas = em.find(Vastaukset.class, vas.getId().getKysymys_ID());
 
 				System.out.println("check 1");
 				if (vas != null) {
