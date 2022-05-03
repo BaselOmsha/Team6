@@ -23,8 +23,8 @@ public class VastauksetPK implements Serializable {
 	public int getCandidate_id() {
 		return this.candidate_id;
 	}
-	public void setCandidate_id(int candidateId) {
-		this.candidate_id = candidateId;
+	public void setCandidate_id(int candidate_id) {
+		this.candidate_id = candidate_id;
 	}
 	public int getKysymys_ID() {
 		return this.kysymys_ID;

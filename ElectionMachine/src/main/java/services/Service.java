@@ -167,7 +167,6 @@ public class Service {
 
 			int vastaus = Integer.parseInt(fp.getFirst("vastaus1"));
 			String kommentti = fp.getFirst("kommentti1");
-			Vastaukset vas = new Vastaukset(kommentti, vastaus);
 			
 			
 			int candidate_id = Integer.parseInt(fp.getFirst("candidate_id"));
@@ -175,6 +174,8 @@ public class Service {
 //			 int kysymykset = Integer.parseInt(request.getParameter("kysymykset_id"));
 
 			System.out.println("     " + kommentti + "    " + vastaus + "   " + candidate_id + "    " + kysymys_ID);
+			
+			Vastaukset vas = new Vastaukset(kommentti, vastaus);
 
 			Candidate ca = new Candidate();
 			ca.setCandidate_id(candidate_id);
