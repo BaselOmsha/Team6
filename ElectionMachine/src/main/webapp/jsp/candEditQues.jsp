@@ -168,9 +168,15 @@ tr:nth-child(even) {
 						value="${sessionScope.LoggedUser.candidate_id}"> --%>
 					<table>
 						<tr>
-							<td>CandidateID</td>
-							<td>QuestionsID</td>
-							<td>Answers</td>
+							<th>CandidateID</th>
+							<th>QuestionsID</th>
+							<th>Answers</th>
+							<th></th>
+							<th></th>
+							<th>Explanation</th>
+							<th></th>
+							<th></th>
+							<th>Edit</th>
 
 						</tr>
 						<c:forEach var="Vastaus" items="${requestScope.Vastauslista}">
@@ -179,30 +185,35 @@ tr:nth-child(even) {
 									value="${sessionScope.LoggedUser.candidate_id}" hidden>${sessionScope.LoggedUser.candidate_id}</td>
 								<td><input type="text" name="id${Vastaus.id}"
 									value="${Vastaus.id}" hidden>${Vastaus.id}</td>
+								<td></td>
 								<td>${Vastaus.vastaus}</td>
+								<td></td>
+								<td></td>
+							
+								<td>${Vastaus.kommentti}</td>
+								<td></td>
 								<td><input type="radio" id="q1${Vastaus.id}"
 									name="vastaus${Vastaus.id}" value="1"> <label
 									for="q1${Vastaus.id}">1</label><br></td>
-									
+
 								<td><input type="radio" id="q2${Vastaus.id}"
 									name="vastaus${Vastaus.id}" value="2"> <label
 									for="q2${Vastaus.id}">2</label><br></td>
-									
+
 								<td><input type="radio" id="q3${Vastaus.id}"
 									name="vastaus${Vastaus.id}" value="3"> <label
 									for="q3${Vastaus.id}">3</label><br></td>
-									
+
 								<td><input type="radio" id="q4${Vastaus.id}"
 									name="vastaus${Vastaus.id}" value="4"> <label
 									for="q4${Vastaus.id}">4</label><br></td>
-									
+
 								<td><input type="radio" id="q5${Vastaus.id}"
 									name="vastaus${Vastaus.id}" value="5"> <label
 									for="q5${Vastaus.id}">5</label><br></td>
-									
+
 								<td><input type="text" id="kommentti${Vastaus.id}"
-									name="kommentti${Vastaus.id}"
-									placeholder="Add an Explanation">
+									name="kommentti${Vastaus.id}" placeholder="Add an Explanation">
 								<td></td>
 								<td></td>
 								<td></td>
@@ -221,7 +232,7 @@ tr:nth-child(even) {
 								name='reset' value='Reset' id="button2"></td>
 							<td><input style='font-size: 30px' type='button'
 								name='cancel' value='Cancel' onclick='window.history.back()'></td>
-							
+
 						</tr>
 					</table>
 				</form>

@@ -120,9 +120,9 @@ tr:nth-child(even) {
 						Style="color: rgb(207, 46, 46);">Machine</b> <b>2022</b></a>
 					<div id="navbarNav">
 						<ul class="navbar-nav">
-							<!-- 	<li class="nav-item"><a class="nav-link active"
-								aria-current="page" href="votRegForm.html" style=" font-size: 20px"><b>Voter Registration</b></a></li>
-							<li class="nav-item"><a class="nav-link active" href="./staticRegForm/candRegForm.html" style=" font-size: 20px"><b>Candidate Registration</b></a>
+							<!-- <li class="nav-item"><a class="nav-link active"
+								aria-current="page" href="rest/service/readAllAnswers" style=" font-size: 20px"><b>Show Answers</b></a></li> -->
+							<!-- 	<li class="nav-item"><a class="nav-link active" href="./staticRegForm/candRegForm.html" style=" font-size: 20px"><b>Candidate Registration</b></a>
 							</li> -->
 							<li class="nav-item"><a class="nav-link active"
 								style="font-size: 20px"><b> <%
@@ -166,38 +166,45 @@ tr:nth-child(even) {
 						value="${sessionScope.LoggedUser.candidate_id}"> --%>
 					<table>
 						<tr>
-							<td>CandidateID</td>
-							<td>QuestionsID</td>
-							<td>Questions</td>
+							<th>CandidateID</th>
+							<th>QuestionsID</th>
+							<th>Questions</th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th>Explanation</th>
 
 						</tr>
 						<c:forEach var="Kysymys" items="${requestScope.Kysymyslista}">
 							<tr>
 								<td><input type="text" name="candidate_id"
 									value="${sessionScope.LoggedUser.candidate_id}" hidden>${sessionScope.LoggedUser.candidate_id}</td>
-								<td><input type="text" name="kysymys_ID${Kysymys.kysymys_ID}"
+								<td><input type="text"
+									name="kysymys_ID${Kysymys.kysymys_ID}"
 									value="${Kysymys.kysymys_ID}" hidden>${Kysymys.kysymys_ID}</td>
 								<td>${Kysymys.kysymys}</td>
 								<td><input type="radio" id="q1${Kysymys.kysymys_ID}"
 									name="vastaus${Kysymys.kysymys_ID}" value="1"> <label
 									for="q1${Kysymys.kysymys_ID}">1</label><br></td>
-									
+
 								<td><input type="radio" id="q2${Kysymys.kysymys_ID}"
 									name="vastaus${Kysymys.kysymys_ID}" value="2"> <label
 									for="q2${Kysymys.kysymys_ID}">2</label><br></td>
-									
+
 								<td><input type="radio" id="q3${Kysymys.kysymys_ID}"
 									name="vastaus${Kysymys.kysymys_ID}" value="3"> <label
 									for="q3${Kysymys.kysymys_ID}">3</label><br></td>
-									
+
 								<td><input type="radio" id="q4${Kysymys.kysymys_ID}"
 									name="vastaus${Kysymys.kysymys_ID}" value="4"> <label
 									for="q4${Kysymys.kysymys_ID}">4</label><br></td>
-									
+
 								<td><input type="radio" id="q5${Kysymys.kysymys_ID}"
 									name="vastaus${Kysymys.kysymys_ID}" value="5"> <label
 									for="q5${Kysymys.kysymys_ID}">5</label><br></td>
-									
+
 								<td><input type="text" id="kommentti${Kysymys.kysymys_ID}"
 									name="kommentti${Kysymys.kysymys_ID}"
 									placeholder="Add an Explanation">
@@ -219,8 +226,7 @@ tr:nth-child(even) {
 								name='reset' value='Reset' id="button2"></td>
 							<td><input style='font-size: 30px' type='button'
 								name='cancel' value='Cancel' onclick='window.history.back()'></td>
-							<td><a style="font-size: 30px; border: solid black;"
-								href="/rest/service/readAllAnswers">Edit</a></td>
+
 						</tr>
 					</table>
 				</form>
