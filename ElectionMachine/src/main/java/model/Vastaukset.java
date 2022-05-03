@@ -189,4 +189,6 @@ public class Vastaukset implements Serializable {
 		return this.vastaus > 0 && this.kommentti != null;
 	}
 
+	
+
 }

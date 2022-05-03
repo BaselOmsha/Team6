@@ -4,6 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="model.Candidate"%>
 <%@ page import="model.Kysymykset"%>
+<%@ page import="model.Vastaukset"%>
+<%@ page import="model.VastauksetPK"%>
 
 
 <%
@@ -21,7 +23,7 @@ response.setHeader("Expires", "0"); // Proxies
 <meta name="author" content="">
 <meta name="description"
 	content="Team 14 project work. The website contains basic web development guides utilizing HTML5, CSS, JavaScript and Bootstrap">
-<title>Question Page</title>
+<title>Edit Answers</title>
 <!--Link to bootstrap.-->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -161,45 +163,45 @@ tr:nth-child(even) {
 			<div class="box">
 				<h1>Candidate Questions Form</h1>
 				<br>
-				<form action='/rest/service/addAnswer' method='post'>
+				<form action='/rest/service/editAnswer' method='post'>
 					<%-- <input type="text" name="candidate_id"
 						value="${sessionScope.LoggedUser.candidate_id}"> --%>
 					<table>
 						<tr>
 							<td>CandidateID</td>
 							<td>QuestionsID</td>
-							<td>Questions</td>
+							<td>Answers</td>
 
 						</tr>
-						<c:forEach var="Kysymys" items="${requestScope.Kysymyslista}">
+						<c:forEach var="Vastaus" items="${requestScope.Vastauslista}">
 							<tr>
 								<td><input type="text" name="candidate_id"
 									value="${sessionScope.LoggedUser.candidate_id}" hidden>${sessionScope.LoggedUser.candidate_id}</td>
-								<td><input type="text" name="kysymys_ID${Kysymys.kysymys_ID}"
-									value="${Kysymys.kysymys_ID}" hidden>${Kysymys.kysymys_ID}</td>
-								<td>${Kysymys.kysymys}</td>
-								<td><input type="radio" id="q1${Kysymys.kysymys_ID}"
-									name="vastaus${Kysymys.kysymys_ID}" value="1"> <label
-									for="q1${Kysymys.kysymys_ID}">1</label><br></td>
+								<td><input type="text" name="id${Vastaus.id}"
+									value="${Vastaus.id}" hidden>${Vastaus.id}</td>
+								<td>${Vastaus.vastaus}</td>
+								<td><input type="radio" id="q1${Vastaus.id}"
+									name="vastaus${Vastaus.id}" value="1"> <label
+									for="q1${Vastaus.id}">1</label><br></td>
 									
-								<td><input type="radio" id="q2${Kysymys.kysymys_ID}"
-									name="vastaus${Kysymys.kysymys_ID}" value="2"> <label
-									for="q2${Kysymys.kysymys_ID}">2</label><br></td>
+								<td><input type="radio" id="q2${Vastaus.id}"
+									name="vastaus${Vastaus.id}" value="2"> <label
+									for="q2${Vastaus.id}">2</label><br></td>
 									
-								<td><input type="radio" id="q3${Kysymys.kysymys_ID}"
-									name="vastaus${Kysymys.kysymys_ID}" value="3"> <label
-									for="q3${Kysymys.kysymys_ID}">3</label><br></td>
+								<td><input type="radio" id="q3${Vastaus.id}"
+									name="vastaus${Vastaus.id}" value="3"> <label
+									for="q3${Vastaus.id}">3</label><br></td>
 									
-								<td><input type="radio" id="q4${Kysymys.kysymys_ID}"
-									name="vastaus${Kysymys.kysymys_ID}" value="4"> <label
-									for="q4${Kysymys.kysymys_ID}">4</label><br></td>
+								<td><input type="radio" id="q4${Vastaus.id}"
+									name="vastaus${Vastaus.id}" value="4"> <label
+									for="q4${Vastaus.id}">4</label><br></td>
 									
-								<td><input type="radio" id="q5${Kysymys.kysymys_ID}"
-									name="vastaus${Kysymys.kysymys_ID}" value="5"> <label
-									for="q5${Kysymys.kysymys_ID}">5</label><br></td>
+								<td><input type="radio" id="q5${Vastaus.id}"
+									name="vastaus${Vastaus.id}" value="5"> <label
+									for="q5${Vastaus.id}">5</label><br></td>
 									
-								<td><input type="text" id="kommentti${Kysymys.kysymys_ID}"
-									name="kommentti${Kysymys.kysymys_ID}"
+								<td><input type="text" id="kommentti${Vastaus.id}"
+									name="kommentti${Vastaus.id}"
 									placeholder="Add an Explanation">
 								<td></td>
 								<td></td>
@@ -213,14 +215,13 @@ tr:nth-child(even) {
 					<br> <br>
 					<table>
 						<tr>
-							<td><input type='submit' name='ok' value='Answer'
+							<td><input type='submit' name='ok' value='Update'
 								style="font-size: 30px"></td>
 							<td><input style="font-size: 30px;" type='reset'
 								name='reset' value='Reset' id="button2"></td>
 							<td><input style='font-size: 30px' type='button'
 								name='cancel' value='Cancel' onclick='window.history.back()'></td>
-							<td><a style="font-size: 30px; border: solid black;"
-								href="/rest/service/readAllAnswers">Edit</a></td>
+							
 						</tr>
 					</table>
 				</form>
