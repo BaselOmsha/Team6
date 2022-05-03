@@ -161,7 +161,7 @@ tr:nth-child(even) {
 		<main>
 
 			<div class="box">
-				<h1>Candidate Questions Form</h1>
+				<h1>Candidate Answers</h1>
 				<br>
 				<form action='#' method='post'>
 					<%-- <input type="text" name="candidate_id"
