@@ -46,11 +46,13 @@ public class Service {
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
 		EntityManager em = emf.createEntityManager();
-
+		
 		// When using default (RESOURCE-LOCAL) transaction type
 		// Every transaction must begin and end.
 		em.getTransaction().begin();
-		List<Vastaukset> list = em.createQuery("select v from Vastaukset v").getResultList();
+		Query q=em.createQuery("select v from Vastaukset v where v.candidate_id = :name");
+		q.setParameter("name", letter+"%");
+		List<Vastaukset> list = em.createQuery("select v from Vastaukset v where v.id.candidate_id like :id.candidate_id").getResultList();
 		em.getTransaction().commit();
 
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/candShowAn.jsp");
