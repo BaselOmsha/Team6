@@ -183,8 +183,8 @@ tr:nth-child(even) {
 							<tr>
 								<td><input type="text" name="candidate_id"
 									value="${sessionScope.LoggedUser.candidate_id}" hidden>${sessionScope.LoggedUser.candidate_id}</td>
-								<td><input type="text" name="id${Vastaus.id}"
-									value="${Vastaus.id}" hidden>${Vastaus.id}</td>
+								<td><input type="text" name="kysymys_ID${Vastaus.id.kysymys_ID}"
+									value="${Vastaus.id.kysymys_ID}" hidden>${Vastaus.id.kysymys_ID}</td>
 								<td></td>
 								<td>${Vastaus.vastaus}</td>
 								<td></td>
