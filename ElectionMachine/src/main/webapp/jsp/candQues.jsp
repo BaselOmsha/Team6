@@ -160,6 +160,7 @@ tr:nth-child(even) {
 
 			<div class="box">
 				<h1>Candidate Questions Form</h1>
+				<h3>Please answer all the questions</h3>
 				<br>
 				<form action='/rest/service/addAnswer' method='post'>
 					<%-- <input type="text" name="candidate_id"

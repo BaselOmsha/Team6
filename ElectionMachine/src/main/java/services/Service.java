@@ -97,16 +97,23 @@ public class Service {
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
 		EntityManager em = emf.createEntityManager();
+		for (String s:fp.keySet()) {
+			System.out.println(s);
+		}
 
 		try {
+			int candidate_id = Integer.parseInt(fp.getFirst("candidate_id"));
+			
+			for (String s:fp.keySet()) {
+				if (!s.contains("vastaus")) {
+					continue;	
+				}
+				String kys_id = s.substring(7);
+				int vastaus = Integer.parseInt(fp.getFirst("vastaus" + kys_id));
+				String kommentti = fp.getFirst("kommentti" + kys_id);
 
-			for (int i = 1; i < fp.keySet().size(); i++) {
-
-				int vastaus = Integer.parseInt(fp.getFirst("vastaus" + i));
-				String kommentti = fp.getFirst("kommentti" + i);
-
-				int candidate_id = Integer.parseInt(fp.getFirst("candidate_id"));
-				int kysymys_ID = Integer.parseInt(fp.getFirst("kysymys_ID" + i));
+				
+				int kysymys_ID = Integer.parseInt(fp.getFirst("kysymys_ID" + kys_id));
 				// int kysymykset = Integer.parseInt(request.getParameter("kysymykset_id"));
 
 				System.out.println("     " + kommentti + "    " + vastaus + "   " + candidate_id + "    " + kysymys_ID);
@@ -158,7 +165,7 @@ public class Service {
 
 	}
 
-	@PUT
+	@POST
 	@Path("/editAnswer")
 //	@Produces(MediaType.TEXT_HTML)
 //	@Produces(MediaType.APPLICATION_JSON)
@@ -171,14 +178,17 @@ public class Service {
 		EntityManager em = emf.createEntityManager();
 
 		try {
+			int candidate_id = Integer.parseInt(fp.getFirst("candidate_id"));
+			for (String s:fp.keySet()) {
+				if (!s.contains("vastaus")) {
+					continue;	
+				}
+				String kys_id = s.substring(7);
+				int vastaus = Integer.parseInt(fp.getFirst("vastaus" + kys_id));
+				String kommentti = fp.getFirst("kommentti" + kys_id);
 
-			for (int i = 1; i < fp.keySet().size(); i++) {
-
-				int vastaus = Integer.parseInt(fp.getFirst("vastaus" + i));
-				String kommentti = fp.getFirst("kommentti" + i);
-
-				int candidate_id = Integer.parseInt(fp.getFirst("candidate_id"));
-				int kysymys_ID = Integer.parseInt(fp.getFirst("kysymys_ID" + i));
+				
+				int kysymys_ID = Integer.parseInt(fp.getFirst("kysymys_ID" + kys_id));
 
 				System.out.println("     " + kommentti + "    " + vastaus + "   " + candidate_id + "    " + kysymys_ID);
 
