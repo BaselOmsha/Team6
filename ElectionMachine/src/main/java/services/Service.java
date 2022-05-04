@@ -42,7 +42,8 @@ public class Service {
 
 	@GET
 	@Path("/readAllAnswers/{candId}")
-	public void readAllAnswers(@PathParam("candId") int candId, @Context HttpServletRequest request, @Context HttpServletResponse response) {
+	public void readAllAnswers(@PathParam("candId") int candId, @Context HttpServletRequest request,
+			@Context HttpServletResponse response) {
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
 		EntityManager em = emf.createEntityManager();
@@ -50,7 +51,7 @@ public class Service {
 		// When using default (RESOURCE-LOCAL) transaction type
 		// Every transaction must begin and end.
 		em.getTransaction().begin();
-		Query q=em.createQuery("select v from Vastaukset v where v.id.candidate_id = :name");
+		Query q = em.createQuery("select v from Vastaukset v where v.id.candidate_id = :name");
 		q.setParameter("name", candId);
 		List<Vastaukset> list = q.getResultList();
 		em.getTransaction().commit();
@@ -65,7 +66,7 @@ public class Service {
 			e.printStackTrace();
 		}
 	}
-	
+
 //	@GET
 //	@Path("/readAllAnswers/{id}")
 //	@Produces(MediaType.APPLICATION_JSON)
@@ -93,10 +94,11 @@ public class Service {
 ////			e.printStackTrace();
 ////		}
 //	}
-	
+
 	@GET
 	@Path("/readAnswer/{canId}")
-	public void readAllAnswers1(@PathParam("canId") int canId, @Context HttpServletRequest request, @Context HttpServletResponse response) {
+	public void readAllAnswers1(@PathParam("canId") int canId, @Context HttpServletRequest request,
+			@Context HttpServletResponse response) {
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
 		EntityManager em = emf.createEntityManager();
@@ -104,7 +106,7 @@ public class Service {
 		// When using default (RESOURCE-LOCAL) transaction type
 		// Every transaction must begin and end.
 		em.getTransaction().begin();
-		Query q=em.createQuery("select v from Vastaukset v where v.id.candidate_id = :name");
+		Query q = em.createQuery("select v from Vastaukset v where v.id.candidate_id = :name");
 		q.setParameter("name", canId);
 		List<Vastaukset> list = q.getResultList();
 		em.getTransaction().commit();
@@ -129,22 +131,21 @@ public class Service {
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
 		EntityManager em = emf.createEntityManager();
-		for (String s:fp.keySet()) {
+		for (String s : fp.keySet()) {
 			System.out.println(s);
 		}
 
 		try {
 			int candidate_id = Integer.parseInt(fp.getFirst("candidate_id"));
-			
-			for (String s:fp.keySet()) {
+
+			for (String s : fp.keySet()) {
 				if (!s.contains("vastaus")) {
-					continue;	
+					continue;
 				}
 				String kys_id = s.substring(7);
 				int vastaus = Integer.parseInt(fp.getFirst("vastaus" + kys_id));
 				String kommentti = fp.getFirst("kommentti" + kys_id);
 
-				
 				int kysymys_ID = Integer.parseInt(fp.getFirst("kysymys_ID" + kys_id));
 
 				System.out.println("     " + kommentti + "    " + vastaus + "   " + candidate_id + "    " + kysymys_ID);
@@ -201,21 +202,23 @@ public class Service {
 	@Consumes("application/x-www-form-urlencoded")
 	public void editAnswer(MultivaluedMap<String, String> fp, @Context HttpServletRequest request,
 			@Context HttpServletResponse response) throws IOException, ServletException {
+//		response.setContentType("text/html");
+//		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = response.getWriter();
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
 		EntityManager em = emf.createEntityManager();
 
 		try {
 			int candidate_id = Integer.parseInt(fp.getFirst("candidate_id"));
-			for (String s:fp.keySet()) {
+			for (String s : fp.keySet()) {
 				if (!s.contains("vastaus")) {
-					continue;	
+					continue;
 				}
 				String kys_id = s.substring(7);
 				int vastaus = Integer.parseInt(fp.getFirst("vastaus" + kys_id));
 				String kommentti = fp.getFirst("kommentti" + kys_id);
 
-				
 				int kysymys_ID = Integer.parseInt(fp.getFirst("kysymys_ID" + kys_id));
 
 				System.out.println("     " + kommentti + "    " + vastaus + "   " + candidate_id + "    " + kysymys_ID);
@@ -231,7 +234,6 @@ public class Service {
 				vas.setKysymykset(k);
 
 				em.getTransaction().begin();
-
 
 				System.out.println("check 1");
 				if (vas != null) {

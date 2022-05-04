@@ -108,16 +108,14 @@ tr:nth-child(even) {
 	/* additional code */
 }
 </style>
-<% 
-Candidate cand = (Candidate)session.getAttribute("LoggedUser");
+<%
+Candidate cand = (Candidate) session.getAttribute("LoggedUser");
 
-
-
-int canId=0;
-if (cand!=null){
-	canId=cand.getCandidate_id();
+int canId = 0;
+if (cand != null) {
+	canId = cand.getCandidate_id();
 }
- %>
+%>
 </head>
 <body>
 	<div id="wrapper">
@@ -131,13 +129,13 @@ if (cand!=null){
 						Style="color: rgb(207, 46, 46);">Machine</b> <b>2022</b></a>
 					<div id="navbarNav">
 						<ul class="navbar-nav">
-							<!-- 	<li class="nav-item"><a class="nav-link active"
-								aria-current="page" href="votRegForm.html" style=" font-size: 20px"><b>Voter Registration</b></a></li>
-							<li class="nav-item"><a class="nav-link active" href="./staticRegForm/candRegForm.html" style=" font-size: 20px"><b>Candidate Registration</b></a>
+							<li class="nav-item"><a class="nav-link active"
+								aria-current="page" href="/showInfo"
+								style="font-size: 20px"><b>My Profile</b></a></li>
+							<!-- <li class="nav-item"><a class="nav-link active" href="./staticRegForm/candRegForm.html" style=" font-size: 20px"><b>Candidate Registration</b></a>
 							</li> -->
 							<li class="nav-item"><a class="nav-link active"
-								style="font-size: 20px"><b> 
-<%
+								style="font-size: 20px"><b> <%
  if (session.getAttribute("LoggedUser") != null) {
  	String uname = null;
  	String sessionID = null;
@@ -183,7 +181,7 @@ if (cand!=null){
 							<th></th>
 							<th></th>
 							<th></th>
-							
+
 							<th>Explanation</th>
 
 
@@ -192,7 +190,8 @@ if (cand!=null){
 							<tr>
 								<td><input type="text" name="candidate_id"
 									value="${sessionScope.LoggedUser.candidate_id}" hidden>${sessionScope.LoggedUser.candidate_id}</td>
-								<td><input type="text" name="kysymys_ID${Vastaus.id.kysymys_ID}"
+								<td><input type="text"
+									name="kysymys_ID${Vastaus.id.kysymys_ID}"
 									value="${Vastaus.id.kysymys_ID}" hidden>${Vastaus.id.kysymys_ID}</td>
 								<td></td>
 								<td>${Vastaus.vastaus}</td>
@@ -201,7 +200,6 @@ if (cand!=null){
 								<td></td>
 								<td>${Vastaus.kommentti}</td>
 								<td></td>
-								<td><a href="/rest/service/readAnswer/<%=canId%>">Edit</a></td>
 								<td></td>
 								<td></td>
 								<td></td>
@@ -214,7 +212,9 @@ if (cand!=null){
 					<br> <br>
 					<table>
 						<tr>
-						<!-- <td><a style=" font-size: 30px; border: solid black;" href="/rest/service/readAnswer/"><b>Edit your Answers</b></a></td> -->
+							<td><a style="font-size: 30px; border: solid black;"
+								href="/rest/service/readAnswer/<%=canId%>"><b>Edit your
+										Answers</b></a></td>
 							<!-- <td><input type='submit' name='ok' value='Edit'
 								style="font-size: 30px"></td> -->
 							<!-- <td><input style="font-size: 30px;" type='reset'

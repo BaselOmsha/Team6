@@ -133,7 +133,7 @@ if (cand!=null){
 						<ul class="navbar-nav">
 							
 							<li class="nav-item"><a class="nav-link active"
-								aria-current="page" href="/rest/service/readAllAnswers/<%=candId%>" style=" font-size: 20px"><b>Your Answers</b></a></li>
+								aria-current="page" href="/rest/service/readAllAnswers/<%=candId%>" style=" font-size: 20px"><b>My Answers</b></a></li>
 							<li class="nav-item"><a class="nav-link active" href="rest/service/readAllQuestions" style=" font-size: 20px"><b>Answer Survey</b></a>
 							</li> 
 							<li class="nav-item"><a class="nav-link active" 
