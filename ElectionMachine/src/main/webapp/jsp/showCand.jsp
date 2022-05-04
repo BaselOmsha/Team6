@@ -108,6 +108,16 @@ display:inline-block;
 
 </style>
 
+
+<% 
+Candidate cand = (Candidate)session.getAttribute("LoggedUser");
+int candId=0;
+if (cand!=null){
+	candId=cand.getCandidate_id();
+}
+%>
+
+
 </head>
 <body>
 	<div id="wrapper">
@@ -121,14 +131,14 @@ display:inline-block;
 						Style="color: rgb(207, 46, 46);">Machine</b> <b>2022</b></a>
 					<div id="navbarNav">
 						<ul class="navbar-nav">
+							
 							<li class="nav-item"><a class="nav-link active"
-								aria-current="page" href="rest/service/readAllAnswers" style=" font-size: 20px"><b>Your Answers</b></a></li>
+								aria-current="page" href="/rest/service/readAllAnswers/<%=candId%>" style=" font-size: 20px"><b>Your Answers</b></a></li>
 							<li class="nav-item"><a class="nav-link active" href="rest/service/readAllQuestions" style=" font-size: 20px"><b>Answer Survey</b></a>
 							</li> 
 							<li class="nav-item"><a class="nav-link active" 
 								style="font-size: 20px"><b> 
 								<%
-								session.getAttribute("LoggedUser");
 								if(session.getAttribute("LoggedUser") != null){
 								String uname = null;
 								String sessionID = null;

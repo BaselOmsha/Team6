@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="model.Candidate"%>
+<%@ page import="app.model.Candidate"%>
 <%@ page import="model.Kysymykset"%>
 <%@ page import="model.Vastaukset"%>
 <%@ page import="model.VastauksetPK"%>
@@ -108,7 +108,16 @@ tr:nth-child(even) {
 	/* additional code */
 }
 </style>
+<% 
+Candidate cand = (Candidate)session.getAttribute("LoggedUser");
 
+
+
+int canId=0;
+if (cand!=null){
+	canId=cand.getCandidate_id();
+}
+ %>
 </head>
 <body>
 	<div id="wrapper">
@@ -127,8 +136,8 @@ tr:nth-child(even) {
 							<li class="nav-item"><a class="nav-link active" href="./staticRegForm/candRegForm.html" style=" font-size: 20px"><b>Candidate Registration</b></a>
 							</li> -->
 							<li class="nav-item"><a class="nav-link active"
-								style="font-size: 20px"><b> <%
- session.getAttribute("LoggedUser");
+								style="font-size: 20px"><b> 
+<%
  if (session.getAttribute("LoggedUser") != null) {
  	String uname = null;
  	String sessionID = null;
@@ -192,7 +201,7 @@ tr:nth-child(even) {
 								<td></td>
 								<td>${Vastaus.kommentti}</td>
 								<td></td>
-								
+								<td><a href="/rest/service/readAnswer/<%=canId%>">Edit</a></td>
 								<td></td>
 								<td></td>
 								<td></td>
@@ -205,7 +214,7 @@ tr:nth-child(even) {
 					<br> <br>
 					<table>
 						<tr>
-						<td><a style=" font-size: 30px; border: solid black;" href="./readAllAnswers1"><b>Edit your Answers</b></a></td>
+						<!-- <td><a style=" font-size: 30px; border: solid black;" href="/rest/service/readAnswer/"><b>Edit your Answers</b></a></td> -->
 							<!-- <td><input type='submit' name='ok' value='Edit'
 								style="font-size: 30px"></td> -->
 							<!-- <td><input style="font-size: 30px;" type='reset'

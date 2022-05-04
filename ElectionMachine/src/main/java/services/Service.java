@@ -41,19 +41,20 @@ public class Service {
 	}
 
 	@GET
-	@Path("/readAllAnswers")
-	public void readAllAnswers(@Context HttpServletRequest request, @Context HttpServletResponse response) {
+	@Path("/readAllAnswers/{candId}")
+	public void readAllAnswers(@PathParam("candId") int candId, @Context HttpServletRequest request, @Context HttpServletResponse response) {
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
 		EntityManager em = emf.createEntityManager();
-		
+
 		// When using default (RESOURCE-LOCAL) transaction type
 		// Every transaction must begin and end.
 		em.getTransaction().begin();
-		Query q=em.createQuery("select v from Vastaukset v where v.candidate_id = :name");
-		q.setParameter("name", letter+"%");
-		List<Vastaukset> list = em.createQuery("select v from Vastaukset v where v.id.candidate_id like :id.candidate_id").getResultList();
+		Query q=em.createQuery("select v from Vastaukset v where v.id.candidate_id = :name");
+		q.setParameter("name", candId);
+		List<Vastaukset> list = q.getResultList();
 		em.getTransaction().commit();
+		em.close();
 
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/candShowAn.jsp");
 		request.setAttribute("Vastauslista", list);
@@ -63,12 +64,39 @@ public class Service {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		em.close();
 	}
 	
+//	@GET
+//	@Path("/readAllAnswers/{id}")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public List<Vastaukset> readAllAnswers(@PathParam("id") int candId) {
+//
+//		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
+//		EntityManager em = emf.createEntityManager();
+//
+//		// When using default (RESOURCE-LOCAL) transaction type
+//		// Every transaction must begin and end.
+//		em.getTransaction().begin();
+//		Query q=em.createQuery("select v from Vastaukset v where v.id.candidate_id = :name");
+//		q.setParameter("name", candId);
+////		Query q=em.createQuery("select v from Vastaukset v");
+//		List<Vastaukset> list = q.getResultList();
+//		em.getTransaction().commit();
+//		em.close();
+//		return list;
+////		RequestDispatcher rd = request.getRequestDispatcher("/jsp/candShowAn.jsp");
+////		request.setAttribute("Vastauslista", list);
+////		try {
+////			rd.forward(request, response);
+////		} catch (ServletException | IOException e) {
+////			// TODO Auto-generated catch block
+////			e.printStackTrace();
+////		}
+//	}
+	
 	@GET
-	@Path("/readAllAnswers1")
-	public void readAllAnswers1(@Context HttpServletRequest request, @Context HttpServletResponse response) {
+	@Path("/readAnswer/{canId}")
+	public void readAllAnswers1(@PathParam("canId") int canId, @Context HttpServletRequest request, @Context HttpServletResponse response) {
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
 		EntityManager em = emf.createEntityManager();
@@ -76,8 +104,11 @@ public class Service {
 		// When using default (RESOURCE-LOCAL) transaction type
 		// Every transaction must begin and end.
 		em.getTransaction().begin();
-		List<Vastaukset> list = em.createQuery("select v from Vastaukset v").getResultList();
+		Query q=em.createQuery("select v from Vastaukset v where v.id.candidate_id = :name");
+		q.setParameter("name", canId);
+		List<Vastaukset> list = q.getResultList();
 		em.getTransaction().commit();
+		em.close();
 
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/candEditQues.jsp");
 		request.setAttribute("Vastauslista", list);
@@ -87,7 +118,6 @@ public class Service {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		em.close();
 	}
 
 	@POST
@@ -116,7 +146,6 @@ public class Service {
 
 				
 				int kysymys_ID = Integer.parseInt(fp.getFirst("kysymys_ID" + kys_id));
-				// int kysymykset = Integer.parseInt(request.getParameter("kysymykset_id"));
 
 				System.out.println("     " + kommentti + "    " + vastaus + "   " + candidate_id + "    " + kysymys_ID);
 
@@ -169,9 +198,6 @@ public class Service {
 
 	@POST
 	@Path("/editAnswer")
-//	@Produces(MediaType.TEXT_HTML)
-//	@Produces(MediaType.APPLICATION_JSON)
-//	@Consumes(MediaType.APPLICATION_JSON)
 	@Consumes("application/x-www-form-urlencoded")
 	public void editAnswer(MultivaluedMap<String, String> fp, @Context HttpServletRequest request,
 			@Context HttpServletResponse response) throws IOException, ServletException {
