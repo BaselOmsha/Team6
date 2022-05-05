@@ -80,9 +80,9 @@ public class Service {
 		em.getTransaction().begin();
 //		Kysymykset k = em.find(Kysymykset.class, kys_id);
 //		"select p.name,d.deptname from Person p JOIN p.dep d"
-		Query q = em.createQuery("select v from Vastaukset v where v.id.kysymys_ID = :nimi");
-		q.setParameter("nimi", canId);
-		q.setParameter("nimi", kys_id);
+		Query q = em.createQuery("select v from Vastaukset v where v.id.kysymys_ID = :kId and v.id.candidate_id = :cId");
+		q.setParameter("cId", canId);
+		q.setParameter("kId", kys_id);
 		List<Vastaukset> list = q.getResultList();
 		em.getTransaction().commit();
 		em.close();
