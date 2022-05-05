@@ -78,8 +78,6 @@ public class Service {
 		// When using default (RESOURCE-LOCAL) transaction type
 		// Every transaction must begin and end.
 		em.getTransaction().begin();
-//		Kysymykset k = em.find(Kysymykset.class, kys_id);
-//		"select p.name,d.deptname from Person p JOIN p.dep d"
 		Query q = em.createQuery("select v from Vastaukset v where v.id.kysymys_ID = :kId and v.id.candidate_id = :cId");
 		q.setParameter("cId", canId);
 		q.setParameter("kId", kys_id);
@@ -96,34 +94,6 @@ public class Service {
 			e.printStackTrace();  
 		}
 	} 
-
-//	@GET
-//	@Path("/readAllAnswers/{id}")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public List<Vastaukset> readAllAnswers(@PathParam("id") int candId) {
-//
-//		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
-//		EntityManager em = emf.createEntityManager();
-//
-//		// When using default (RESOURCE-LOCAL) transaction type
-//		// Every transaction must begin and end.
-//		em.getTransaction().begin();
-//		Query q=em.createQuery("select v from Vastaukset v where v.id.candidate_id = :name");
-//		q.setParameter("name", candId);
-////		Query q=em.createQuery("select v from Vastaukset v");
-//		List<Vastaukset> list = q.getResultList();
-//		em.getTransaction().commit();
-//		em.close();
-//		return list;
-////		RequestDispatcher rd = request.getRequestDispatcher("/jsp/candShowAn.jsp");
-////		request.setAttribute("Vastauslista", list);
-////		try {
-////			rd.forward(request, response);
-////		} catch (ServletException | IOException e) {
-////			// TODO Auto-generated catch block
-////			e.printStackTrace();
-////		}
-//	}
 
 	@GET
 	@Path("/readAnswer/{canId}")
@@ -232,9 +202,6 @@ public class Service {
 	@Consumes("application/x-www-form-urlencoded")
 	public void editAnswer(MultivaluedMap<String, String> fp, @Context HttpServletRequest request,
 			@Context HttpServletResponse response) throws IOException, ServletException {
-//		response.setContentType("text/html");
-//		response.setCharacterEncoding("UTF-8");
-		PrintWriter out = response.getWriter();
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
 		EntityManager em = emf.createEntityManager();
