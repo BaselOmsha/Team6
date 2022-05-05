@@ -281,41 +281,22 @@ public class Service {
 	}
 
 	@POST
-		@Path("/deleteAnswer")
-		@Consumes("application/x-www-form-urlencoded")
-		public void deleteAnswer(MultivaluedMap<String, String> fp, @Context HttpServletRequest request,@Context HttpServletResponse response) 
-				throws IOException, ServletException {
-			
-			EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
-			EntityManager em = emf.createEntityManager();
-			
-			
-			try {
-				int candidate_id = Integer.parseInt(fp.getFirst("candidate_id"));
-				for (String s:fp.keySet()) {
-					if (!s.contains("vastaus")) {
-						continue;	
-					}
-					String kys_id = s.substring(7);
-					int vastaus = Integer.parseInt(fp.getFirst("vastaus" + kys_id));
-					String kommentti = fp.getFirst("kommentti" + kys_id);
+	@Path("/deleteAnswer/{candId}")
+	@Consumes("application/x-www-form-urlencoded")
+	public void deleteAnswer(@PathParam("canId") int canId, MultivaluedMap<String, String> fp,
+			@Context HttpServletRequest request, @Context HttpServletResponse response)
+			throws IOException, ServletException {
 
-					int kysymys_ID = Integer.parseInt(fp.getFirst("kysymys_ID" + kys_id));
-		
-					em.getTransaction().begin();
-					Fish f=em.find(Fish.class, id);
-					if (f!=null) {
-						em.remove(f);//The actual insertion line
-					}
-					em.getTransaction().commit();
-						
-					} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}	 
-	    
-	
-			
-	
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
+		EntityManager em = emf.createEntityManager();
+
+		em.getTransaction().begin();
+		Vastaukset v = em.find(Vastaukset.class, canId);
+		if (v != null) {
+			em.remove(v);// The actual insertion line
+		}
+		em.getTransaction().commit();
+		em.close();
+	}
 
 }
