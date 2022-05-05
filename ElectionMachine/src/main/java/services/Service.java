@@ -42,7 +42,8 @@ public class Service {
 
 	@GET
 	@Path("/readAllAnswers/{candId}")
-	public void readAllAnswers(@PathParam("candId") int candId, @Context HttpServletRequest request, @Context HttpServletResponse response) {
+	public void readAllAnswers(@PathParam("candId") int candId, @Context HttpServletRequest request,
+			@Context HttpServletResponse response) {
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
 		EntityManager em = emf.createEntityManager();
@@ -50,7 +51,7 @@ public class Service {
 		// When using default (RESOURCE-LOCAL) transaction type
 		// Every transaction must begin and end.
 		em.getTransaction().begin();
-		Query q=em.createQuery("select v from Vastaukset v where v.id.candidate_id = :name");
+		Query q = em.createQuery("select v from Vastaukset v where v.id.candidate_id = :name");
 		q.setParameter("name", candId);
 		List<Vastaukset> list = q.getResultList();
 		em.getTransaction().commit();
@@ -65,7 +66,35 @@ public class Service {
 			e.printStackTrace();
 		}
 	}
-	
+
+	@GET
+	@Path("/readOneAnswer/{canId}")
+	public void readOneAnswer(@PathParam("canId") int canId, @Context HttpServletRequest request,
+			@Context HttpServletResponse response) {
+
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
+		EntityManager em = emf.createEntityManager();
+
+		// When using default (RESOURCE-LOCAL) transaction type
+		// Every transaction must begin and end.
+		em.getTransaction().begin();
+		Kysymykset k = em.find(Kysymykset.class, canId);
+		Query q = em.createQuery("select v from Vastaukset v where v.id.kysymys_ID = :name");
+		q.setParameter("name", canId);
+		List<Vastaukset> list = q.getResultList();
+		em.getTransaction().commit();
+		em.close();
+
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/deleteAns.jsp");
+		request.setAttribute("Vastauslista", list);
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 //	@GET
 //	@Path("/readAllAnswers/{id}")
 //	@Produces(MediaType.APPLICATION_JSON)
@@ -93,10 +122,11 @@ public class Service {
 ////			e.printStackTrace();
 ////		}
 //	}
-	
+
 	@GET
 	@Path("/readAnswer/{canId}")
-	public void readAllAnswers1(@PathParam("canId") int canId, @Context HttpServletRequest request, @Context HttpServletResponse response) {
+	public void readAllAnswers1(@PathParam("canId") int canId, @Context HttpServletRequest request,
+			@Context HttpServletResponse response) {
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
 		EntityManager em = emf.createEntityManager();
@@ -104,7 +134,7 @@ public class Service {
 		// When using default (RESOURCE-LOCAL) transaction type
 		// Every transaction must begin and end.
 		em.getTransaction().begin();
-		Query q=em.createQuery("select v from Vastaukset v where v.id.candidate_id = :name");
+		Query q = em.createQuery("select v from Vastaukset v where v.id.candidate_id = :name");
 		q.setParameter("name", canId);
 		List<Vastaukset> list = q.getResultList();
 		em.getTransaction().commit();
@@ -129,22 +159,21 @@ public class Service {
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
 		EntityManager em = emf.createEntityManager();
-		for (String s:fp.keySet()) {
+		for (String s : fp.keySet()) {
 			System.out.println(s);
 		}
 
 		try {
 			int candidate_id = Integer.parseInt(fp.getFirst("candidate_id"));
-			
-			for (String s:fp.keySet()) {
+
+			for (String s : fp.keySet()) {
 				if (!s.contains("vastaus")) {
-					continue;	
+					continue;
 				}
 				String kys_id = s.substring(7);
 				int vastaus = Integer.parseInt(fp.getFirst("vastaus" + kys_id));
 				String kommentti = fp.getFirst("kommentti" + kys_id);
 
-				
 				int kysymys_ID = Integer.parseInt(fp.getFirst("kysymys_ID" + kys_id));
 
 				System.out.println("     " + kommentti + "    " + vastaus + "   " + candidate_id + "    " + kysymys_ID);
@@ -199,26 +228,25 @@ public class Service {
 	@POST
 	@Path("/editAnswer")
 	@Consumes("application/x-www-form-urlencoded")
-	public void editAnswer(MultivaluedMap<String, String> fp, @Context HttpServletRequest request,@Context HttpServletResponse response) 
-			throws IOException, ServletException {
+	public void editAnswer(MultivaluedMap<String, String> fp, @Context HttpServletRequest request,
+			@Context HttpServletResponse response) throws IOException, ServletException {
 //		response.setContentType("text/html");
 //		response.setCharacterEncoding("UTF-8");
-		PrintWriter out=response.getWriter();
+		PrintWriter out = response.getWriter();
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
 		EntityManager em = emf.createEntityManager();
 
 		try {
 			int candidate_id = Integer.parseInt(fp.getFirst("candidate_id"));
-			for (String s:fp.keySet()) {
+			for (String s : fp.keySet()) {
 				if (!s.contains("vastaus")) {
-					continue;	
+					continue;
 				}
 				String kys_id = s.substring(7);
 				int vastaus = Integer.parseInt(fp.getFirst("vastaus" + kys_id));
 				String kommentti = fp.getFirst("kommentti" + kys_id);
 
-				
 				int kysymys_ID = Integer.parseInt(fp.getFirst("kysymys_ID" + kys_id));
 
 				System.out.println("     " + kommentti + "    " + vastaus + "   " + candidate_id + "    " + kysymys_ID);
@@ -235,7 +263,6 @@ public class Service {
 
 				em.getTransaction().begin();
 
-
 				System.out.println("check 1");
 				if (vas != null) {
 
@@ -251,8 +278,44 @@ public class Service {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 
-	    
 	}
+
+	@POST
+		@Path("/deleteAnswer")
+		@Consumes("application/x-www-form-urlencoded")
+		public void deleteAnswer(MultivaluedMap<String, String> fp, @Context HttpServletRequest request,@Context HttpServletResponse response) 
+				throws IOException, ServletException {
+			
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
+			EntityManager em = emf.createEntityManager();
+			
+			
+			try {
+				int candidate_id = Integer.parseInt(fp.getFirst("candidate_id"));
+				for (String s:fp.keySet()) {
+					if (!s.contains("vastaus")) {
+						continue;	
+					}
+					String kys_id = s.substring(7);
+					int vastaus = Integer.parseInt(fp.getFirst("vastaus" + kys_id));
+					String kommentti = fp.getFirst("kommentti" + kys_id);
+
+					int kysymys_ID = Integer.parseInt(fp.getFirst("kysymys_ID" + kys_id));
+		
+					em.getTransaction().begin();
+					Fish f=em.find(Fish.class, id);
+					if (f!=null) {
+						em.remove(f);//The actual insertion line
+					}
+					em.getTransaction().commit();
+						
+					} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}	 
+	    
+	
+			
+	
 
 }
