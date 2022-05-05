@@ -163,6 +163,7 @@ tr:nth-child(even) {
 
 			<div class="box">
 				<h1>Edit Questions Form</h1>
+				<h5 style="color:orange">Note that you need to answer the question again in order to edit your explanation.</h5>
 				<br>
 				<form action='/rest/service/editAnswer' method='post'>
 					<%-- <input type="text" name="candidate_id"

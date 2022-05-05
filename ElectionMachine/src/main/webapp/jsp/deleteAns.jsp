@@ -168,7 +168,8 @@ if (cand != null) {
 		<main>
 
 			<div class="box">
-				<h1>Candidate Answers</h1>
+				<h1 style="color:red">Are you sure you want to delete your answer?</h1>
+				<h1 style="color:red">This step cannot be undone!</h1>
 				<br>
 				<form action='#' method='post'>
 					<%-- <input type="text" name="candidate_id"
