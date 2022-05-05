@@ -29,7 +29,7 @@ public class Vastaukset implements Serializable {
 	@JoinColumn(name = "kysymys_ID")
 	private Kysymykset kysymykset;
 
-	public Vastaukset() {
+	public Vastaukset() { 
 	}
 
 //	public Vastaukset(String vastaus, String kommentti, String candidate_id) {

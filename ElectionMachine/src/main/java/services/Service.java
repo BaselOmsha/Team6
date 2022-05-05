@@ -68,8 +68,8 @@ public class Service {
 	}
 
 	@GET
-	@Path("/readOneAnswer/{canId}")
-	public void readOneAnswer(@PathParam("canId") int canId, @Context HttpServletRequest request,
+	@Path("/readOneAnswer/{canId}/{kys_id}/")
+	public void readOneAnswer(@PathParam("canId") int canId, @PathParam("kys_id") int kys_id, @Context HttpServletRequest request,
 			@Context HttpServletResponse response) {
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
@@ -78,9 +78,11 @@ public class Service {
 		// When using default (RESOURCE-LOCAL) transaction type
 		// Every transaction must begin and end.
 		em.getTransaction().begin();
-		Kysymykset k = em.find(Kysymykset.class, canId);
-		Query q = em.createQuery("select v from Vastaukset v where v.id.kysymys_ID = :name");
-		q.setParameter("name", canId);
+//		Kysymykset k = em.find(Kysymykset.class, kys_id);
+//		"select p.name,d.deptname from Person p JOIN p.dep d"
+		Query q = em.createQuery("select v from Vastaukset v where v.id.kysymys_ID = :nimi");
+		q.setParameter("nimi", canId);
+		q.setParameter("nimi", kys_id);
 		List<Vastaukset> list = q.getResultList();
 		em.getTransaction().commit();
 		em.close();
@@ -91,9 +93,9 @@ public class Service {
 			rd.forward(request, response);
 		} catch (ServletException | IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e.printStackTrace();  
 		}
-	}
+	} 
 
 //	@GET
 //	@Path("/readAllAnswers/{id}")

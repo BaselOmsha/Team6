@@ -201,7 +201,7 @@ if (cand != null) {
 								<td>${Vastaus.kommentti}</td>
 								<td></td>
 								<td></td>
-								<td><a href = "/rest/service/readOneAnswer/<%=canId%>">Delete</a></td>
+								<td><a href = "/rest/service/readOneAnswer/<%=canId%>/${Vastaus.id.kysymys_ID}">Delete</a></td>
 								<td></td>
 								<td></td>
 								<td></td>
