@@ -263,25 +263,28 @@ public class Service {
 		// When using default (RESOURCE-LOCAL) transaction type
 		// Every transaction must begin and end.
 		
-//		int candidate_id = Integer.parseInt(fp.getFirst("candidate_id"));
+//		int candidate_id=1;
+//		int kysymys_ID = kys_id;
+//		int candidate_id =canId;
 		
-
+		
 		em.getTransaction().begin();
-		Query q = em.createQuery("select v from Vastaukset v where v.id.kysymys_ID = :kId and v.id.candidate_id = :cId");
+//		Vastaukset v=em.find(Vastaukset.class, kysymys_ID);
+//		 		   v=em.find(Vastaukset.class, candidate_id);
+		Query q = em.createQuery("delete from Vastaukset v where v.id.kysymys_ID = :kId and v.id.candidate_id = :cId");
 		q.setParameter("cId", canId);
-		q.setParameter("kId", kys_id);
-		em.remove(q);
+		q.setParameter("kId", kys_id).executeUpdate();
 		em.getTransaction().commit();
 		em.close();
 
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/showCand.jsp");
+		response.sendRedirect("/rest/service/readAllAnswers/*");
 
-		try {
-			rd.forward(request, response);
-		} catch (ServletException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			rd.forward(request, response);
+//		} catch (ServletException | IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 }

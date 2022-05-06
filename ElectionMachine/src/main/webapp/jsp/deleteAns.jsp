@@ -201,7 +201,8 @@ if (cand != null) {
 								<td>${Vastaus.kommentti}</td>
 								<td></td>
 								<td></td>
-								<td></td>
+								<td><a style="font-size: 30px; border: solid black;"
+								href="/rest/service/deleteAnswer/<%=canId%>/${Vastaus.id.kysymys_ID}"><b>Delete</b></a></td>
 								<td></td>
 								<td></td>
 								<td></td>
@@ -212,8 +213,7 @@ if (cand != null) {
 					<br> <br>
 					<table>
 						<tr>
-							 <td><a style="font-size: 30px; border: solid black;"
-								href="/rest/service/deleteAnswer/<%=canId%>/${Vastaus.id.kysymys_ID}"><b>Delete</b></a></td>
+							 <td></td>
 						<!-- 	<td><input type='submit' name='ok' value='Delete'
 								style="font-size: 30px"></td>  -->
 							<!-- <td><input style="font-size: 30px;" type='reset'

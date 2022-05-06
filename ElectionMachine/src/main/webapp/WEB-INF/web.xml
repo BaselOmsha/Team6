@@ -34,7 +34,7 @@
 			This tells the server to load REST service when the server starts
 		-->
 		<load-on-startup>1</load-on-startup>
-	</servlet>
+	</servlet> 
 	<!--
 	servlet-mapping gives the first part of the path (url-pattern) where the
 	REST service is found (e.g. http://my.server.fi/rest) and the rest of the path is given in 
