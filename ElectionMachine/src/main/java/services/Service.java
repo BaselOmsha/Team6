@@ -69,8 +69,8 @@ public class Service {
 
 	@GET
 	@Path("/readOneAnswer/{canId}/{kys_id}/")
-	public void readOneAnswer(@PathParam("canId") int canId, @PathParam("kys_id") int kys_id, @Context HttpServletRequest request,
-			@Context HttpServletResponse response) {
+	public void readOneAnswer(@PathParam("canId") int canId, @PathParam("kys_id") int kys_id,
+			@Context HttpServletRequest request, @Context HttpServletResponse response) {
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
 		EntityManager em = emf.createEntityManager();
@@ -78,7 +78,8 @@ public class Service {
 		// When using default (RESOURCE-LOCAL) transaction type
 		// Every transaction must begin and end.
 		em.getTransaction().begin();
-		Query q = em.createQuery("select v from Vastaukset v where v.id.kysymys_ID = :kId and v.id.candidate_id = :cId");
+		Query q = em
+				.createQuery("select v from Vastaukset v where v.id.kysymys_ID = :kId and v.id.candidate_id = :cId");
 		q.setParameter("cId", canId);
 		q.setParameter("kId", kys_id);
 		List<Vastaukset> list = q.getResultList();
@@ -91,9 +92,9 @@ public class Service {
 			rd.forward(request, response);
 		} catch (ServletException | IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();  
+			e.printStackTrace();
 		}
-	} 
+	}
 
 	@GET
 	@Path("/readAnswer/{canId}")
@@ -249,23 +250,38 @@ public class Service {
 		}
 	}
 
-	@POST
-	@Path("/deleteAnswer/{candId}")
+	@GET
+	@Path("/deleteAnswer/{canId}/{kys_id}/")
 	@Consumes("application/x-www-form-urlencoded")
-	public void deleteAnswer(@PathParam("canId") int canId, MultivaluedMap<String, String> fp,
-			@Context HttpServletRequest request, @Context HttpServletResponse response)
-			throws IOException, ServletException {
+	public void deleteAnswer(@PathParam("canId") int canId, @PathParam("kys_id") int kys_id,
+			MultivaluedMap<String, String> fp, @Context HttpServletRequest request,
+			@Context HttpServletResponse response) throws IOException, ServletException {
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
 		EntityManager em = emf.createEntityManager();
 
+		// When using default (RESOURCE-LOCAL) transaction type
+		// Every transaction must begin and end.
+		
+//		int candidate_id = Integer.parseInt(fp.getFirst("candidate_id"));
+		
+
 		em.getTransaction().begin();
-		Vastaukset v = em.find(Vastaukset.class, canId);
-		if (v != null) {
-			em.remove(v);// The actual insertion line
-		}
+		Query q = em.createQuery("select v from Vastaukset v where v.id.kysymys_ID = :kId and v.id.candidate_id = :cId");
+		q.setParameter("cId", canId);
+		q.setParameter("kId", kys_id);
+		em.remove(q);
 		em.getTransaction().commit();
 		em.close();
+
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/showCand.jsp");
+
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

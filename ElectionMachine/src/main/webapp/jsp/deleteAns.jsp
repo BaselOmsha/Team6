@@ -166,7 +166,6 @@ if (cand != null) {
 			<!-- /#header -->
 		</header>
 		<main>
-
 			<div class="box">
 				<h1 style="color:red">Are you sure you want to delete your answer?</h1>
 				<h1 style="color:red">This step cannot be undone!</h1>
@@ -213,10 +212,10 @@ if (cand != null) {
 					<br> <br>
 					<table>
 						<tr>
-							<td><a style="font-size: 30px; border: solid black;"
-								href="/rest/service/deleteAnswer/<%=canId%>"><b>Delete</b></a></td>
-							<!-- <td><input type='submit' name='ok' value='Edit'
-								style="font-size: 30px"></td> -->
+							 <td><a style="font-size: 30px; border: solid black;"
+								href="/rest/service/deleteAnswer/<%=canId%>/${Vastaus.id.kysymys_ID}"><b>Delete</b></a></td>
+						<!-- 	<td><input type='submit' name='ok' value='Delete'
+								style="font-size: 30px"></td>  -->
 							<!-- <td><input style="font-size: 30px;" type='reset'
 								name='reset' value='Reset' id="button2"></td> -->
 							<td><input style='font-size: 30px' type='button'
