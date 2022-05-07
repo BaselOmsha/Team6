@@ -163,6 +163,8 @@ public class Service {
 
 				ca = em.find(Candidate.class, candidate_id);
 				k = em.find(Kysymykset.class, kysymys_ID);
+				
+				
 
 				System.out.println("check 1");
 				if (vas.isOk()) {
@@ -206,9 +208,10 @@ public class Service {
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
 		EntityManager em = emf.createEntityManager();
-
+		
+		int candidate_id = Integer.parseInt(fp.getFirst("candidate_id"));
 		try {
-			int candidate_id = Integer.parseInt(fp.getFirst("candidate_id"));
+			
 			for (String s : fp.keySet()) {
 				if (!s.contains("vastaus")) {
 					continue;
@@ -248,6 +251,24 @@ public class Service {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		//redirect
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Query q1 = em.createQuery("select v from Vastaukset v where v.id.candidate_id = :name");
+		q1.setParameter("name", candidate_id);
+		List<Vastaukset> list = q1.getResultList();
+		em.getTransaction().commit();
+		em.close();
+
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/canAnEdited.jsp");
+		request.setAttribute("Vastauslista", list);
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@GET
@@ -260,31 +281,32 @@ public class Service {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("electionMachine");
 		EntityManager em = emf.createEntityManager();
 
-		// When using default (RESOURCE-LOCAL) transaction type
-		// Every transaction must begin and end.
-		
-//		int candidate_id=1;
-//		int kysymys_ID = kys_id;
-//		int candidate_id =canId;
-		
-		
 		em.getTransaction().begin();
-//		Vastaukset v=em.find(Vastaukset.class, kysymys_ID);
-//		 		   v=em.find(Vastaukset.class, candidate_id);
 		Query q = em.createQuery("delete from Vastaukset v where v.id.kysymys_ID = :kId and v.id.candidate_id = :cId");
 		q.setParameter("cId", canId);
 		q.setParameter("kId", kys_id).executeUpdate();
 		em.getTransaction().commit();
 		em.close();
 
-		response.sendRedirect("/rest/service/readAllAnswers/*");
 
-//		try {
-//			rd.forward(request, response);
-//		} catch (ServletException | IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		//redirect
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Query q1 = em.createQuery("select v from Vastaukset v where v.id.candidate_id = :name");
+		q1.setParameter("name", canId);
+		List<Vastaukset> list = q1.getResultList();
+		em.getTransaction().commit();
+		em.close();
+
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/canAnDele.jsp");
+		request.setAttribute("Vastauslista", list);
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 }
