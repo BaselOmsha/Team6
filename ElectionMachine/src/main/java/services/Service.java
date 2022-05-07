@@ -181,7 +181,7 @@ public class Service {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		//redirect
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
 		List<Kysymykset> list1 = em.createQuery("select k from Kysymykset k").getResultList();
