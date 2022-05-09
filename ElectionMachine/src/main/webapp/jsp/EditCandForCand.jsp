@@ -120,9 +120,10 @@ display:inline-block;
 						Style="color: rgb(207, 46, 46);">Machine</b> <b>2022</b></a>
 					<div id="navbarNav">
 						<ul class="navbar-nav">
-							<!-- 	<li class="nav-item"><a class="nav-link active"
-								aria-current="page" href="votRegForm.html" style=" font-size: 20px"><b>Voter Registration</b></a></li>
-							<li class="nav-item"><a class="nav-link active" href="./staticRegForm/candRegForm.html" style=" font-size: 20px"><b>Candidate Registration</b></a>
+							<li class="nav-item"><a class="nav-link active"
+								aria-current="page" href="/showInfo"
+								style="font-size: 20px"><b>My Profile</b></a></li>
+							<!-- <li class="nav-item"><a class="nav-link active" href="./staticRegForm/candRegForm.html" style=" font-size: 20px"><b>Candidate Registration</b></a>
 							</li> -->
 							<li class="nav-item"><a class="nav-link active" 
 								style="font-size: 20px"><b> 

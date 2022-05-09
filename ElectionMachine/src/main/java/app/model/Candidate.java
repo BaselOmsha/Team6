@@ -1,14 +1,22 @@
 package app.model;
 
 import java.io.Serializable;
+import java.util.*;
+import javax.persistence.*;
+import app.model.*;
 
 /**
  * This is the model layer that contain the necessary data of candidate to be
  * fetched to the user by the controller layer(Servelt)
- * @author team6 (Nori, Jesse, Basil) 
- * version 0.3
+ * 
+ * @author team6 (Nori, Jesse, Basil) version 0.3
  */
+//@Entity
+//@NamedQuery(name = "Candidate.findAll", query = "SELECT c FROM Candidate c")
 public class Candidate implements Serializable {
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int candidate_id;
 	private String fname;
 	private String lname;
@@ -23,12 +31,56 @@ public class Candidate implements Serializable {
 	private String paswd;
 	private String salt;
 
+	// bi-directional many-to-one association to Fish
+//	@OneToMany(targetEntity=Vastaukset.class, mappedBy = "Candidate", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy="candidate")
+//	@OrderBy("candidate_id")
+	private List<Vastaukset> vastaukset;
+
+	public Candidate() {
+
+	}
+
+	public Candidate(int candidate_id, String fname, String lname, String ssn, String party, String email, String uname,
+			int age, String why_running, String what_things_do_you_want_to_represent, String profession, String paswd,
+			String salt, List<Vastaukset> vastaukset) {
+		super();
+		this.candidate_id = candidate_id;
+		this.fname = fname;
+		this.lname = lname;
+		this.ssn = ssn;
+		this.party = party;
+		this.email = email;
+		this.uname = uname;
+		this.age = age;
+		Why_running = why_running;
+		this.what_things_do_you_want_to_represent = what_things_do_you_want_to_represent;
+		this.profession = profession;
+		this.paswd = paswd;
+		this.salt = salt;
+		this.vastaukset = vastaukset;
+	}
+
+	public Candidate(int candidate_id) {
+		// TODO Auto-generated constructor stub
+		super();
+		this.candidate_id = candidate_id;
+	}
+
 	public int getCandidate_id() {
 		return candidate_id;
 	}
 
 	public void setCandidate_id(int candidate_id) {
 		this.candidate_id = candidate_id;
+	}
+
+	public void setCandidate_id(String candidate_id) {
+		try {
+			this.candidate_id = Integer.parseInt(candidate_id);
+		} catch (NumberFormatException e) {
+
+		}
 	}
 
 	public String getFname() {
@@ -125,6 +177,31 @@ public class Candidate implements Serializable {
 
 	public void setSalt(String salt) {
 		this.salt = salt;
+	}
+
+	public List<Vastaukset> getVastaukset() {
+		if (this.vastaukset == null) {
+			vastaukset = new ArrayList<>();
+		}
+		return this.vastaukset;
+	}
+
+	public void setVastaukset(List<Vastaukset> vastaukset) {
+		this.vastaukset = vastaukset;
+	}
+
+	public Vastaukset addVastaukset(Vastaukset vastaukset) {
+		getVastaukset().add(vastaukset);
+		vastaukset.setCandidate(this);
+
+		return vastaukset;
+	}
+
+	public Vastaukset removeVastaukset(Vastaukset vastaukset) {
+		getVastaukset().remove(vastaukset);
+		vastaukset.setCandidate(null);
+
+		return vastaukset;
 	}
 
 	public String toString() {
