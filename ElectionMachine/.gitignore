@@ -1,3 +1,4 @@
 /target/
 #ignoring javadoc
 /doc/
+ElectionMachine/pom.xml
