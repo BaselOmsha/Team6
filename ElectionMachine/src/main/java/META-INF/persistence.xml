@@ -30,7 +30,7 @@
 				value="jdbc:mysql://localhost:3306/electionMachine?useSSL=false" />
 			<property name="javax.persistence.jdbc.user" value="team6" />
 			<property name="javax.persistence.jdbc.password"
-				value="kukkuu" />
+				value="#" />
 			<property name="eclipselink.ddl-generation"
 				value="create-tables" />
 		</properties>
